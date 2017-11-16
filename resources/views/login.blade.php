@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="/admin/assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>會員登入</title>
+	<title>登入</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -41,29 +41,39 @@
             <div class="container">
                 <div class="row">                   
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                        <form method="#" action="#">
-                            
-                        <!--   if you want to have the card without animation please remove the ".card-hidden" class   -->
+                        <form method="POST" action="{{ action('AuthController@login') }}">
+                            {{ csrf_field() }}
+                       
                             <div class="card card-hidden">
                                 <div class="header text-center">Login</div>
+
+                                @if($errors->has('msg'))
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-4 text-center text-danger">
+                                            {!! $errors->first('msg') !!}
+                                        </div>
+                                    </div>
+                                @endif
+
                                 <div class="content">
                                     <div class="form-group">
-                                        <label>Email address</label>
-                                        <input type="email" placeholder="Enter email" class="form-control">
+                                        <label>帳號</label>
+                                        <input name="username" type="text" placeholder="Username" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" placeholder="Password" class="form-control">
+                                        <label>密碼</label>
+                                        <input name='password' type="password" placeholder="Password" class="form-control">
                                     </div>                                    
                                     <div class="form-group">
                                         <label class="checkbox">
-                                            <input type="checkbox" data-toggle="checkbox" value="">
-                                            Subscribe to newsletter
+
+                                            <input name="remember" type="checkbox" data-toggle="checkbox">
+                                            記住帳號名稱
                                         </label>    
                                     </div>
                                 </div>
                                 <div class="footer text-center">
-                                    <button type="submit" class="btn btn-fill btn-warning btn-wd">Login</button>
+                                    <button type="submit" class="btn btn-fill btn-warning btn-wd">登入</button>
                                 </div>
                             </div>
                                 

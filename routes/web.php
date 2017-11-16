@@ -21,6 +21,6 @@ Route::post('/login','AuthController@login');
 
 Route::get('/admin/logout','AuthController@logout');
 
-Route::get('/index', function () {
-    return view('admin.dashboard');
-});
+
+
+Route::get('/admin/user','Admin\UserController@index');

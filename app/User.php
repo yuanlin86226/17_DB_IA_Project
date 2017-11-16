@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phoneNumber', 'lastLoginAt', 'lastLoginIP', 'lastLoginAgent'
+        'userName', 'name', 'email', 'password', 'phoneNumber', 'lastLoginAt', 'lastLoginIP', 'lastLoginAgent'
     ];
 
     /**
@@ -40,7 +40,7 @@ class User extends Authenticatable
     public static function validate($id=0, $merge=[]) {
         return array_merge(
         [
-            'name' => 'required|unique:users,name' . ($id ? ",$id" : ''),
+            'userName' => 'required|unique:users,userName' . ($id ? ",$id" : ''),
             'email' => 'required|email|unique:users,email' . ($id ? ",$id" : '')
         ], 
         $merge);

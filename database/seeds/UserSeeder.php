@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
         DB::table('users')->delete();
 
         $user = User::create([
-            'name' => 'admin',
+            'userName' => 'Admin',
+            'name' => 'poor student',
         	'email' => 'admin@example.com',
         	'password' => bcrypt('admin'),
             'phoneNumber' => null,
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
 
 
         User::create([
+            'userName' => 'yuanlin',
             'name' => 'yuanlin',
         	'email' => 'sonia86226@gmail.com',
         	'password' => bcrypt('sonia26'),
