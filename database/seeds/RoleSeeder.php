@@ -24,5 +24,15 @@ class RoleSeeder extends Seeder
             'name' => 'User',
             'description' => '一般管理員'
         ]);
+
+        Role::create([
+            'name' => 'test1',
+            'description' => '測試管理員1'
+        ]);
+
+        Role::create([
+            'name' => 'test2',
+            'description' => '測試管理員2'
+        ]);
     }
 }
