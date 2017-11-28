@@ -26,15 +26,19 @@
     <!--  Paper Dashboard core CSS    -->
     <link href="/admin/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
-
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <!-- <link href="/admin/assets/css/demo.css" rel="stylesheet" /> -->
 
+    <link rel="stylesheet" href="/admin/assets/css/custom.css">
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="/admin/assets/css/themify-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/assets/css/pe-icon-7-stroke.css">
+
+    <link rel="stylesheet" href="/admin/assets/sass/style.scss">
+    <link rel="stylesheet" href="/admin/assets/css/style.css">
 
     @yield('css')
     

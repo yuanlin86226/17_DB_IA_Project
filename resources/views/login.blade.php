@@ -22,7 +22,7 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="/admin/assets/css/demo.css" rel="stylesheet" />
     
-        
+    
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
@@ -34,7 +34,7 @@
 
 
 <div class="wrapper wrapper-full-page">
-    <div class="full-page login-page" data-color="azure" data-image="/admin/assets/img/full-screen-image-5.jpg">   
+    <div class="full-page login-page" data-color="azure" data-image="/admin/assets/img/full-screen-image-4.jpg">
 
     <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
         <div class="content">
