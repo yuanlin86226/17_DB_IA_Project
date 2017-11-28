@@ -46,7 +46,7 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'icon' => 'pe-7s-config',
+            'icon' => 'pe-7s-note2',
             'title' => '基本資料管理',
             'href' => '#',
             'parent' => null,
