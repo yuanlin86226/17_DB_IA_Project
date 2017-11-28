@@ -34,16 +34,16 @@
 
 
 <div class="wrapper wrapper-full-page">
-    <div class="full-page login-page" data-color="orange" data-image="/admin/assets/img/full-screen-image-3.jpg">   
-        
+    <div class="full-page login-page" data-color="azure" data-image="/admin/assets/img/full-screen-image-5.jpg">   
+
     <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
         <div class="content">
             <div class="container">
-                <div class="row">                   
+                <div class="row">
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                         <form method="POST" action="{{ action('AuthController@login') }}">
                             {{ csrf_field() }}
-                       
+
                             <div class="card card-hidden">
                                 <div class="header text-center">Login</div>
 
@@ -63,29 +63,29 @@
                                     <div class="form-group">
                                         <label>密碼</label>
                                         <input name='password' type="password" placeholder="Password" class="form-control">
-                                    </div>                                    
+                                    </div>
                                     <div class="form-group">
                                         <label class="checkbox">
 
                                             <input name="remember" type="checkbox" data-toggle="checkbox">
                                             記住帳號名稱
-                                        </label>    
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="footer text-center">
-                                    <button type="submit" class="btn btn-fill btn-warning btn-wd">登入</button>
+                                    <button type="submit" class="btn btn-fill btn-info btn-wd">登入</button>
                                 </div>
                             </div>
-                                
+
                         </form>
-                                
-                    </div>                    
+
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>                             
-       
+    </div>
+
 </div>
 
 
