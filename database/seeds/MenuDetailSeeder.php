@@ -230,14 +230,7 @@ class MenuDetailSeeder extends Seeder
             'role_id' => '3'
         ]);
 
-
         MenuRole::create([
-            'menu_id' => '1',
-            'menu_detail_id' => null,
-            'role_id' => '4'
-        ]);
-
-         MenuRole::create([
             'menu_id' => '3',
             'menu_detail_id' => '5',
             'role_id' => '4'
@@ -255,6 +248,32 @@ class MenuDetailSeeder extends Seeder
         MenuRole::create([
             'menu_id' => '3',
             'menu_detail_id' => '8',
+            'role_id' => '4'
+        ]);
+
+        MenuRole::create([
+            'menu_id' => '5',
+            'menu_detail_id' => null,
+            'role_id' => '4'
+        ]);
+        MenuRole::create([
+            'menu_id' => '6',
+            'menu_detail_id' => '13',
+            'role_id' => '4'
+        ]);
+        MenuRole::create([
+            'menu_id' => '6',
+            'menu_detail_id' => '14',
+            'role_id' => '4'
+        ]);
+        MenuRole::create([
+            'menu_id' => '6',
+            'menu_detail_id' => '15',
+            'role_id' => '4'
+        ]);
+        MenuRole::create([
+            'menu_id' => '6',
+            'menu_detail_id' => '16',
             'role_id' => '4'
         ]);
         
