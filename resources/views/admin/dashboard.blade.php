@@ -1,193 +1,189 @@
 @extends('layouts.admin')
 
-@section('title','首頁')
+@section('title','帳號管理')
 
 @section('content')
 
-@php ($REST_API = '/api/admin/messageSpeed/')
+@php ($REST_API = '/api/admin/user/')
 
-        <div class="content">
+        <div class="content" id="panel-list">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-warning text-center">
-                                            <i class="ti-server"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-danger text-center">
-                                            <i class="ti-pulse"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Errors</p>
-                                            23
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> In the last hour
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-info text-center">
-                                            <i class="ti-twitter-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Followers</p>
-                                            +45
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated 3 minutes ago
-                                    </div>
+                            <div class="content table-responsive table-full-width">
+                                <div class="toolbar">
+                                    <button id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
+                                        <i class="glyphicon fa fa-plus"></i>
+                                        新增
+                                    </button>
+                                    &nbsp;
+                                    <button id="btn-remove" class="btn btn-default" type="button" title="刪除人員">
+                                        <i class="glyphicon fa fa-remove"></i>
+                                        刪除
+                                    </button>
+                                    &nbsp;
                                 </div>
+                                
+                                <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
+                                    <thead>
+                                        <th data-field="state" data-width="50" data-checkbox="true"></th>
+                                        <th data-field="id" data-width="50" data-visible="false" class="text-center">ID</th>
+                                        <th data-field="userName" data-sortable="true">帳號名稱</th>
+                                        <th data-field="fullName" data-visible="true"  data-sortable="true">姓名</th>
+                                        <th data-field="email" data-sortable="true">Email</th>
+                                        <th data-field="phoneNumber" data-visible="false" data-sortable="true">手機號碼</th>
+                                        <th data-field="lastLoginAt" data-visible="false">最後登入時間</th>
+                                        <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
+                                        <th data-field="updated_at" data-visible="true" data-sortable="true">更新時間</th>
+                                        <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
+                                    </thead>
+                                    <tbody id="table-body"></tbody>
+                                </table>
+
+                                <div class="clearfix"></div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Email Statistics</h4>
-                                <p class="category">Last Campaign Performance</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
 
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> Campaign sent 2 days ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">2015 Sales</h4>
-                                <p class="category">All products including Taxes</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
 
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-check"></i> Data information certified
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
+
 
 @stop
 
 @section('script')
+<script src="/admin/assets/js/sweetalert2.js"></script>
 
+<script type="text/javascript">
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+    var __REST_API_URL__ = '{{$REST_API}}';
+
+    $('#btn-create').click(function(e) {
+        $('#panel-list').hide();
+        $('#panel-form').show();
+        panelForm.load();
+    });
+
+    $('#btn-remove').click(function(e) {
+        var selections = $table.bootstrapTable('getAllSelections');
+
+        if (selections.length == 0) {
+            swal("尚未選取任何資料");
+            return;
+        }
+
+        var ids = selections.map(function(x) {
+            return x.id;
+        });
+       swal({title: "確認刪除",
+            text: "是否確定要刪除多筆資料？",
+            type: "warning",
+            showCancelButton: true
+        }, function(isConfirm) {
+            if (isConfirm) {
+                Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
+                    console.log(ids);
+                    notifyAfterHttpSuccess(response.body);
+                    $table.bootstrapTable('refresh');
+                }, function() {
+                    notifyAfterHttpError();
+                });
+            }
+        });
+    });
+
+    window.operateEvents = {
+        'click .view': function (e, value, row, index) {
+            $('#panel-list').hide();
+            $('#panel-view').show();
+            panelView.load(row.id);
+        },
+        'click .edit': function (e, value, row, index) {
+            $('#panel-list').hide();
+            $('#panel-form').show();
+            panelForm.load(row.id);
+        },
+        'click .remove': function (e, value, row, index) {
+            swal({title: "確認刪除",
+                text: "是否確定要刪除此筆資料？",
+                type: "warning",
+                showCancelButton: true
+            }, function(isConfirm) {
+                if (isConfirm) {
+                    $table.bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                    Vue.http.delete(__REST_API_URL__ + row.id).then(function(response) {
+                        notifyAfterHttpSuccess(response.body);
+                    }, function() {
+                        notifyAfterHttpError();
+                    });
+                }
+            });
+        }
+    };
+    
+    var initDataTable = function($table) {
+        $table.bootstrapTable({
+            toolbar: ".toolbar",
+            striped: true,
+            sortOrder: 'desc',
+            sortName: 'updatedAt',
+            clickToSelect: true,
+            showRefresh: true,
+            search: true,
+            showToggle: false,
+            showColumns: true,
+            pagination: true,
+            searchAlign: 'right',
+            pageSize: 8,
+            clickToSelect: false,
+            pageList: [8, 10, 25, 50, 100],
+            formatShowingRows: function(pageFrom, pageTo, totalRows){
+                return "共 " + totalRows + " 筆 ";
+            },
+            formatRecordsPerPage: function(pageNumber){
+                return "每頁顯示 " + pageNumber + " 筆資料";
+            },
+            icons: {
+                refresh: 'fa fa-refresh',
+                toggle: 'fa fa-th-list',
+                columns: 'fa fa-columns',
+                detailOpen: 'fa fa-plus-circle',
+                detailClose: 'fa fa-minus-circle'
+            }
+        });
+        $(window).resize(function () {
+            $table.bootstrapTable('resetView');
+        });
+    };
+
+    var $table = $('#bootstrap-table');
+    
+    initDataTable($table);
+
+    function operateFormatter(value, row, index) {
+        return [
+            '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">',
+                '<i class="fa fa-file-text-o"></i>',
+            '</a>',
+            '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
+                '<i class="fa fa-edit"></i>',
+            '</a>',
+            '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
+                '<i class="fa fa-remove"></i>',
+            '</a>'
+        ].join('');
+    }
+
+
+</script>
 @stop
         
