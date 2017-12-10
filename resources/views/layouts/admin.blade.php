@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="/admin/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="/admin/assets/img/favicon.png">
+	<link rel="icon" type="image/png" href="/admin/assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>@yield('title')</title>
@@ -13,32 +12,25 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    
     <!-- Bootstrap core CSS     -->
     <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+        
+    <!--  Light Bootstrap Dashboard core CSS    -->
+    <link href="/admin/assets/css/app.css" rel="stylesheet">
 
-    <!-- Sweetalert2 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.0/sweetalert2.min.css" rel="stylesheet">
-
-    <!-- Animation library for notifications   -->
-    <link href="/admin/assets/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="/admin/assets/css/paper-dashboard.css" rel="stylesheet"/>
-
+    
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <!-- <link href="/admin/assets/css/demo.css" rel="stylesheet" /> -->
 
-    <link rel="stylesheet" href="/admin/assets/css/custom.css">
-
-    <!--  Fonts and icons     -->
+    <!-- CSS -->
+    <link href="/admin/assets/css/custom.css" rel="stylesheet" />
+        
+    <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="/admin/assets/css/themify-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/admin/assets/css/pe-icon-7-stroke.css">
-
-    <link rel="stylesheet" href="/admin/assets/sass/style.scss">
-    <link rel="stylesheet" href="/admin/assets/css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="/admin/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     @yield('css')
     
@@ -47,72 +39,23 @@
 </head>
 <body>
 
+    
+
 <div class="wrapper">
-    <div class="sidebar" data-background-color="white" data-active-color="azure">
+    <div class="sidebar" data-color="orange" data-image="assets/img/full-screen-image-3.jpg">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
 		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 	-->
 
+        <div class="logo">
+            <a href="http://www.creative-tim.com" class="logo-text">
+                IA 3rd
+            </a>
+        </div>
+
     	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    IA 3rd
-                </a>
-            </div>
-
-            <!-- <ul class="nav">
-                <li class="active">
-                    <a href="dashboard.html">
-                        <i class="ti-panel"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="user.html">
-                        <i class="ti-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="table.html">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="typography.html">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="ti-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="ti-export"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
-            </ul> -->
-
             <ul id="menu" class="nav" v-cloak>
                 <li v-for="item in items" :class="item.active && 'active'">
                     <a v-if="item.childs.length==0" :href="item.href" :title="item.title">
@@ -150,22 +93,31 @@
                     <a class="navbar-brand" href="#">@yield('page_title')</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-user"></i>
-									<p>{{ Auth::user()->userName }}</p>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown dropdown-with-icons">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-user"></i>
+								<p>
+									{{ Auth::user()->userName }}
 									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">修改帳號資料</a></li>
-                                <li><a href="logout">登出</a></li>
-                              </ul>
-                        </li>
-
-                    </ul>
-                </div>
+								</p>
+							</a>
+							<ul class="dropdown-menu dropdown-with-icons">
+								<li>
+									<a href="profile">
+										<i class="pe-7s-lock"></i> 修改帳號資料
+									</a>
+								</li>
+								<li>
+									<a href="logout" class="text-danger swal-prompt">
+										<i class="pe-7s-close-circle"></i>
+										登出
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
             </div>
         </nav>
 
@@ -194,12 +146,31 @@
     <script src="/lib/vee-validate/dist/locale/zh_TW.js"></script>
     <script src="/lib/moment/min/moment.min.js"></script>
 
-    <!--   Core JS Files   -->
-    <script src="/admin/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    
+
+    <!--   Core JS Files and PerfectScrollbar library inside jquery.ui   -->
+    <script src="/admin/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/js/jquery-ui.min.js" type="text/javascript"></script> 
 	<script src="/admin/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="/admin/assets/js/bootstrap-checkbox-radio.js"></script>
+
+	<!--  Forms Validations Plugin -->
+	<script src="/admin/assets/js/jquery.validate.min.js"></script>
+
+	<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+	<script src="/admin/assets/js/moment.min.js"></script>
+
+    <!--  date.format.js -->
+	<script src="/admin/assets/js/date.format.js"></script>
+
+    <!--  Date Time Picker Plugin is included in this js file -->
+    <script src="/admin/assets/js/bootstrap-datetimepicker.js"></script>
+
+    <!--  Select Picker Plugin -->
+    <script src="/admin/assets/js/bootstrap-selectpicker.js"></script>
+
+	<!--  Checkbox, Radio, Switch and Tags Input Plugins -->
+	<script src="/admin/assets/js/bootstrap-checkbox-radio-switch-tags.js"></script>
 
 	<!--  Charts Plugin -->
 	<script src="/admin/assets/js/chartist.min.js"></script>
@@ -207,14 +178,33 @@
     <!--  Notifications Plugin    -->
     <script src="/admin/assets/js/bootstrap-notify.js"></script>
 
+    <!-- Sweet Alert 2 plugin -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.0/sweetalert2.min.js"></script> -->
+    <!-- <script src="/admin/assets/js/sweetalert2.js"></script> -->
+    
+    <!-- Vector Map plugin -->
+	<script src="/admin/assets/js/jquery-jvectormap.js"></script>
+
     <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
 
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="/admin/assets/js/paper-dashboard.js"></script>
+	<!-- Wizard Plugin    -->
+     <script src="/admin/assets/js/jquery.bootstrap.wizard.min.js"></script> 
 
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/admin/assets/js/demo.js"></script>
+    <!--  Bootstrap Table Plugin    -->
+    <script src="/admin/assets/js/bootstrap-table.js"></script>
+
+	<!--  Plugin for DataTables.net  -->
+    <script src="/admin/assets/js/jquery.datatables.js"></script>
+
+    <!--  Full Calendar Plugin    -->
+    <script src="/admin/assets/js/fullcalendar.min.js"></script>
+
+    <!-- Light Bootstrap Dashboard Core javascript and methods -->
+	 <script src="/admin/assets/js/light-bootstrap-dashboard.js"></script> 
+
+    <!-- sweetalert2.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.0/sweetalert2.min.js"></script>
 
 	<script type="text/javascript">
     
@@ -323,7 +313,7 @@
                         }
                         _this.items = items;
                         _this.items = JSON.parse(JSON.stringify(_this.items));
-                        console.log(_this.items);
+                        // console.log(_this.items);
 
                         Vue.nextTick(function() {
                             $(document).ready(load_scrollbar);
