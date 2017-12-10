@@ -12,6 +12,7 @@ use App\RoleUser;
 use App\MenuRole;
 use App\MenuDetail;
 
+use DB;
 use Exception;
 use View;
 use Auth;
@@ -24,8 +25,24 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::check()) {
+
             // menu_id要確認
-            return View::make('admin/user',['menu_id'=>'2']);
+            $menu_id = 2;
+            $user_id = Auth::user()->id;
+
+            $role_menus = DB::select(
+                DB::raw("select DISTINCT menu_id from menu_role 
+                where role_id in (select role_id from role_user where user_id = '".$user_id."') and menu_id = '".$menu_id."'")
+            );
+
+            if (count($role_menus)==0) {
+                return Redirect::action('AuthController@login');
+            } else {
+                return View::make('admin/user',['menu_id' => $menu_id]);
+            }
+
+            
+            return View::make('admin/user',['menu_id' => $menu_id]);
         } else {
             return Redirect::action('AuthController@login');
         }

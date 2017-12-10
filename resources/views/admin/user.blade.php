@@ -154,7 +154,7 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">權限角色</label>
+                                            <label class="col-sm-2 control-label">群組角色</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">
                                                      <template v-for="role in row.roles">
@@ -264,7 +264,7 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">權限角色</label>
+                                            <label class="col-sm-2 control-label">群組角色</label>
                                             <div class="col-sm-10">
                                                 <div v-for="all_role in row.all_roles">
                                                     <label>
