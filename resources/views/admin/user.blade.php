@@ -13,12 +13,12 @@
                         <div class="card">
                             <div class="content table-responsive table-full-width">
                                 <div class="toolbar">
-                                    <button id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
+                                    <button v-if="roles.insert" id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
                                         <i class="glyphicon fa fa-plus"></i>
                                         新增
                                     </button>
                                     &nbsp;
-                                    <button id="btn-remove" class="btn btn-default" type="button" title="刪除人員">
+                                    <button v-if="roles.delete" id="btn-remove" class="btn btn-default" type="button" title="刪除人員">
                                         <i class="glyphicon fa fa-remove"></i>
                                         刪除
                                     </button>
@@ -30,7 +30,7 @@
                                         <th data-field="state" data-width="50" data-checkbox="true"></th>
                                         <th data-field="id" data-width="50" data-visible="false" class="text-center">ID</th>
                                         <th data-field="userName" data-sortable="true">帳號名稱</th>
-                                        <th data-field="fullName" data-visible="true"  data-sortable="true">姓名</th>
+                                        <th data-field="name" data-visible="true"  data-sortable="true">姓名</th>
                                         <th data-field="email" data-sortable="true">Email</th>
                                         <th data-field="phoneNumber" data-visible="false" data-sortable="true">手機號碼</th>
                                         <th data-field="lastLoginAt" data-visible="false">最後登入時間</th>
@@ -57,12 +57,53 @@
 @stop
 
 @section('script')
-<script src="/admin/assets/js/sweetalert2.js"></script>
 
 <script type="text/javascript">
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
     var __REST_API_URL__ = '{{$REST_API}}';
+
+    var user_id = '{{Auth::user()->id}}';
+    var menu_id = '{{ $menu_id }}';
+
+    var roles = {};
+
+    var panelList = new Vue({
+        el: '#panel-list',
+        data: {
+            roles:{}
+        },
+        mounted: function(){
+            _this = this;
+            
+            Vue.http.get(__REST_API_URL__  + user_id + '/roles/' +  menu_id).then(function(response) {
+                console.log(response.body);
+                _this.roles = response.body;
+                roles = response.body;
+            });
+        },
+        methods: {
+            load: function(id){
+                _this = this;
+
+                REDENVELOPE_ID = id;
+                _this.redenvelope_time = REDENVELOPE_TIME;
+
+                $table.bootstrapTable('refresh', {
+                    url: __REST_API_URL__  + $user_id + '/roles/' +  $menu_id
+                });
+            },
+            close: function() {
+                _this = this;
+
+                $('#panel-red-envelope-list').show();
+                $('#panel-list').hide();
+                $('#panel-form').hide();
+
+                $table2.bootstrapTable('refresh');
+            }
+        }
+    });
 
     $('#btn-create').click(function(e) {
         $('#panel-list').hide();
@@ -81,7 +122,8 @@
         var ids = selections.map(function(x) {
             return x.id;
         });
-       swal({title: "確認刪除",
+
+        swal({title: "確認刪除",
             text: "是否確定要刪除多筆資料？",
             type: "warning",
             showCancelButton: true
@@ -170,16 +212,36 @@
     initDataTable($table);
 
     function operateFormatter(value, row, index) {
+        
+        if(roles.view){
+            $view = [
+                '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">'+
+                    '<i class="fa fa-file-text-o"></i>'+
+                '</a>'
+            ];
+        } else { $view = []; }
+
+        if(roles.edit){
+            $edit = [
+                '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">'+
+                    '<i class="fa fa-edit"></i>'+
+                '</a>'
+            ];
+        } else { $edit = []; }
+
+        if(roles.delete){
+            $delete = [
+                '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">'+
+                    '<i class="fa fa-remove"></i>'+
+                '</a>'
+            ];
+        } else { $delete = []; }
+
+
         return [
-            '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">',
-                '<i class="fa fa-file-text-o"></i>',
-            '</a>',
-            '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
-                '<i class="fa fa-edit"></i>',
-            '</a>',
-            '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
-                '<i class="fa fa-remove"></i>',
-            '</a>'
+            $view,
+            $edit,
+            $delete
         ].join('');
     }
 
