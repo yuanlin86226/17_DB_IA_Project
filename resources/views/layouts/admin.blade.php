@@ -315,10 +315,10 @@
                         _this.items = JSON.parse(JSON.stringify(_this.items));
                         // console.log(_this.items);
 
-                        Vue.nextTick(function() {
-                            $(document).ready(load_scrollbar);
-                            copyright.getcopyright();
-                        });
+                        // Vue.nextTick(function() {
+                        //     $(document).ready(load_scrollbar);
+                        //     copyright.getcopyright();
+                        // });
                     });
                 }
             }

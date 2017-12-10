@@ -19,53 +19,65 @@ class MenuDetailSeeder extends Seeder
 
         MenuDetail::create([
             'menu_id' => '2',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '2',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '2',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '2',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
 
         MenuDetail::create([
             'menu_id' => '3',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '3',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '3',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '3',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
         MenuDetail::create([
             'menu_id' => '4',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '4',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '4',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '4',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
@@ -73,103 +85,127 @@ class MenuDetailSeeder extends Seeder
 
         MenuDetail::create([
             'menu_id' => '6',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '6',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '6',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '6',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
         MenuDetail::create([
             'menu_id' => '7',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '7',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '7',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '7',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
         MenuDetail::create([
             'menu_id' => '8',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '8',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '8',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '8',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
         MenuDetail::create([
             'menu_id' => '9',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '9',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '9',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '9',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
         MenuDetail::create([
             'menu_id' => '10',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '10',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '10',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '10',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
         MenuDetail::create([
             'menu_id' => '11',
+            'sign' => 'view',
             'description' => '查看'
         ]);
         MenuDetail::create([
             'menu_id' => '11',
+            'sign' => 'insert',
             'description' => '新增'
         ]);
         MenuDetail::create([
             'menu_id' => '11',
+            'sign' => 'edit',
             'description' => '修改'
         ]);
         MenuDetail::create([
             'menu_id' => '11',
+            'sign' => 'delete',
             'description' => '刪除'
         ]);
 
@@ -177,21 +213,16 @@ class MenuDetailSeeder extends Seeder
 
         $menu_details = MenuDetail::all();
         
+        $i = 1;
         foreach ($menu_details as $menu) {
-            if($menu['menu_id']==2 and $menu['id']==1){
+            if($i != $menu['menu_id']){
                 MenuRole::create([
-                    'menu_id' => '1',
+                    'menu_id' => $i,
                     'menu_detail_id' => null,
                     'role_id' => '1'
                 ]);
-            }
 
-            if($menu['menu_id']==6 and $menu['id']==13){
-                MenuRole::create([
-                    'menu_id' => '5',
-                    'menu_detail_id' => null,
-                    'role_id' => '1'
-                ]);
+                $i++;
             }
 
             MenuRole::create([

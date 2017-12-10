@@ -20,7 +20,7 @@ class CreateMenuDetailTable extends Migration
             $table->foreign('menu_id')
                 ->references('id')->on('menus');
 
-
+            $table->string('sign');
             $table->string('description');
             $table->timestamps();
         });
