@@ -30,10 +30,7 @@ class UserController extends Controller
             $menu_id = 2;
             $user_id = Auth::user()->id;
 
-            $role_menus = DB::select(
-                DB::raw("select DISTINCT menu_id from menu_role 
-                where role_id in (select role_id from role_user where user_id = '".$user_id."') and menu_id = '".$menu_id."'")
-            );
+            $role_menus = User::able_page($user_id, $menu_id);
 
             if (count($role_menus)==0) {
                 return Redirect::action('AuthController@login');
@@ -48,7 +45,7 @@ class UserController extends Controller
         }
     }
 
-    // 之後要移到RoleController底下，全部共用
+    // 全部共用
     public function getSign($id,$menu_id)
     {
         $data = array();
