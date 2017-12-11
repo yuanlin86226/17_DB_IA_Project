@@ -30,7 +30,11 @@ Route::middleware('api')->delete('/admin/user', 'Admin\UserController@destroyMan
 Route::middleware('api')->get('/admin/user/{id}/roles', 'Admin\UserController@getRoles');
 Route::middleware('api')->get('/admin/user/{id}/roles/{menu_id}', 'Admin\UserController@getSign');
 
+
 Route::middleware('api')->get('/admin/role', 'Admin\RoleController@findAll');
+Route::middleware('api')->get('/admin/roleParent', 'Admin\RoleController@findroleParent');
+Route::middleware('api')->get('/admin/role/{id}', 'Admin\RoleController@findOne');
+Route::middleware('api')->get('/admin/role/{id}/menu_detail/{menu_id}', 'Admin\RoleController@findOneMenuDetail');
 
 
 Route::middleware('api')->get('/admin/menu', 'Admin\MenuController@findAll');

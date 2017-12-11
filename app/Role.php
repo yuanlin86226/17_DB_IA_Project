@@ -17,6 +17,12 @@ class Role extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
 
+    // public function menu()
+    // {
+    //     return $this
+    //     ->belongsToMany('App\MenuDetail', 'menu_role', 'role_id', 'menu_detail_id');
+    // }
+
     public static function validate($id=0, $merge=[]) {
         return array_merge(
         [

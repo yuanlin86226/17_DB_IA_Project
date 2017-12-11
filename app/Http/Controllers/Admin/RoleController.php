@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Role;
+use App\Menu;
+use App\MenuRole;
+use App\MenuDetail;
 
 use Exception;
 use View;
 use Auth;
 use Redirect;
 use Validator;
+use DB;
 
 class RoleController extends Controller
 {
@@ -44,5 +48,54 @@ class RoleController extends Controller
         $roles = Role::all();
 
         return response()->json($roles);
+    }
+
+    public function findOne($id)
+    {
+        $role = Role::find($id);
+        $parents = Menu::where('parent',null)->get();
+
+        $data['role'] = $role;
+        $data['parents'] = $parents;
+
+        return response()->json($data);
+    }
+
+    public function findroleParent()
+    {
+        $parents = Menu::where('parent',null)->get();
+
+        return response()->json($parents);
+    }
+
+    public function findOneMenuDetail($id, $menu_id)
+    {
+        $data = array();
+        $menus = Menu::where('parent',$menu_id)->get();
+
+        foreach ($menus as $index => $menu) {
+            $data[$index] = [
+                'title' => $menu['title'],
+                'view' => false,
+                'insert' => false,
+                'edit' => false,
+                'delete' => false,
+            ];
+
+            $roles = DB::select(
+                DB::raw("select DISTINCT sign from menu_details 
+                where id in (select menu_detail_id from menu_role where menu_id = '".$menu['id']."' and role_id = '".$id."')")
+            );
+
+            foreach ($roles as $role) {
+                if($role->sign == 'view') {$data[$index]['view'] = true;}
+                if($role->sign == 'insert') {$data[$index]['insert'] = true;}
+                if($role->sign == 'edit') {$data[$index]['edit'] = true;}
+                if($role->sign == 'delete') {$data[$index]['delete'] = true;}
+            }
+            
+        }
+
+        return response()->json($data);
     }
 }
