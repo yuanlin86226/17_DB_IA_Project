@@ -17,7 +17,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content table-responsive table-full-width">
-                                <div class="toolbar">
+                                <div id="toolbox" class="toolbar">
                                     <button v-if="roles.insert" v-on:click="create" id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
                                         <i class="glyphicon fa fa-plus"></i>
                                         新增
@@ -336,10 +336,11 @@
 
     var roles = {};
 
-    var panelList = new Vue({
-        el: '#panel-list',
+    var toolBox = new Vue({
+        el: '#toolbox',
         data: {
-            roles:{}
+            roles:{},
+            
         },
         mounted: function(){
             _this = this;
@@ -373,6 +374,7 @@
                     showCancelButton: true
                 }).then( function(isConfirm) {
                     if (isConfirm) {
+                        console.log(ids);
                         Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
                             notifyAfterHttpSuccess(response.body);
                             $table.bootstrapTable('refresh');
