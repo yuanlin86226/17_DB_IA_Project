@@ -13,3 +13,11 @@
 .bootstrap-table .table thead > tr > th{
     padding: 5px 0;
 }
+
+span.space{
+    width: 2px;
+}
+input[type="checkbox"].role-checkbox{
+    width: 20px;
+    height: 20px;
+}

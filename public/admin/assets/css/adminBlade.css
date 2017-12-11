@@ -1,0 +1,8 @@
+.main-panel{
+    background-image: url('/admin/assets/img/full-screen-image-5.jpg');
+    background-position: top center;
+}
+
+.sidebar .nav p{
+    letter-spacing: 1px;
+}
