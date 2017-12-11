@@ -24,3 +24,4 @@ Route::get('/admin/logout','AuthController@logout');
 
 
 Route::get('/admin/user','Admin\UserController@index');
+Route::get('/admin/role','Admin\RoleController@index');

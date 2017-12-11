@@ -39,14 +39,14 @@ class MenuSeeder extends Seeder
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
-            'title' => '權限管理',
+            'title' => '選單管理',
             'href' => '/admin/menu',
             'parent' => '1',
             'order' => '4'
         ]);
 
         Menu::create([
-            'icon' => 'pe-7s-config',
+            'icon' => 'pe-7s-note2',
             'title' => '基本資料管理',
             'href' => '#',
             'parent' => null,

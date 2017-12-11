@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\User;
 
+use DB;
 use Auth;
 use Redirect;
 use View;
@@ -39,7 +41,13 @@ class AuthController extends Controller
 
             Auth::user() -> save();
 
-            return Redirect::action('Admin\UserController@index');
+            $href = DB::select(
+                DB::raw("select href from menus where id in 
+                    (select DISTINCT menu_id from menu_role 
+                    where role_id in (select role_id from role_user where user_id = '".Auth::user()->id."')) and href <> '#' limit 1")
+            );
+
+            return Redirect($href[0]->href);
         }
         else {
         	$user = User::where('userName', $request->username)->get();
