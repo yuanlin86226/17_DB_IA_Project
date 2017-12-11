@@ -19,81 +19,70 @@ class MenuSeeder extends Seeder
             'icon' => 'pe-7s-config',
             'title' => '系統管理',
             'href' => '#',
-            'parent' => null,
-            'order' => '1'
+            'parent' => null
         ]);
 
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '帳號管理',
             'href' => '/admin/user',
-            'parent' => '1',
-            'order' => '2'
+            'parent' => '1'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '群組管理',
             'href' => '/admin/role',
-            'parent' => '1',
-            'order' => '3'
+            'parent' => '1'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '選單管理',
             'href' => '/admin/menu',
-            'parent' => '1',
-            'order' => '4'
+            'parent' => '1'
         ]);
 
         Menu::create([
-            'icon' => 'pe-7s-config',
+            'icon' => 'pe-7s-note2',
             'title' => '基本資料管理',
             'href' => '#',
-            'parent' => null,
-            'order' => '5'
+            'parent' => null
         ]);
 
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '公司資料',
             'href' => '/admin/company',
-            'parent' => '5',
-            'order' => '6'
+            'parent' => '5'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '員工資料',
             'href' => '/admin/employee',
-            'parent' => '5',
-            'order' => '7'
+            'parent' => '5'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '客戶資料',
             'href' => '/admin/customer',
-            'parent' => '5',
-            'order' => '8'
+            'parent' => '5'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '廠商資料',
             'href' => '/admin/supplier',
-            'parent' => '5',
-            'order' => '9'
+            'parent' => '5'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '商品分類',
             'href' => '/admin/productType',
-            'parent' => '5',
-            'order' => '10'
+            'parent' => '5'
         ]);
         Menu::create([
             'icon' => 'pe-7s-box2',
             'title' => '商品資料',
             'href' => '/admin/productData',
-            'parent' => '5',
-            'order' => '11'
+            'parent' => '5'
         ]);
 
     }

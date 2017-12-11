@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title','後台選單管理-F1娛樂客服系統')
-@section('page_title','後台選單管理')
+@section('title','選單管理')
+@section('page_title','選單管理')
 
 @section('content')
 
@@ -22,13 +22,13 @@
                         <div class="card">
                             <div class="content table-responsive table-full-width">
 
-                                <div class="toolbar">
-                                    <button id="btn-create" class="btn btn-default" type="button" title="新增一篇文章">
+                                <div id="toolbox" class="toolbar">
+                                    <button v-if="roles.insert" v-on:click="create" id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
                                         <i class="glyphicon fa fa-plus"></i>
                                         新增
                                     </button>
                                     &nbsp;
-                                    <button id="btn-remove" class="btn btn-default" type="button" title="批次刪除文章">
+                                    <button v-if="roles.delete" v-on:click="delete_many" id="btn-remove" class="btn btn-default" type="button" title="刪除人員">
                                         <i class="glyphicon fa fa-remove"></i>
                                         刪除
                                     </button>
@@ -36,9 +36,9 @@
                                 </div>
                                 
                                 @if( isset($_GET['parent']) )
-                                    <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}?parent={{$_GET['parent']}}" data-click-to-select="ture">
+                                    <table v-if="" id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}?parent={{$_GET['parent']}}" data-click-to-select="ture">
                                 @else
-                                    <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
+                                    <table v-if="" id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
                                 @endif
                                 
                                 
@@ -220,8 +220,6 @@
                             </div>
                         </div>
                     </div>
-                
-
                 </div>
             </div>
         </div>
@@ -230,7 +228,6 @@
 @stop
 
 @section('script')
-<script src="/admin/assets/js/sweetalert2.js"></script>
 
 <script type="text/javascript">
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
@@ -238,6 +235,9 @@
     var $table = $('#bootstrap-table');
 
     var __REST_API_URL__ = '{{$REST_API}}';
+
+    var user_id = '{{Auth::user()->id}}';
+    var menu_id = '{{ $menu_id }}';
 
     if (window.location.search!=""){
         var parent_arr = window.location.search.split("=");
@@ -264,6 +264,57 @@
     function displayIcon(value, row, index) {
         return '<i class="' + value + '" style="font-size:150%"></i> <small>' + value + '</small>';
     }
+
+    var toolBox = new Vue({
+        el: '#toolbox',
+        data: {
+            roles:{},
+            
+        },
+        mounted: function(){
+            _this = this;
+            
+            Vue.http.get('/api/admin/user/'  + user_id + '/roles/' +  menu_id).then(function(response) {
+                _this.roles = response.body;
+                roles = response.body;
+            });
+        },
+        methods: {
+            create: function(id){
+                $('#panel-list').hide();
+                $('#panel-form').show();
+                panelForm.load();
+            },
+            delete_many: function() {
+                var selections = $table.bootstrapTable('getAllSelections');
+
+                if (selections.length == 0) {
+                    swal("尚未選取任何資料");
+                    return;
+                }
+
+                var ids = selections.map(function(x) {
+                    return x.id;
+                });
+
+                swal({title: "確認刪除",
+                    text: "是否確定要刪除多筆資料？",
+                    type: "warning",
+                    showCancelButton: true
+                }).then( function(isConfirm) {
+                    if (isConfirm) {
+                        console.log(ids);
+                        Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
+                            notifyAfterHttpSuccess(response.body);
+                            $table.bootstrapTable('refresh');
+                        }, function() {
+                            notifyAfterHttpError();
+                        });
+                    }
+                });
+            }
+        }
+    });
     
     var panelView = new Vue({
         el: '#panel-view',
@@ -359,41 +410,6 @@
         }
     });
 
-    $('#btn-create').click(function(e) {
-        $('#panel-list').hide();
-        $('#panel-form').show();
-        panelForm.load();
-    });
-
-    $('#btn-remove').click(function(e) {
-        var selections = $table.bootstrapTable('getAllSelections');
-
-        if (selections.length == 0) {
-            swal("尚未選取任何資料");
-            return;
-        }
-
-        var ids = selections.map(function(x) {
-            return x.id;
-        });
-        swal({title: "確認刪除",
-            text: "是否確定要刪除多筆資料？",
-            type: "warning",
-            showCancelButton: true
-        }, function(isConfirm) {
-            if (isConfirm) {
-                Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
-                    console.log(ids);
-                    notifyAfterHttpSuccess(response.body);
-                    $table.bootstrapTable('refresh');
-                    adminMenu.fetch();
-                }, function() {
-                    notifyAfterHttpError();
-                });
-            }
-        });
-    });
-
     window.operateEvents = {
         'click .open': function (e, value, row, index) {
             location.href='/admin/menu?parent='+row.id;
@@ -413,7 +429,7 @@
                 text: "是否確定要刪除此筆資料？",
                 type: "warning",
                 showCancelButton: true
-            }, function(isConfirm) {
+            }).then( function(isConfirm) {
                 if (isConfirm) {
                     $table.bootstrapTable('remove', {
                         field: 'id',
@@ -471,33 +487,43 @@
 
     function operateFormatter(value, row, index) {
         if (__PARENT_ID__==null) {
-            return [
-                '<a rel="tooltip" title="開啟" class="btn btn-simple btn-info btn-icon table-action open" href="javascript:void(0)">',
-                    '<i class="fa fa-folder-open-o"></i>',
-                '</a>',
-                '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">',
-                    '<i class="fa fa-file-text-o"></i>',
-                '</a>',
-                '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
-                    '<i class="fa fa-edit"></i>',
-                '</a>',
-                '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
-                    '<i class="fa fa-remove"></i>',
+            $parent = [
+                '<a rel="tooltip" title="開啟" class="btn btn-simple btn-info btn-icon table-action open" href="javascript:void(0)">'+
+                    '<i class="fa fa-folder-open-o"></i>'+
                 '</a>'
-            ].join('');
-        } else {
-            return [
-                '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">',
-                    '<i class="fa fa-file-text-o"></i>',
-                '</a>',
-                '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
-                    '<i class="fa fa-edit"></i>',
-                '</a>',
-                '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
-                    '<i class="fa fa-remove"></i>',
+            ]
+        } else { $parent = []; }
+
+        if(roles.view){
+            $view = [
+                '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">'+
+                    '<i class="fa fa-file-text-o"></i>'+
                 '</a>'
-            ].join('');
-        }
+            ];
+        } else { $view = []; }
+
+        if(roles.edit){
+            $edit = [
+                '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">'+
+                    '<i class="fa fa-edit"></i>'+
+                '</a>'
+            ];
+        } else { $edit = []; }
+
+        if(roles.delete){
+            $delete = [
+                '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">'+
+                    '<i class="fa fa-remove"></i>'+
+                '</a>'
+            ];
+        } else { $delete = []; }
+
+        return [
+            $parent,
+            $view,
+            $edit,
+            $delete
+        ].join('');
         
     }
 

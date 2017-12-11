@@ -1,0 +1,45 @@
+.sidebar .nav i, .off-canvas-sidebar .nav i {
+  margin-right: 5px;
+}
+
+.sidebar .nav, .off-canvas-sidebar .nav {
+    margin-top: 0px;
+}
+
+.sidebar .nav li > a, .off-canvas-sidebar .nav li > a{
+	margin: 10px 0 0 0;
+}
+
+.sidebar .nav p, .off-canvas-sidebar .nav p{
+	letter-spacing: 1px;
+	font-size: 14px;
+}
+.sidebar .nav, .off-canvas-sidebar .nav{
+	letter-spacing: 1px;
+}
+
+.sidebar .nav li.active > a:before, .off-canvas-sidebar .nav li.active > a:before{
+	top: 3px;
+}
+.sidebar .nav li.active > a:after, .off-canvas-sidebar .nav li.active > a:after{
+	border-right: 17px solid #68b3c8;
+	top: 3px;
+}
+
+.sidebar .nav li.active > a, .off-canvas-sidebar .nav li.active > a{
+	font-weight: 400;
+}
+
+.dropdown-menu{
+	background-color: #dfedf1;
+}
+.navbar-nav > li > .dropdown-menu:before{
+	border-bottom: 11px solid #dfedf1;
+}
+.navbar-nav > li > .dropdown-menu:after{
+	border-bottom: 11px solid #dfedf1;
+}
+
+.footer .copyright{
+	color: #68b3c8;
+}

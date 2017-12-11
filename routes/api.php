@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::middleware('api')->get('/admin/menu_list/{user_id}', 'Admin\MenuController@menu_list');
+
 Route::middleware('api')->get('/admin/user', 'Admin\UserController@findAll');
 Route::middleware('api')->post('/admin/user', 'Admin\UserController@save');
 Route::middleware('api')->get('/admin/user/{id}', 'Admin\UserController@findOne');
@@ -30,4 +32,10 @@ Route::middleware('api')->get('/admin/user/{id}/roles/{menu_id}', 'Admin\UserCon
 
 Route::middleware('api')->get('/admin/role', 'Admin\RoleController@findAll');
 
-Route::middleware('api')->get('/admin/menu_list/{user_id}', 'Admin\MenuController@menu_list');
+
+Route::middleware('api')->get('/admin/menu', 'Admin\MenuController@findAll');
+Route::middleware('api')->get('/admin/menu/{id}', 'Admin\MenuController@findOne');
+Route::middleware('api')->post('/admin/menu', 'Admin\MenuController@save');
+Route::middleware('api')->put('/admin/menu/{id}', 'Admin\MenuController@update');
+Route::middleware('api')->delete('/admin/menu/{id}', 'Admin\MenuController@destroy');
+Route::middleware('api')->delete('/admin/menu', 'Admin\MenuController@destroyMany');

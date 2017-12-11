@@ -12,4 +12,18 @@ class Menu extends Model
 
     public $timestamps = true;
 
+    public function parent()
+    {
+        return $this->belongsTo('App\Menu')->withTimestamps();
+    }
+
+    public static function validate($id=0, $merge=[]) {
+        return array_merge(
+        [
+            'title' => 'required|unique:menus,title' . ($id ? ",$id" : ''),
+            'icon' => 'required'
+        ], 
+        $merge);
+    }
+
 }
