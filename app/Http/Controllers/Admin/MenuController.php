@@ -88,7 +88,7 @@ class MenuController extends Controller
                     MenuDetail::create([
                         'menu_id' => $createdMenu['id'],
                         'sign' => 'view',
-                        'description' => '查看'
+                        'description' => '檢視'
                     ]);
                     MenuDetail::create([
                         'menu_id' => $createdMenu['id'],
