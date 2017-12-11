@@ -12,6 +12,7 @@ use App\RoleUser;
 use App\MenuRole;
 use App\MenuDetail;
 
+use DB;
 use Exception;
 use View;
 use Auth;
@@ -24,14 +25,27 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::check()) {
+
             // menu_id要確認
-            return View::make('admin/user',['menu_id'=>'2']);
+            $menu_id = 2;
+            $user_id = Auth::user()->id;
+
+            $role_menus = User::able_page($user_id, $menu_id);
+
+            if (count($role_menus)==0) {
+                return Redirect::action('AuthController@login');
+            } else {
+                return View::make('admin/user',['menu_id' => $menu_id]);
+            }
+
+            
+            return View::make('admin/user',['menu_id' => $menu_id]);
         } else {
             return Redirect::action('AuthController@login');
         }
     }
 
-    // 之後要移到RoleController底下，全部共用
+    // 全部共用
     public function getSign($id,$menu_id)
     {
         $data = array();

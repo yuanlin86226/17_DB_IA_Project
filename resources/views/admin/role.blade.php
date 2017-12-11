@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title','帳號管理')
+@section('title','群組管理')
 
 @section('content')
 
-@php ($REST_API = '/api/admin/user/')
+@php ($REST_API = '/api/admin/role/')
 
         <div class="content" id="panel-list">
             <div class="container-fluid">
@@ -27,15 +27,10 @@
                                 
                                 <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
                                     <thead>
-                                        <th data-field="state" data-width="50" data-checkbox="true"></th>
-                                        <th data-field="id" data-width="50" data-visible="false" class="text-center">ID</th>
-                                        <th data-field="userName" data-sortable="true">帳號名稱</th>
-                                        <th data-field="name" data-visible="true"  data-sortable="true">姓名</th>
-                                        <th data-field="email" data-sortable="true">Email</th>
-                                        <th data-field="phoneNumber" data-visible="false" data-sortable="true">手機號碼</th>
-                                        <th data-field="lastLoginAt" data-visible="false">最後登入時間</th>
-                                        <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
-                                        <th data-field="updated_at" data-visible="true" data-sortable="true">更新時間</th>
+                                        <th data-width="50" data-field="state" data-checkbox="true"></th>
+                                        <th data-width="300" data-field="id" data-visible="false">ID</th>
+                                        <th data-field="name" data-sortable="true">角色名稱</th>
+                                        <th data-field="description">角色說明</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
                                     </thead>
                                     <tbody id="table-body"></tbody>

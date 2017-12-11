@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use DB;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -44,5 +46,12 @@ class User extends Authenticatable
             'email' => 'required|email|unique:users,email' . ($id ? ",$id" : '')
         ], 
         $merge);
+    }
+
+    public static function able_page($user_id, $menu_id) {
+        return DB::select(
+            DB::raw("select DISTINCT menu_id from menu_role 
+            where role_id in (select role_id from role_user where user_id = '".$user_id."') and menu_id = '".$menu_id."'")
+        );
     }
 }
