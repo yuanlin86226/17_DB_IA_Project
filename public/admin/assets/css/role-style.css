@@ -1,0 +1,15 @@
+.main-panel{
+    overflow-y: scroll;
+}
+.role-table span{
+    margin-left: 5px;
+}
+.role-table thead{
+    background-color: #f6f6f6;
+}
+.role-checkbox{
+    margin-left: 5px;
+}
+.bootstrap-table .table thead > tr > th{
+    padding: 5px 0;
+}
