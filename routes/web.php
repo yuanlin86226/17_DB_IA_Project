@@ -11,16 +11,17 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/','AuthController@index');
+// Route::get('/','AuthController@index');
 Route::get('/login','AuthController@index');
 Route::post('/login','AuthController@login');
 
 Route::get('/admin/logout','AuthController@logout');
 
-Route::get('/index', function () {
-    return view('admin.dashboard');
-});
+
+
+Route::get('/admin/user','Admin\UserController@index');
+Route::get('/admin/role','Admin\RoleController@index');

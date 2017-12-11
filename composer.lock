@@ -836,6 +836,7 @@
         },
         {
             "name": "psy/psysh",
+<<<<<<< HEAD
             "version": "v0.8.16",
             "source": {
                 "type": "git",
@@ -846,6 +847,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bobthecow/psysh/zipball/d4c8eab0683dc056f2ca54ca67f5388527c068b1",
                 "reference": "d4c8eab0683dc056f2ca54ca67f5388527c068b1",
+=======
+            "version": "v0.8.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobthecow/psysh.git",
+                "reference": "b1d289c2cb03a2f8249912c53e96ced38f879926"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/b1d289c2cb03a2f8249912c53e96ced38f879926",
+                "reference": "b1d289c2cb03a2f8249912c53e96ced38f879926",
+>>>>>>> 771dffadd55f0baad458f0745b1bd3963a471f7b
                 "shasum": ""
             },
             "require": {
@@ -859,7 +872,11 @@
             "require-dev": {
                 "hoa/console": "~3.16|~1.14",
                 "phpunit/phpunit": "^4.8.35|^5.4.3",
+<<<<<<< HEAD
                 "symfony/finder": "~2.1|~3.0|~4.0"
+=======
+                "symfony/finder": "~2.1|~3.0"
+>>>>>>> 771dffadd55f0baad458f0745b1bd3963a471f7b
             },
             "suggest": {
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
@@ -904,7 +921,11 @@
                 "interactive",
                 "shell"
             ],
+<<<<<<< HEAD
             "time": "2017-12-10T21:49:27+00:00"
+=======
+            "time": "2017-11-16T14:29:51+00:00"
+>>>>>>> 771dffadd55f0baad458f0745b1bd3963a471f7b
         },
         {
             "name": "ramsey/uuid",
