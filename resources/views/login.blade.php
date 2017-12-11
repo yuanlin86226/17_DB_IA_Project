@@ -24,18 +24,20 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="/admin/assets/css/demo.css" rel="stylesheet" />
     
-        
+    
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="/admin/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+    <link href="/admin/assets/css/login.css" rel="stylesheet" />
     
 
     @show
 </head>
 <body>
     <div class="wrapper wrapper-full-page">
-        <div class="full-page login-page" data-color="azure" data-image="/images/background.jpg"> 
+        <div class="full-page login-page" data-color="azure" data-image="/admin/assets/img/full-screen-image-4.jpg"> 
             <div class="content">
                 <div class="content">
                     <div class="container">
@@ -47,7 +49,7 @@
                                 {{ csrf_field() }}
                                     <div class="card card-hidden">
                                         <div class="header text-center">
-                                            <img src="/admin/assets/img/logo.png" alt="" style="max-width:150px" />
+                                            <img src="/admin/assets/img/97(2).png" alt="" style="max-width:60px" />
                                         </div>
                                         
                                         @if($errors->has('msg'))
