@@ -56,7 +56,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <legend class="title">檢視</legend>
+                                    <legend class="title">檢視資訊</legend>
                                 </div>
 
                                 <div class="content">
@@ -93,19 +93,9 @@
                                     <div class="clearfix"></div>
 
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div id="panel-form" style="">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
                                 <div class="header">
-                                <legend class="title">權限</legend>
+                                <legend class="title">檢視權限</legend>
                                 </div>
                                 <div class="content">
                                 <form class="form-horizontal">
@@ -160,6 +150,13 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    <fieldset>
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <div class="col-sm-12">
+                                                <button type="submit" class="btn btn-fill btn-info">返回</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </form>
                                     
                                         
@@ -180,7 +177,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <legend class="title">修改</legend>
+                                    <legend class="title">修改資訊</legend>
                                 </div>
 
                                 <div class="content">
@@ -217,19 +214,9 @@
                                     <div class="clearfix"></div>
 
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div id="panel-form" style="">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
                                 <div class="header">
-                                <legend class="title">權限</legend>
+                                <legend class="title">修改權限</legend>
                                 </div>
                                 <div class="content">
                                 <form class="form-horizontal">
@@ -261,50 +248,58 @@
                                                     <tr>
                                                         <td>帳號管理</td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/> 
+                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/> 
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-danger">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>群組管理</td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-danger">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>選單管理</td>
                                                         <td class="text-danger">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                         <td class="text-success">
-                                                            <input class="role-checkbox" type="checkbox"/>
+                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <div class="col-sm-12">
+                                                <button type="submit" class="btn btn-fill btn-info">更新</button>
+                                                <button type="submit" class="btn btn-defult">取消</button>
                                             </div>
                                         </div>
                                     </fieldset>

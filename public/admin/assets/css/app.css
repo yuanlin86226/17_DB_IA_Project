@@ -1248,6 +1248,11 @@ svg {
 .fixed-table-container input[type="checkbox"] {
   margin: 0 auto !important;
   cursor: pointer;
+  /* new add */
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: 3px;
 }
 
 .fixed-table-container .no-records-found {
