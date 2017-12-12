@@ -20,7 +20,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '2',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '2',
@@ -42,7 +42,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '3',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '3',
@@ -63,7 +63,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '4',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '4',
@@ -86,7 +86,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '6',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '6',
@@ -107,7 +107,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '7',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '7',
@@ -128,7 +128,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '8',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '8',
@@ -149,7 +149,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '9',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '9',
@@ -170,7 +170,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '10',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '10',
@@ -191,7 +191,7 @@ class MenuDetailSeeder extends Seeder
         MenuDetail::create([
             'menu_id' => '11',
             'sign' => 'view',
-            'description' => '查看'
+            'description' => '檢視'
         ]);
         MenuDetail::create([
             'menu_id' => '11',

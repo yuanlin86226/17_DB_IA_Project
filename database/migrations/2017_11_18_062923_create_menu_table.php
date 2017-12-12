@@ -19,7 +19,6 @@ class CreateMenuTable extends Migration
             $table->string('title');
             $table->string('href');
             $table->integer('parent')->nullable();
-            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

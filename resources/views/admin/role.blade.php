@@ -17,7 +17,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="content table-responsive table-full-width">
-                                <div class="toolbar">
+                                <div id="toolbox" class="toolbar">
                                     <button v-if="roles.insert" v-on:click="create" id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
                                         <i class="glyphicon fa fa-plus"></i>
                                         新增
@@ -49,64 +49,64 @@
                 </div>
             </div>
         </div>
-        <div class="content">
-            <div id="panel-view" style="">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <legend class="title">檢視資訊</legend>
-                                </div>
 
-                                <div class="content">
+        <div id="panel-view" class="content" style="display:none">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <legend class="title">檢視資訊</legend>
+                            </div>
 
-                                    <form class="form-horizontal">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">ID</label>
-                                                <div class="col-sm-10">
-                                                    <p class="form-control-static">@{{row.userName}}</p>
-                                                </div>
+                            <div class="content">
+
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">ID</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.id}}</p>
                                             </div>
-                                        </fieldset>
+                                        </div>
+                                    </fieldset>
 
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">角色名稱</label>
-                                                <div class="col-sm-10">
-                                                    <p class="form-control-static">@{{row.name}}</p>
-                                                </div>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">角色名稱</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.name}}</p>
                                             </div>
-                                        </fieldset>
+                                        </div>
+                                    </fieldset>
 
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">角色說明</label>
-                                                <div class="col-sm-10">
-                                                    <p class="form-control-static">@{{row.email}}</p>
-                                                </div>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">角色說明</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.description}}</p>
                                             </div>
-                                        </fieldset>
-                                    </form>
+                                        </div>
+                                    </fieldset>
+                                </form>
 
-                                    <div class="clearfix"></div>
+                                <div class="clearfix"></div>
 
-                                </div>
+                            </div>
 
-                                <div class="header">
+                            <div class="header">
                                 <legend class="title">檢視權限</legend>
-                                </div>
-                                <div class="content">
+                            </div>
+
+                            <div class="content">
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">頂層</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control menu-dropdown">
-                                                    <option disabled="disabled" value="">請選擇父層</option>
-                                                    <option value="">系統管理</option>
-                                                    <option value="">基本資料</option>
+                                                <select id="view_select" class="form-control menu-dropdown" v-on:change="select_change">
+                                                    <option disabled="disabled" value="" selected>請選擇父層</option>
+                                                    <option v-for="parent in parents" :value="parent.id">@{{ parent.title }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -115,7 +115,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">子層</label>
                                             <div class="col-sm-9">
-                                                <table id="bootstrap-table" class="table role-table" data-toggle="table"data-click-to-select="ture">
+                                                <table class="table role-table">
                                                 <thead>
                                                     <th data-width="200" data-field="child-menu">頁面名稱</th>
                                                     <th data-field="view">檢視</th>
@@ -124,26 +124,19 @@
                                                     <th data-field="delete">刪除</th>
                                                 </thead>
                                                 <tbody id="table-body">
-                                                    <tr>
-                                                        <td>帳號管理</td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-danger"><span>Ｘ</span></td>
+                                                    <tr v-if="table_datas.length == 0" style="height:100px;">
+                                                        <td colspan="5" style="text-align: center;">No matching records found</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>群組管理</td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-danger"><span>Ｘ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>選單管理</td>
-                                                        <td class="text-danger"><span>Ｘ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
-                                                        <td class="text-success"><span>Ｏ</span></td>
+                                                    <tr v-for="table_data in table_datas">
+                                                        <td>@{{table_data.title}}</td>
+                                                        <td v-if="table_data.view == true" class="text-success"><span>Ｏ</span></td>
+                                                        <td v-if="table_data.view == false"class="text-danger"><span>Ｘ</span></td>
+                                                        <td v-if="table_data.insert == true" class="text-success"><span>Ｏ</span></td>
+                                                        <td v-if="table_data.insert == false"class="text-danger"><span>Ｘ</span></td>
+                                                        <td v-if="table_data.edit == true" class="text-success"><span>Ｏ</span></td>
+                                                        <td v-if="table_data.edit == false"class="text-danger"><span>Ｘ</span></td>
+                                                        <td v-if="table_data.delete == true" class="text-success"><span>Ｏ</span></td>
+                                                        <td v-if="table_data.delete == false"class="text-danger"><span>Ｘ</span></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -152,17 +145,16 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group" style="margin-top: 20px;">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-fill btn-info">返回</button>
+                                                <label class="col-md-2"></label>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="done">返回</button>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
-                                    
                                         
-                                    <div class="clearfix"></div>
+                                <div class="clearfix"></div>
                                     
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,55 +162,59 @@
             </div>
         </div>
 
-        <div class="content">
-            <div id="panel-view" style="">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <legend class="title">修改資訊</legend>
-                                </div>
+        <div id="panel-form" class="content" style="display:none">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <legend v-if="type==='update'">修改資料</legend>
+                                <legend v-if="type==='create'">新增資料</legend>
+                            </div>
 
-                                <div class="content">
+                            <div class="content">
 
-                                    <form class="form-horizontal">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">ID</label>
-                                                <div class="col-sm-10">
-                                                    <p class="form-control-static">@{{row.userName}}</p>
-                                                </div>
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">ID</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.id}}</p>
                                             </div>
-                                        </fieldset>
+                                        </div>
+                                    </fieldset>
 
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">角色名稱</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control"/>
-                                                </div>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">群組名稱</label>
+                                            <div class="col-sm-9">
+                                                <input :class="{'form-control': true, 'error': errors.has('name')}" type="text" name="name" placeholder="名稱" data-vv-as="名稱" v-model="row.name" v-validate="'required'" required >
+                                                <span v-show="errors.has('name')" class="help-block"> @{{errors.first('name')}} </span>
                                             </div>
-                                        </fieldset>
+                                        </div>
+                                    </fieldset>
 
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">角色說明</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control"/>
-                                                </div>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">群組說明</label>
+                                            <div class="col-sm-9">
+                                                <input :class="{'form-control': true, 'error': errors.has('description')}" type="text" name="description" placeholder="說明" data-vv-as="說明" v-model="row.description" v-validate="'required'" required >
+                                                <span v-show="errors.has('description')" class="help-block"> @{{errors.first('description')}} </span>
                                             </div>
-                                        </fieldset>
-                                    </form>
+                                        </div>
+                                    </fieldset>
+                                </form>
 
-                                    <div class="clearfix"></div>
+                                <div class="clearfix"></div>
 
-                                </div>
+                            </div>
 
-                                <div class="header">
-                                <legend class="title">修改權限</legend>
-                                </div>
-                                <div class="content">
+                            <div class="header">
+                                <legend v-if="type==='update'">修改權限</legend>
+                                <legend v-if="type==='create'">新增權限</legend>
+                            </div>
+
+                            <div class="content">
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="form-group">
@@ -297,24 +293,26 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group" style="margin-top: 20px;">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-fill btn-info">更新</button>
-                                                <button type="submit" class="btn btn-defult">取消</button>
+                                            <label class="col-sm-2"></label>
+                                            <div class="col-sm-9">
+                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="save" v-if="type==='update'">更新</button>
+                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="save" v-if="type==='create'">儲存</button>
+                                                <button type="submit" class="btn btn-default" v-on:click="cancel">取消</button>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
-                                    
+                                
                                         
-                                    <div class="clearfix"></div>
+                                <div class="clearfix"></div>
                                     
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    
 
 
 @stop
@@ -331,10 +329,10 @@
 
     var roles = {};
 
-    var panelList = new Vue({
-        el: '#panel-list',
+    var toolBox = new Vue({
+        el: '#toolbox',
         data: {
-            roles:{}
+            roles: {}
         },
         mounted: function(){
             _this = this;
@@ -368,6 +366,7 @@
                     showCancelButton: true
                 }).then( function(isConfirm) {
                     if (isConfirm) {
+                        console.log(ids);
                         Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
                             notifyAfterHttpSuccess(response.body);
                             $table.bootstrapTable('refresh');
@@ -383,9 +382,9 @@
     var panelView = new Vue({
         el: '#panel-view',
         data: {
-            row: {
-                roles:{},
-            }
+            row: {},
+            parents: {},
+            table_datas: {}
         },
         methods: {
             done: function(e) {
@@ -395,12 +394,17 @@
             },
             load: function(id) {
                 var _this = this;
+
                 Vue.http.get(__REST_API_URL__ + id).then(function(response) {
-                    _this.row = response.body;
-                    Vue.http.get(__REST_API_URL__ + id + '/roles').then(function(response) {
-                        _this.row.roles = response.body;
-                        _this.row = JSON.parse(JSON.stringify(_this.row));
-                    });
+                    _this.row = response.body['role'];
+                    _this.parents = response.body['parents'];
+                });
+            },
+            select_change: function() {
+                var _this = this;
+
+                Vue.http.get(__REST_API_URL__ + _this.row.id + '/menu_detail/' + $('#view_select').val() ).then(function(response) {
+                    _this.table_datas = response.body;
                 });
             }
         }
@@ -412,9 +416,9 @@
             type: 'create',
             row: {
                 _token: csrf_token,
-                all_roles:[],
-                roles:[],
-            }
+            },
+            parents: {},
+            table_datas: {}
         },
         methods: {
             close: function(e) {
@@ -471,14 +475,23 @@
                     });
 
                     if (id) {
-                        Vue.http.get(__REST_API_URL__ + id + '/roles').then(function(response) {
-                            _this.row.roles = response.body;
-                            _this.row = JSON.parse(JSON.stringify(_this.row));
+                        Vue.http.get(__REST_API_URL__ + id).then(function(response) {
+                            _this.row = response.body['role'];
+                            _this.parents = response.body['parents'];
                         });
                     }
                     else {
-                        _this.row.roles = [];
+                        Vue.http.get('/api/admin/roleParent').then(function(response) {
+                            _this.parents = response.body;
+                        });
                     }
+                });
+            },
+            update_select_change: function() {
+                var _this = this;
+
+                Vue.http.get(__REST_API_URL__ + _this.row.id + '/menu_detail/' + $('#view_select').val() ).then(function(response) {
+                    _this.table_datas = response.body;
                 });
             }
         }
