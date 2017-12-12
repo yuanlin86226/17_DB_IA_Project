@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request as data_request;
 
 use App\User;
+use App\RoleUser;
 use App\Role;
 use App\Menu;
 use App\MenuRole;
@@ -66,6 +67,43 @@ class RoleController extends Controller
         $parents = Menu::where('parent',null)->get();
 
         return response()->json($parents);
+    }
+
+    public function destroy($id)
+    {
+        try {
+            RoleUser::where('role_id',$id)->delete();
+            MenuRole::where('role_id',$id)->delete();
+            Role::destroy($id);
+
+            $data["result"] = true;
+            $data["message"] = "角色刪除成功";
+
+            return response()->json($data);
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function destroyMany(data_request $request)
+    {
+        try {
+            $ids = $request->json()->all();
+
+            foreach ($ids as $id) {
+                RoleUser::where('role_id',$id)->delete();
+                MenuRole::where('role_id',$id)->delete();
+                Role::destroy($id);
+            }
+
+            $data["result"] = true;
+            $data["message"] = "成功刪除".count($ids)."筆資料";
+            
+            return response()->json($data);
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function findOneMenuDetail($id, $menu_id)
