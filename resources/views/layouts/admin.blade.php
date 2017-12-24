@@ -32,6 +32,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="/admin/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+    <link href="/admin/assets/css/adminBlade.css" rel="stylesheet" href="" />
+
     @yield('css')
     
     @show
@@ -42,17 +44,18 @@
     
 
 <div class="wrapper">
-    <div class="sidebar" data-color="orange" data-image="assets/img/full-screen-image-3.jpg">
+    <div class="sidebar" data-color="azure" data-image="/admin/assets/img/full-screen-image-4.jpg">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
 		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 	-->
 
-        <div class="logo">
-            <a href="http://www.creative-tim.com" class="logo-text">
+        <div class="logo text-center">
+            <!-- <a href="#" class="logo-text">
                 IA 3rd
-            </a>
+            </a> -->
+            <img src="/admin/assets/img/97.png" alt="" style="max-height:30px" />
         </div>
 
     	<div class="sidebar-wrapper">
@@ -125,10 +128,10 @@
         @yield('content')
 
 
-        <footer class="footer">
+        <footer class="footer" style="background-color: transparent;">
             <div class="container-fluid">
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-tree tree"></i> by 97line
                 </div>
             </div>
         </footer>

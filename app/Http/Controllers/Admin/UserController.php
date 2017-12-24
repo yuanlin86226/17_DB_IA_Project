@@ -37,9 +37,7 @@ class UserController extends Controller
             } else {
                 return View::make('admin/user',['menu_id' => $menu_id]);
             }
-
             
-            return View::make('admin/user',['menu_id' => $menu_id]);
         } else {
             return Redirect::action('AuthController@login');
         }

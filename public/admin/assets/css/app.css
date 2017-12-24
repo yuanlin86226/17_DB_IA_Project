@@ -1248,6 +1248,11 @@ svg {
 .fixed-table-container input[type="checkbox"] {
   margin: 0 auto !important;
   cursor: pointer;
+  /* new add */
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: 3px;
 }
 
 .fixed-table-container .no-records-found {
@@ -4832,7 +4837,8 @@ h1 .subtitle {
 .bootstrap-navbar[data-color="azure"]:after {
   background: #23CCEF;
   background: -webkit-gradient(linear, left top, left bottom, from(#23CCEF), to(rgba(64, 145, 255, 0.7)));
-  background: linear-gradient(to bottom, #23CCEF 0%, rgba(64, 145, 255, 0.7) 100%);
+  /* background: linear-gradient(to bottom, #23CCEF 0%, rgba(64, 145, 255, 0.7) 100%); */
+  background: linear-gradient(135deg, rgb(0, 187, 217) 0%, rgba(239, 255, 0, 0.35) 100%);
   background-size: 150% 150%;
 }
 
@@ -9538,11 +9544,13 @@ star {
 .full-page[data-color="azure"]:after {
   background: #23CCEF;
   /*background: -webkit-gradient(linear, left top, left bottom, from(#23CCEF), to(rgba(64, 145, 255, 0.6)));*/
-  /*background: -webkit-gradient(linear, left top, left bottom, from(rgba(74, 184, 191, 0.5)), to(rgba(255, 255, 255, 0.1)));*/
-  background: -webkit-gradient(linear, left top, left bottom, from(rgb(0, 187, 217)), to(rgba(239, 255, 0, 0.35)));
+  /* background: -webkit-gradient(linear, left top, left bottom, from(rgba(74, 184, 191, 0.5)), to(rgba(255, 255, 255, 0.1))); */
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 94, 94, 0.5)), to(rgba(255, 211, 52, 0.2)));
+  /* background: -webkit-gradient(linear, left top, left bottom, from(rgb(0, 187, 217)), to(rgba(239, 255, 0, 0.35))); */
   /*background: linear-gradient(to bottom, #23CCEF 0%, rgba(64, 145, 255, 0.6) 100%);*/
-  /*background: linear-gradient(to bottom, rgba(74, 184, 191, 0.5) 0%, rgba(255, 255, 255, 0.1) 100%);*/
-  background: linear-gradient(280deg, rgb(0, 187, 217) 0%, rgba(239, 255, 0, 0.35) 100%);
+  /* background: linear-gradient(to bottom, rgba(74, 184, 191, 0.5) 0%, rgba(255, 255, 255, 0.1) 100%); */
+  background: linear-gradient(to bottom, rgba(0, 94, 94, 0.5) 0%, rgba(255, 211, 52, 0.2) 100%);
+  /* background: linear-gradient(280deg, rgb(0, 187, 217) 0%, rgba(239, 255, 0, 0.35) 100%); */
   background-size: 150% 150%;
 }
 

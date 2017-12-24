@@ -14,25 +14,25 @@ class RoleSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->delete();
-
-        Role::create([
-            'name' => 'Admin',
-            'description' => '最高權限管理者'
-        ]);
         
-        Role::create([
-            'name' => 'User',
-            'description' => '一般管理員'
-        ]);
-
-        Role::create([
-            'name' => 'test1',
-            'description' => '測試管理員1'
-        ]);
-
-        Role::create([
-            'name' => 'test2',
-            'description' => '測試管理員2'
-        ]);
+                Role::create([
+                    'name' => 'Admin',
+                    'description' => '最高權限管理者'
+                ]);
+                
+                Role::create([
+                    'name' => 'User',
+                    'description' => '一般管理員'
+                ]);
+        
+                Role::create([
+                    'name' => 'test1',
+                    'description' => '測試管理員1'
+                ]);
+        
+                Role::create([
+                    'name' => 'test2',
+                    'description' => '測試管理員2'
+                ]);
     }
 }
