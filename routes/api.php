@@ -32,8 +32,9 @@ Route::middleware('api')->get('/admin/user/{id}/roles/{menu_id}', 'Admin\UserCon
 
 
 Route::middleware('api')->get('/admin/role', 'Admin\RoleController@findAll');
-Route::middleware('api')->get('/admin/roleParent', 'Admin\RoleController@findroleParent');
+Route::middleware('api')->post('/admin/role', 'Admin\RoleController@save');
 Route::middleware('api')->get('/admin/role/{id}', 'Admin\RoleController@findOne');
+Route::middleware('api')->put('/admin/role/{id}', 'Admin\RoleController@update');
 Route::middleware('api')->delete('/admin/role/{id}', 'Admin\RoleController@destroy');
 Route::middleware('api')->delete('/admin/role', 'Admin\RoleController@destroyMany');
 Route::middleware('api')->get('/admin/role/{id}/menu_detail/{menu_id}', 'Admin\RoleController@findOneMenuDetail');

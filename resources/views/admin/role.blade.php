@@ -97,7 +97,7 @@
                                             <label class="col-sm-2 control-label">頂層</label>
                                             <div class="col-sm-9">
                                                 <select id="view_select" class="form-control menu-dropdown" v-on:change="select_change">
-                                                    <option disabled="disabled" value="" selected>請選擇父層</option>
+                                                    <option disabled="disabled" value="0" selected>請選擇父層</option>
                                                     <option v-for="parent in parents" :value="parent.id">@{{ parent.title }}</option>
                                                 </select>
                                             </div>
@@ -205,7 +205,7 @@
                                             <label class="col-sm-2 control-label">頂層</label>
                                             <div class="col-sm-9">
                                                 <select id="edit_select" class="form-control menu-dropdown" v-on:change="select_change">
-                                                    <option disabled="disabled" value="" selected>請選擇父層</option>
+                                                    <option disabled="disabled" value="0" selected>請選擇父層</option>
                                                     <option v-for="parent in parents" :value="parent.id">@{{ parent.title }}</option>
                                                 </select>
                                             </div>
@@ -352,6 +352,12 @@
             load: function(id) {
                 var _this = this;
 
+                $('#view_select').val(0);
+
+                _this.row = {};
+                _this.parents = {};
+                _this.table_datas = {};
+
                 Vue.http.get(__REST_API_URL__ + id).then(function(response) {
                     _this.row = response.body['role'];
                     _this.parents = response.body['parents'];
@@ -374,9 +380,11 @@
             type: 'create',
             row: {
                 _token: csrf_token,
+                'menu': {}
             },
             parents: {},
-            table_datas: {}
+            table_datas: {},
+            menu_id: 0
         },
         methods: {
             close: function(e) {
@@ -389,6 +397,8 @@
                 if (e) e.preventDefault();
 
                 _this = this;
+
+                _this.row['menu'][_this.menu_id] = _this.table_datas;
                 
                 this.$validator.validateAll().then(function() {
 
@@ -396,6 +406,7 @@
                         notifyAfterHttpSuccess(response.body);
                         if (response.body.result) {
                             _this.close();
+                            adminMenu.fetch();
                         }
                     };
 
@@ -405,6 +416,7 @@
                     }
                     else {
                         Vue.http.options.emulateJSON = true;
+
                         Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
                         Vue.http.options.emulateJSON = false;                      
                     }
@@ -422,29 +434,43 @@
                 _this.type = id?'update':'create';
 
                 _this.row = {};
+                _this.row['menu'] = {};
+                _this.parents = {}; 
+                _this.table_datas = {}; 
+                _this.menu_id = 0;
+
+                $('#edit_select').val(0);
+
                 _this.errors.clear();
 
                 Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
-                    _this.row = response.body;
-                    _this.parents = _this.row.parents;
+                    if (response.body['role']) {
+                        _this.row = response.body['role'];
+                        _this.row['menu'] = {};
+                    }
 
-                    if (id) {
-                        Vue.http.get(__REST_API_URL__ + id + '/roles').then(function(response) {
-                            _this.row.roles = response.body;
-                            _this.row = JSON.parse(JSON.stringify(_this.row));
-                        });
-                    }
-                    else {
-                        _this.table_datas = {};
-                    }
+                    // 資料要分兩層，一層table名，另一層資料內容
+                    
+                    _this.parents = response.body['parents'];                    
+                    
                 });
             },
             select_change: function() {
                 var _this = this;
 
-                Vue.http.get(__REST_API_URL__ + (_this.row.id || 'new') + '/menu_detail/' + $('#edit_select').val() ).then(function(response) {
-                    _this.table_datas = response.body;
-                });
+                if(_this.menu_id!=0) {
+                    _this.row['menu'][_this.menu_id] = _this.table_datas;
+                }
+
+                if(_this.row['menu'][$('#edit_select').val()]==null || _this.row['menu'][$('#edit_select').val()]=="") {
+                    Vue.http.get(__REST_API_URL__ + (_this.row.id || 'new') + '/menu_detail/' + $('#edit_select').val() ).then(function(response) {                  
+                        _this.table_datas = response.body;
+                    });
+                } else {
+                    _this.table_datas = _this.row['menu'][$('#edit_select').val()];
+                }
+
+                _this.menu_id = $('#edit_select').val();
             }
         }
     });

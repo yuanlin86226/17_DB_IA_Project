@@ -211,20 +211,19 @@ class MenuDetailSeeder extends Seeder
 
         DB::table('menu_role')->delete();
 
+        $menu_parents = Menu::where('parent',null)->get();
+
+        foreach ($menu_parents as $menu_parent) {
+            MenuRole::create([
+                'menu_id' => $menu_parent['id'],
+                'menu_detail_id' => null,
+                'role_id' => '1'
+            ]);
+        }
+
         $menu_details = MenuDetail::all();
-        
-        $i = 1;
+
         foreach ($menu_details as $menu) {
-            if($i != $menu['menu_id']){
-                MenuRole::create([
-                    'menu_id' => $i,
-                    'menu_detail_id' => null,
-                    'role_id' => '1'
-                ]);
-
-                $i++;
-            }
-
             MenuRole::create([
                 'menu_id' => $menu['menu_id'],
                 'menu_detail_id' => $menu['id'],
