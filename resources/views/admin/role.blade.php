@@ -34,8 +34,8 @@
                                     <thead>
                                         <th data-width="50" data-field="state" data-checkbox="true"></th>
                                         <th data-width="300" data-field="id" data-visible="false">ID</th>
-                                        <th data-field="name" data-sortable="true">角色名稱</th>
-                                        <th data-field="description">角色說明</th>
+                                        <th data-field="name" data-sortable="true">群組名稱</th>
+                                        <th data-field="description">群組說明</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
                                     </thead>
                                     <tbody id="table-body"></tbody>
@@ -62,18 +62,10 @@
                             <div class="content">
 
                                 <form class="form-horizontal">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">ID</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.id}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">角色名稱</label>
+                                            <label class="col-sm-2 control-label">群組名稱</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.name}}</p>
                                             </div>
@@ -82,7 +74,7 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">角色說明</label>
+                                            <label class="col-sm-2 control-label">群組說明</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.description}}</p>
                                             </div>
@@ -105,7 +97,7 @@
                                             <label class="col-sm-2 control-label">頂層</label>
                                             <div class="col-sm-9">
                                                 <select id="view_select" class="form-control menu-dropdown" v-on:change="select_change">
-                                                    <option disabled="disabled" value="" selected>請選擇父層</option>
+                                                    <option disabled="disabled" value="0" selected>請選擇父層</option>
                                                     <option v-for="parent in parents" :value="parent.id">@{{ parent.title }}</option>
                                                 </select>
                                             </div>
@@ -175,14 +167,6 @@
                             <div class="content">
 
                                 <form class="form-horizontal">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">ID</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.id}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
 
                                     <fieldset>
                                         <div class="form-group">
@@ -220,10 +204,9 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">頂層</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control menu-dropdown">
-                                                    <option disabled="disabled" value="">請選擇父層</option>
-                                                    <option value="">系統管理</option>
-                                                    <option value="">基本資料</option>
+                                                <select id="edit_select" class="form-control menu-dropdown" v-on:change="select_change">
+                                                    <option disabled="disabled" value="0" selected>請選擇父層</option>
+                                                    <option v-for="parent in parents" :value="parent.id">@{{ parent.title }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -232,62 +215,36 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">子層</label>
                                             <div class="col-sm-9">
-                                                <table id="bootstrap-table" class="table role-table" data-toggle="table"data-click-to-select="ture">
-                                                <thead>
-                                                    <th data-width="200" data-field="child-menu">頁面名稱</th>
-                                                    <th data-field="view">檢視</th>
-                                                    <th data-field="create">新增</th>
-                                                    <th data-field="update">修改</th>
-                                                    <th data-field="delete">刪除</th>
-                                                </thead>
-                                                <tbody id="table-body">
-                                                    <tr>
-                                                        <td>帳號管理</td>
-                                                        <td class="text-success">
-                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/> 
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-danger">
-                                                            <span class="space"></span> <input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>群組管理</td>
-                                                        <td class="text-success">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-danger">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>選單管理</td>
-                                                        <td class="text-danger">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                        <td class="text-success">
-                                                            <span class="space"><input class="role-checkbox" type="checkbox"/>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                <table class="table role-table">
+                                                    <thead>
+                                                        <th data-width="200" data-field="child-menu">頁面名稱</th>
+                                                        <th data-field="view">檢視</th>
+                                                        <th data-field="create">新增</th>
+                                                        <th data-field="update">修改</th>
+                                                        <th data-field="delete">刪除</th>
+                                                    </thead>
+                                                    <tbody id="table-body">
+                                                        <tr v-if="table_datas.length == 0" style="height:100px;">
+                                                            <td colspan="5" style="text-align: center;">No matching records found</td>
+                                                        </tr>
+                                                        <tr v-if="table_datas.length!=0" v-for="table_data in table_datas">
+                                                            <td>@{{ table_data.title }}</td>
+                                                            <td class="text-success">
+                                                                <span class="space"></span> <input v-model="table_data.view" class="role-checkbox" type="checkbox"/>
+                                                            </td>
+                                                            <td class="text-success">
+                                                                <span class="space"></span> <input v-model="table_data.insert" class="role-checkbox" type="checkbox"/> 
+                                                            </td>
+                                                            <td class="text-success">
+                                                                <span class="space"></span> <input v-model="table_data.edit" class="role-checkbox" type="checkbox"/>
+                                                            </td>
+                                                            <td class="text-danger">
+                                                                <span class="space"></span> <input v-model="table_data.delete" class="role-checkbox" type="checkbox"/>
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -395,9 +352,16 @@
             load: function(id) {
                 var _this = this;
 
+                $('#view_select').val(0);
+
+                _this.row = {};
+                _this.parents = {};
+                _this.table_datas = {};
+
                 Vue.http.get(__REST_API_URL__ + id).then(function(response) {
                     _this.row = response.body['role'];
                     _this.parents = response.body['parents'];
+
                 });
             },
             select_change: function() {
@@ -416,9 +380,11 @@
             type: 'create',
             row: {
                 _token: csrf_token,
+                'menu': {}
             },
             parents: {},
-            table_datas: {}
+            table_datas: {},
+            menu_id: 0
         },
         methods: {
             close: function(e) {
@@ -431,6 +397,8 @@
                 if (e) e.preventDefault();
 
                 _this = this;
+
+                _this.row['menu'][_this.menu_id] = _this.table_datas;
                 
                 this.$validator.validateAll().then(function() {
 
@@ -438,6 +406,7 @@
                         notifyAfterHttpSuccess(response.body);
                         if (response.body.result) {
                             _this.close();
+                            adminMenu.fetch();
                         }
                     };
 
@@ -447,6 +416,7 @@
                     }
                     else {
                         Vue.http.options.emulateJSON = true;
+
                         Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
                         Vue.http.options.emulateJSON = false;                      
                     }
@@ -464,35 +434,43 @@
                 _this.type = id?'update':'create';
 
                 _this.row = {};
+                _this.row['menu'] = {};
+                _this.parents = {}; 
+                _this.table_datas = {}; 
+                _this.menu_id = 0;
+
+                $('#edit_select').val(0);
+
                 _this.errors.clear();
 
                 Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
-                    _this.row = response.body;
-                    
-                    Vue.http.get('/api/admin/role').then(function(response) {
-                        _this.row.all_roles = response.body;
-                        _this.row = JSON.parse(JSON.stringify(_this.row));
-                    });
+                    if (response.body['role']) {
+                        _this.row = response.body['role'];
+                        _this.row['menu'] = {};
+                    }
 
-                    if (id) {
-                        Vue.http.get(__REST_API_URL__ + id).then(function(response) {
-                            _this.row = response.body['role'];
-                            _this.parents = response.body['parents'];
-                        });
-                    }
-                    else {
-                        Vue.http.get('/api/admin/roleParent').then(function(response) {
-                            _this.parents = response.body;
-                        });
-                    }
+                    // 資料要分兩層，一層table名，另一層資料內容
+                    
+                    _this.parents = response.body['parents'];                    
+                    
                 });
             },
-            update_select_change: function() {
+            select_change: function() {
                 var _this = this;
 
-                Vue.http.get(__REST_API_URL__ + _this.row.id + '/menu_detail/' + $('#view_select').val() ).then(function(response) {
-                    _this.table_datas = response.body;
-                });
+                if(_this.menu_id!=0) {
+                    _this.row['menu'][_this.menu_id] = _this.table_datas;
+                }
+
+                if(_this.row['menu'][$('#edit_select').val()]==null || _this.row['menu'][$('#edit_select').val()]=="") {
+                    Vue.http.get(__REST_API_URL__ + (_this.row.id || 'new') + '/menu_detail/' + $('#edit_select').val() ).then(function(response) {                  
+                        _this.table_datas = response.body;
+                    });
+                } else {
+                    _this.table_datas = _this.row['menu'][$('#edit_select').val()];
+                }
+
+                _this.menu_id = $('#edit_select').val();
             }
         }
     });
