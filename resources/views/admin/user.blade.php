@@ -1,406 +1,574 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+@extends('layouts.admin')
 
-	<title>Paper Dashboard by Creative Tim</title>
+@section('title','帳號管理')
 
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+@section('content')
 
+@php ($REST_API = '/api/admin/user/')
 
-    <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
-
-    <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
-
-</head>
-<body>
-
-<div class="wrapper">
-	<div class="sidebar" data-background-color="white" data-active-color="danger">
-
-    <!--
-		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
-		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-	-->
-
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li>
-                    <a href="dashboard.html">
-                        <i class="ti-panel"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="user.html">
-                        <i class="ti-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="table.html">
-                        <i class="ti-view-list-alt"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="typography.html">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="ti-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="ti-export"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
-    </div>
-
-    <div class="main-panel">
-		<nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar bar1"></span>
-                        <span class="icon-bar bar2"></span>
-                        <span class="icon-bar bar3"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">User Profile</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-
-
-        <div class="content">
+        <div class="content" id="panel-list">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="card card-user">
-                            <div class="image">
-                                <img src="assets/img/background.jpg" alt="..."/>
-                            </div>
-                            <div class="content">
-                                <div class="author">
-                                  <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
-                                  <h4 class="title">Chet Faker<br />
-                                     <a href="#"><small>@chetfaker</small></a>
-                                  </h4>
-                                </div>
-                                <p class="description text-center">
-                                    "I like the way you work it <br>
-                                    No diggity <br>
-                                    I wanna bag it up"
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="text-center">
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-1">
-                                        <h5>12<br /><small>Files</small></h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>2GB<br /><small>Used</small></h5>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5>24,6$<br /><small>Spent</small></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-12">
                         <div class="card">
-                            <div class="header">
-                                <h4 class="title">Team Members</h4>
-                            </div>
-                            <div class="content">
-                                <ul class="list-unstyled team-members">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        DJ Khaled
-                                                        <br />
-                                                        <span class="text-muted"><small>Offline</small></span>
-                                                    </div>
+                            <div class="content table-responsive table-full-width">
+                                <div class="toolbar">
+                                    <button v-if="roles.insert" v-on:click="create" id="btn-create" class="btn btn-default" type="button" title="新增一位人員">
+                                        <i class="glyphicon fa fa-plus"></i>
+                                        新增
+                                    </button>
+                                    &nbsp;
+                                    <button v-if="roles.delete" v-on:click="delete_many" id="btn-remove" class="btn btn-default" type="button" title="刪除人員">
+                                        <i class="glyphicon fa fa-remove"></i>
+                                        刪除
+                                    </button>
+                                    &nbsp;
+                                </div>
+                                
+                                <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
+                                    <thead>
+                                        <th data-field="state" data-width="50" data-checkbox="true"></th>
+                                        <th data-field="id" data-width="50" data-visible="false" class="text-center">ID</th>
+                                        <th data-field="userName" data-sortable="true">帳號名稱</th>
+                                        <th data-field="name" data-visible="true"  data-sortable="true">姓名</th>
+                                        <th data-field="email" data-sortable="true">Email</th>
+                                        <th data-field="phoneNumber" data-visible="false" data-sortable="true">手機號碼</th>
+                                        <th data-field="lastLoginAt" data-visible="false">最後登入時間</th>
+                                        <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
+                                        <th data-field="updated_at" data-visible="true" data-sortable="true">更新時間</th>
+                                        <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
+                                    </thead>
+                                    <tbody id="table-body"></tbody>
+                                </table>
 
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Creative Tim
-                                                        <br />
-                                                        <span class="text-success"><small>Available</small></span>
-                                                    </div>
+                                <div class="clearfix"></div>
 
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <div class="avatar">
-                                                            <img src="assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-6">
-                                                        Flume
-                                                        <br />
-                                                        <span class="text-danger"><small>Busy</small></span>
-                                                    </div>
-
-                                                    <div class="col-xs-3 text-right">
-                                                        <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-7">
+                </div>
+            </div>
+        </div>
+
+        <div class="content" id="panel-view" style="display:none">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Edit Profile</h4>
+                                <legend class="title">檢視</legend>
                             </div>
+
                             <div class="content">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label>Company</label>
-                                                <input type="text" class="form-control border-input" disabled placeholder="Company" value="Creative Code Inc.">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input type="text" class="form-control border-input" placeholder="Username" value="michael23">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control border-input" placeholder="Email">
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company" value="Chet">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">帳號名稱</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.userName}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="Faker">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </fieldset>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control border-input" placeholder="Home Address" value="Melbourne, Australia">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">姓名</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.name}}</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </fieldset>
 
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control border-input" placeholder="City" value="Melbourne">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">EMAIL</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.email}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Country</label>
-                                                <input type="text" class="form-control border-input" placeholder="Country" value="Australia">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Postal Code</label>
-                                                <input type="number" class="form-control border-input" placeholder="ZIP Code">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </fieldset>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>About Me</label>
-                                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">Oh so, your weak rhyme
-You doubt I'll bother, reading into it
-I'll probably won't, left to my own devices
-But that's the difference in our opinions.</textarea>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">手機號碼</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.phoneNumber}}</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
-                                    </div>
-                                    <div class="clearfix"></div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">建立日期</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.created_at}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">更新日期</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.updated_at}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">系統備註</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.remark}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">最後登入時間</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.lastLoginAt}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">瀏覽器IP位址</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.lastLoginIP}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">瀏覽器除錯資訊</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.lastLoginAgent}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">群組角色</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">
+                                                     <template v-for="role in row.roles">
+                                                        <span class="label label-primary">@{{ role }}</span>&nbsp;
+                                                    </template> 
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    
+
+                                    <fieldset>
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <div class="col-sm-2">
+                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="done">返回</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </form>
+
+                                <div class="clearfix"></div>
+
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-
+        <div class="content" id="panel-form" style="display:none">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <legend v-if="type==='update'">修改 使用者</legend>
+                                <legend v-if="type==='create'">新增 使用者</legend>
+                            </div>
+                            <div class="content">
+                                
+                                <form method="POST" name="user_form" class="form-horizontal">
+                                    {{ csrf_field() }}
+                                
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">帳號名稱</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('userName') }" type="text" name="userName" placeholder="帳號名稱" data-vv-as="帳號名稱" v-model="row.userName" v-validate="'required|min:2|alpha_dash'" required>
+                                                <span v-show="errors.has('userName')" class="help-block">@{{ errors.first('userName') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">密碼</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('password') }" type="password" name="password" placeholder="密碼" data-vv-as="密碼" v-model="row.password" v-validate="type=='create'?'required|min:5':'min:5'">
+                                                <span v-show="errors.has('password')" class="help-block">@{{ errors.first('password') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">確認密碼</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('password2') }" type="password" name="password2" placeholder="確認密碼" data-vv-as="確認密碼" v-model="row.password2" v-validate="row.password?'required|confirmed:password':'confirmed:password'">
+                                                <span v-show="errors.has('password2')" class="help-block">@{{ errors.first('password2') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">姓名</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="請輸入全名" data-vv-as="姓名" v-model="row.name" v-validate="'required'" required>
+                                                <span v-show="errors.has('name')" class="help-block">@{{ errors.first('name') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('email') }" type="text" name="email" placeholder="user@example.com" data-vv-as="Email" v-model="row.email" v-validate="'required|email'" required>
+                                                <span v-show="errors.has('email')" class="help-block">@{{ errors.first('email') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">手機號碼</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('phoneNumber') }" type="text" name="phoneNumber" placeholder="行動電話門號" data-vv-as="手機號碼" v-model="row.phoneNumber" v-validate="'regex:^[0-9\.\-]+$'">
+                                                <span v-show="errors.has('phoneNumber')" class="help-block">@{{ errors.first('phoneNumber') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">系統備註</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" v-model="row.remark" rows="3" placeholder="網站管理員註記用"></textarea>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">群組角色</label>
+                                            <div class="col-sm-10">
+                                                <div v-for="all_role in row.all_roles">
+                                                    <label>
+                                                        <input type="checkbox" v-bind:value="all_role.name" v-model="row.roles">
+                                                        @{{ all_role.name }} &nbsp (@{{ all_role.description }})
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2"></label>
+                                            <div class="col-sm-10">
+                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="save" v-if="type==='update'">更新</button>
+                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="save" v-if="type==='create'">儲存</button>
+                                                <button type="submit" class="btn btn-default" v-on:click="cancel">取消</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                                    
+                                <div class="clearfix"></div>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
+@stop
 
-                        <li>
-                            <a href="http://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                               Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.creative-tim.com/license">
-                                Licenses
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-				<div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
-                </div>
-            </div>
-        </footer>
+@section('script')
 
-    </div>
-</div>
+<script type="text/javascript">
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+    var __REST_API_URL__ = '{{$REST_API}}';
+
+    var user_id = '{{Auth::user()->id}}';
+    var menu_id = '{{ $menu_id }}';
+
+    var roles = {};
+
+    var panelList = new Vue({
+        el: '#panel-list',
+        data: {
+            roles:{}
+        },
+        mounted: function(){
+            _this = this;
+            
+            Vue.http.get('/api/admin/user/'  + user_id + '/roles/' +  menu_id).then(function(response) {
+                _this.roles = response.body;
+                roles = response.body;
+            });
+        },
+        methods: {
+            create: function(id){
+                $('#panel-list').hide();
+                $('#panel-form').show();
+                panelForm.load();
+            },
+            delete_many: function() {
+                var selections = $table.bootstrapTable('getAllSelections');
+
+                if (selections.length == 0) {
+                    swal("尚未選取任何資料");
+                    return;
+                }
+
+                var ids = selections.map(function(x) {
+                    return x.id;
+                });
+
+                swal({title: "確認刪除",
+                    text: "是否確定要刪除多筆資料？",
+                    type: "warning",
+                    showCancelButton: true
+                }).then( function(isConfirm) {
+                    if (isConfirm) {
+                        Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
+                            notifyAfterHttpSuccess(response.body);
+                            $table.bootstrapTable('refresh');
+                        }, function() {
+                            notifyAfterHttpError();
+                        });
+                    }
+                });
+            }
+        }
+    });
+
+    var panelView = new Vue({
+        el: '#panel-view',
+        data: {
+            row: {
+                roles:{},
+            }
+        },
+        methods: {
+            done: function(e) {
+                if (e) e.preventDefault();
+                $('#panel-view').hide();
+                $('#panel-list').show();
+            },
+            load: function(id) {
+                var _this = this;
+                Vue.http.get(__REST_API_URL__ + id).then(function(response) {
+                    _this.row = response.body;
+                    Vue.http.get(__REST_API_URL__ + id + '/roles').then(function(response) {
+                        _this.row.roles = response.body;
+                        _this.row = JSON.parse(JSON.stringify(_this.row));
+                    });
+                });
+            }
+        }
+    });
+
+    var panelForm = new Vue({
+        el: '#panel-form',
+        data: {
+            type: 'create',
+            row: {
+                _token: csrf_token,
+                all_roles:[],
+                roles:[],
+            }
+        },
+        methods: {
+            close: function(e) {
+                $('#panel-form').hide();
+                $('#panel-list').show();
+
+                $table.bootstrapTable('refresh');
+            },
+            save: function(e) {
+                if (e) e.preventDefault();
+
+                _this = this;
+                
+                this.$validator.validateAll().then(function() {
+
+                    var cb_success = function(response) {
+                        notifyAfterHttpSuccess(response.body);
+                        if (response.body.result) {
+                            _this.close();
+                        }
+                    };
+
+                    if (_this.type == 'update') {
+                        Vue.http.put(__REST_API_URL__ + _this.row.id, _this.row).then(cb_success, notifyAfterHttpError);
+
+                    }
+                    else {
+                        Vue.http.options.emulateJSON = true;
+                        Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
+                        Vue.http.options.emulateJSON = false;                      
+                    }
+
+                }).catch(function() {
+                    $('.form-control.error').first().focus();
+                });
+            },
+            cancel: function(e) {
+                if (e) e.preventDefault();
+                this.close();
+            },
+            load: function(id) {
+                var _this = this;
+                _this.type = id?'update':'create';
+
+                _this.row = {};
+                _this.errors.clear();
+
+                Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
+                    _this.row = response.body;
+                    
+                    Vue.http.get('/api/admin/role').then(function(response) {
+                        _this.row.all_roles = response.body;
+                        _this.row = JSON.parse(JSON.stringify(_this.row));
+                    });
+
+                    if (id) {
+                        Vue.http.get(__REST_API_URL__ + id + '/roles').then(function(response) {
+                            _this.row.roles = response.body;
+                            _this.row = JSON.parse(JSON.stringify(_this.row));
+                        });
+                    }
+                    else {
+                        _this.row.roles = [];
+                    }
+                });
+            }
+        }
+    });
+
+    window.operateEvents = {
+        'click .view': function (e, value, row, index) {
+            $('#panel-list').hide();
+            $('#panel-view').show();
+            panelView.load(row.id);
+        },
+        'click .edit': function (e, value, row, index) {
+            $('#panel-list').hide();
+            $('#panel-form').show();
+            panelForm.load(row.id);
+        },
+        'click .remove': function (e, value, row, index) {
+            swal({title: "確認刪除",
+                text: "是否確定要刪除此筆資料？",
+                type: "warning",
+                showCancelButton: true
+            }).then( function(isConfirm) {
+                if (isConfirm) {
+                    $table.bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                    Vue.http.delete(__REST_API_URL__ + row.id).then(function(response) {
+                        notifyAfterHttpSuccess(response.body);
+                    }, function() {
+                        notifyAfterHttpError();
+                    });
+                }
+            });
+        }
+    };
+    
+    var initDataTable = function($table) {
+        $table.bootstrapTable({
+            toolbar: ".toolbar",
+            striped: true,
+            sortOrder: 'desc',
+            sortName: 'updatedAt',
+            clickToSelect: true,
+            showRefresh: true,
+            search: true,
+            showToggle: false,
+            showColumns: true,
+            pagination: true,
+            searchAlign: 'right',
+            pageSize: 8,
+            clickToSelect: false,
+            pageList: [8, 10, 25, 50, 100],
+            formatShowingRows: function(pageFrom, pageTo, totalRows){
+                return "共 " + totalRows + " 筆 ";
+            },
+            formatRecordsPerPage: function(pageNumber){
+                return "每頁顯示 " + pageNumber + " 筆資料";
+            },
+            icons: {
+                refresh: 'fa fa-refresh',
+                toggle: 'fa fa-th-list',
+                columns: 'fa fa-columns',
+                detailOpen: 'fa fa-plus-circle',
+                detailClose: 'fa fa-minus-circle'
+            }
+        });
+        $(window).resize(function () {
+            $table.bootstrapTable('resetView');
+        });
+    };
+
+    var $table = $('#bootstrap-table');
+    
+    initDataTable($table);
+
+    function operateFormatter(value, row, index) {
+        
+        if(roles.view){
+            $view = [
+                '<a rel="tooltip" title="檢視" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)">'+
+                    '<i class="fa fa-file-text-o"></i>'+
+                '</a>'
+            ];
+        } else { $view = []; }
+
+        if(roles.edit){
+            $edit = [
+                '<a rel="tooltip" title="修改" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">'+
+                    '<i class="fa fa-edit"></i>'+
+                '</a>'
+            ];
+        } else { $edit = []; }
+
+        if(roles.delete){
+            $delete = [
+                '<a rel="tooltip" title="移除" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">'+
+                    '<i class="fa fa-remove"></i>'+
+                '</a>'
+            ];
+        } else { $delete = []; }
 
 
-</body>
+        return [
+            $view,
+            $edit,
+            $delete
+        ].join('');
+    }
 
-    <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
-
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
-    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="assets/js/paper-dashboard.js"></script>
-
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
-
-</html>
+</script>
+@stop
+        

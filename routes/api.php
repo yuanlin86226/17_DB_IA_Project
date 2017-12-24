@@ -13,6 +13,35 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('api')->get('/admin/menu_list/{user_id}', 'Admin\MenuController@menu_list');
+
+Route::middleware('api')->get('/admin/user', 'Admin\UserController@findAll');
+Route::middleware('api')->post('/admin/user', 'Admin\UserController@save');
+Route::middleware('api')->get('/admin/user/{id}', 'Admin\UserController@findOne');
+Route::middleware('api')->put('/admin/user/{id}', 'Admin\UserController@update');
+Route::middleware('api')->delete('/admin/user/{id}', 'Admin\UserController@destroy');
+Route::middleware('api')->delete('/admin/user', 'Admin\UserController@destroyMany');
+
+
+Route::middleware('api')->get('/admin/user/{id}/roles', 'Admin\UserController@getRoles');
+Route::middleware('api')->get('/admin/user/{id}/roles/{menu_id}', 'Admin\UserController@getSign');
+
+
+Route::middleware('api')->get('/admin/role', 'Admin\RoleController@findAll');
+Route::middleware('api')->get('/admin/roleParent', 'Admin\RoleController@findroleParent');
+Route::middleware('api')->get('/admin/role/{id}', 'Admin\RoleController@findOne');
+Route::middleware('api')->delete('/admin/role/{id}', 'Admin\RoleController@destroy');
+Route::middleware('api')->delete('/admin/role', 'Admin\RoleController@destroyMany');
+Route::middleware('api')->get('/admin/role/{id}/menu_detail/{menu_id}', 'Admin\RoleController@findOneMenuDetail');
+
+
+Route::middleware('api')->get('/admin/menu', 'Admin\MenuController@findAll');
+Route::middleware('api')->get('/admin/menu/{id}', 'Admin\MenuController@findOne');
+Route::middleware('api')->post('/admin/menu', 'Admin\MenuController@save');
+Route::middleware('api')->put('/admin/menu/{id}', 'Admin\MenuController@update');
+Route::middleware('api')->delete('/admin/menu/{id}', 'Admin\MenuController@destroy');
+Route::middleware('api')->delete('/admin/menu', 'Admin\MenuController@destroyMany');

@@ -1,0 +1,15 @@
+{
+  "name": "vee-validate",
+  "homepage": "https://github.com/logaretm/vee-validate",
+  "version": "2.0.0-rc.5",
+  "_release": "2.0.0-rc.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.0-rc.5",
+    "commit": "89b8077a2dcb98e18816b73bfef639e08f61a0ab"
+  },
+  "_source": "https://github.com/logaretm/vee-validate.git",
+  "_target": "2.0.0-rc.5",
+  "_originalSource": "vee-validate",
+  "_direct": true
+}

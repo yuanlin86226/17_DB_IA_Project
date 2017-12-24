@@ -1,0 +1,32 @@
+.login-page .card {
+    padding: 25px 20px;
+}
+
+.login-page .card .header{
+    padding-bottom: 10px;
+}
+
+.card .form-group > label{
+    letter-spacing: 1px;
+}
+.card .category, .card .form-group > label{
+    color: #1f9fa0;
+}
+.checkbox.checked .icons, .radio.checked .icons{
+    color: #1f9fa0;
+}
+.checkbox.checked .second-icon, .radio.checked .second-icon{
+    color: #1f9fa0;
+}
+
+.btn{
+    letter-spacing: 2px;
+}
+.btn.btn-fill{
+    background-color: #007171;
+    background-color: #005e5e;
+}
+.btn.btn-fill:hover{
+    background-color: #f0d937;
+    border-color: #ffc434;
+}
