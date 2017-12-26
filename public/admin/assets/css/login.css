@@ -21,6 +21,7 @@
 
 .btn{
     letter-spacing: 2px;
+    border: none;
 }
 .btn.btn-fill{
     background-color: #007171;
