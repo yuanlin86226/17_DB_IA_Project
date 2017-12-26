@@ -54,7 +54,7 @@
                                         
                                         @if($errors->has('msg'))
                                             <div class="row">
-                                                <div class="col-md-4 col-md-offset-4 text-center text-danger">
+                                                <div class="col-md-12 text-center text-danger">
                                                     {!! $errors->first('msg') !!}
                                                 </div>
                                             </div>
