@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Member;
+use App\Employee;
 
-class MemberSeeder extends Seeder
+class EmployeeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,9 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('members')->delete();
+        DB::table('employees')->delete();
 
-        Member::create([
+        Employee::create([
             'job' => '工程師',
             'name' => '林俞安',
             'identity_id' => '1310634008',
@@ -27,7 +27,7 @@ class MemberSeeder extends Seeder
             'end_date' => null,
         ]);
 
-        Member::create([
+        Employee::create([
             'job' => '工程師',
             'name' => '馮莉茵',
             'identity_id' => '1310634015',
@@ -39,7 +39,7 @@ class MemberSeeder extends Seeder
             'end_date' => null,
         ]);
 
-        Member::create([
+        Employee::create([
             'job' => '設計師',
             'name' => '李均容',
             'identity_id' => '1310634005',

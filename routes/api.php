@@ -46,3 +46,7 @@ Route::middleware('api')->post('/admin/menu', 'Admin\MenuController@save');
 Route::middleware('api')->put('/admin/menu/{id}', 'Admin\MenuController@update');
 Route::middleware('api')->delete('/admin/menu/{id}', 'Admin\MenuController@destroy');
 Route::middleware('api')->delete('/admin/menu', 'Admin\MenuController@destroyMany');
+
+
+Route::middleware('api')->get('/admin/company', 'Admin\CompanyController@findOne');
+Route::middleware('api')->put('/admin/company', 'Admin\CompanyController@update');
