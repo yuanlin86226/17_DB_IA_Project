@@ -170,6 +170,7 @@ class MenuController extends Controller
             }
 
             MenuDetail::where('menu_id',$id)->delete();
+            MenuRole::where('menu_id',$id)->delete();
             Menu::where('parent',$id)->delete();
             Menu::destroy($id);
 
@@ -195,6 +196,7 @@ class MenuController extends Controller
                     MenuDetail::where('menu_id',$menu['id'])->delete();
                 }
 
+                MenuRole::where('menu_id',$id)->delete();
                 MenuDetail::where('menu_id',$id)->delete();
                 Menu::where('parent',$id)->delete();
                 Menu::destroy($id);
