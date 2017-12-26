@@ -51,7 +51,7 @@ class User extends Authenticatable
     public static function able_page($user_id, $menu_id) {
         return DB::select(
             DB::raw("select DISTINCT menu_id from menu_role 
-            where role_id in (select role_id from role_user where user_id = '".$user_id."') and menu_id = '".$menu_id."'")
+            where role_id in (select role_id from role_user where user_id = '".$user_id."') and menu_id = '".$menu_id."' order by menu_id asc")
         );
     }
 }

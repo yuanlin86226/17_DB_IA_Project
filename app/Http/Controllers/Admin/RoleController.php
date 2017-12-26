@@ -37,8 +37,6 @@ class RoleController extends Controller
                 return View::make('admin/role',['menu_id' => $menu_id]);
             }
 
-            
-            return View::make('admin/user',['menu_id' => $menu_id]);
         } else {
             return Redirect::action('AuthController@login');
         }
@@ -62,11 +60,258 @@ class RoleController extends Controller
         return response()->json($data);
     }
 
-    public function findroleParent()
+    public function save(data_request $request)
     {
-        $parents = Menu::where('parent',null)->get();
+        try {
+            $role = [
+                'name' => $request["name"],
+                'description' => $request["description"]
+            ];
 
-        return response()->json($parents);
+            $menu_details = array();
+
+            foreach ($request["menu"] as $menus) {
+                foreach ($menus as $menu) {
+                    $menu_details[count($menu_details)] = $menu;
+                }
+            }
+
+            $validator = Validator::make($role, Role::validate());
+            
+            if ($validator->fails())
+            {
+                $error_msg = "";
+                $error = $validator->errors();
+                foreach ($error->all() as $message) {
+                    $error_msg = $error_msg . $message;
+                }
+
+                $data['result'] = false;
+                $data['message'] = $error_msg;
+                
+            } else {
+                // 建立資料
+                $createdRole = Role::create($role);
+
+                if($createdRole) {
+                    foreach ($menu_details as $md) {
+                        
+                        $count_num = 0;
+
+                        if($md['view']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','view')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $createdRole->id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($md['insert']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','insert')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $createdRole->id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($md['edit']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','edit')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $createdRole->id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($md['delete']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','delete')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $createdRole->id
+                            ]);
+
+                            $count_num++;
+                        }
+                        
+                        if($count_num!=0) {
+                            $parent = DB::select(
+                                DB::raw("select id from menus 
+                                    where id = (select parent from menus where id = '".$md['id']."')")
+                            );
+                            
+                            $parent_exist = MenuRole::where('role_id',$createdRole->id)->where('menu_id',$parent[0]->id)->get();
+                            
+                            if(count($parent_exist)==0){
+                                MenuRole::create([
+                                    'menu_id' => $parent[0]->id,
+                                    'menu_detail_id' => null,
+                                    'role_id' => $createdRole->id
+                                ]);
+                            }
+                        }
+                    }
+                }
+
+                $data["result"] = true;
+                $data["message"] = "群組建立成功";
+            }
+            
+            return response()->json($data);
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function update($id, data_request $request)
+    {
+        try {
+            $role = [
+                'id' => $id,
+                'name' => $request["name"],
+                'description' => $request["description"]
+            ];
+
+            $menu_details = array();
+
+            foreach ($request["menu"] as $menus) {
+                foreach ($menus as $menu) {
+                    $menu_details[count($menu_details)] = $menu;
+                }
+            }
+
+            // 資料驗證
+            $validator = Validator::make($role, Role::validate($role["id"]));
+
+            if ($validator->fails())
+            {
+                $error_msg = "";
+                $error = $validator->errors();
+                foreach ($error->all() as $message) {
+                    $error_msg = $error_msg . $message;
+                }
+
+                $data['result'] = false;
+                $data['message'] = $error_msg;
+                
+            } else {
+                // 修改資料
+                $updateRole =  Role::find($role["id"]);
+  
+                $updateRole -> name = $role["name"];
+                $updateRole -> description = $role["description"];
+                $updateRole -> save();
+
+                if($updateRole) {
+                    foreach ($menu_details as $md) {
+
+                        $count_num = 0;
+
+                        MenuRole::where('role_id',$role['id'])->where('menu_id',$md['id'])->delete();
+                        
+                        if($md['view']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','view')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($md['insert']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','insert')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($md['edit']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','edit')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($md['delete']=='true'){
+                            $detail = MenuDetail::where('menu_id',$md['id'])->where('sign','delete')->get();
+                            
+                            MenuRole::create([
+                                'menu_id' => $md['id'],
+                                'menu_detail_id' => $detail[0]->id,
+                                'role_id' => $id
+                            ]);
+
+                            $count_num++;
+                        }
+
+                        if($count_num!=0) {
+                            $parent = DB::select(
+                                DB::raw("select id from menus 
+                                    where id = (select parent from menus where id = '".$md['id']."')")
+                            );
+
+                            $parent_exist = MenuRole::where('role_id',$id)->where('menu_id',$parent[0]->id)->get();
+
+                            if(count($parent_exist)==0){
+                                MenuRole::create([
+                                    'menu_id' => $parent[0]->id,
+                                    'menu_detail_id' => null,
+                                    'role_id' => $id
+                                ]);
+                            }
+                        }
+                    }
+                }
+
+                $role_parents = MenuRole::where('role_id',$id)->where('menu_detail_id',null)->get();
+                
+                foreach($role_parents as $role_parent) {
+                    $count_child = DB::select(
+                        DB::raw("select id from menu_role 
+                            where menu_id in (select id from menus where parent = '".$role_parent['menu_id']."')
+                            and role_id = '".$id."'")
+                    );
+                    
+                    if(count($count_child)==0){
+                        MenuRole::where('menu_id',$role_parent['menu_id'])->where('role_id',$id)->delete();
+                    }
+                }
+
+                $data["result"] = true;
+                $data["message"] = "群組修改成功";
+            }
+        
+            return response()->json($data);
+
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function destroy($id)
@@ -113,6 +358,7 @@ class RoleController extends Controller
 
         foreach ($menus as $index => $menu) {
             $data[$index] = [
+                'id' => $menu['id'],
                 'title' => $menu['title'],
                 'view' => false,
                 'insert' => false,

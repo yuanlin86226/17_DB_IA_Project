@@ -168,8 +168,7 @@
                                     
 
                                     <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2"></label>
+                                        <div class="form-group" style="margin-top: 20px;">
                                             <div class="col-sm-2">
                                                 <button type="submit" class="btn btn-fill btn-info" v-on:click="done">返回</button>
                                             </div>

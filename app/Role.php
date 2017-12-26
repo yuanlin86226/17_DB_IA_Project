@@ -26,7 +26,8 @@ class Role extends Model
     public static function validate($id=0, $merge=[]) {
         return array_merge(
         [
-            'name' => 'required|unique:roles,name' . ($id ? ",$id" : '')
+            'name' => 'required|unique:roles,name' . ($id ? ",$id" : ''),
+            'description' => 'required'
         ], 
         $merge);
     }
