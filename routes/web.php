@@ -27,11 +27,9 @@ Route::get('/admin/role','Admin\RoleController@index');
 Route::get('/admin/menu','Admin\MenuController@index');
 
 Route::get('/admin/company','Admin\CompanyController@index');
+Route::get('/admin/employee','Admin\EmployeeController@index');
 
 
-Route::get('/admin/employee', function () {
-    return view('/admin/code');
-});
 Route::get('/admin/customer', function () {
     return view('/admin/code');
 });

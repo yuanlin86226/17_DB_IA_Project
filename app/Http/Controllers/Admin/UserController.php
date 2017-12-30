@@ -110,7 +110,6 @@ class UserController extends Controller
                 'name' => $request["name"],
                 'email' => $request["email"],
                 'phoneNumber' => $request["phoneNumber"],
-                'remark' => $request["remark"],
                 'remember_token' => str_random(10),
                 'roles' => $request["roles"],
             ];
@@ -159,8 +158,7 @@ class UserController extends Controller
                 'password' => $request["password"],
                 'name' => $request["name"],
                 'email' => $request["email"],
-                'phoneNumber' => $request["phoneNumber"],
-                'remark' => $request["remark"],
+                'phoneNumber' => $request["phoneNumber"],
                 'roles' => $request["roles"],
             ];
 
@@ -187,7 +185,6 @@ class UserController extends Controller
                 $updateUser -> name = $user["name"];
                 $updateUser -> email = $user["email"];
                 $updateUser -> phoneNumber = $user["phoneNumber"];
-                $updateUser -> remark = $user["remark"];
                 $updateUser -> save();
 
                 if (isset($user["roles"])) {
