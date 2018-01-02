@@ -27,7 +27,7 @@ class SupplierSeeder extends Seeder
         DB::table('suppliers')->delete();
 
         Supplier::create([
-            'name' => 'BigHit',
+            'name' => 'Big Hit Entertainment',
             'tax' => '52010202',
             'ceo' => '方時赫',
             'telephone' => '027417732',
