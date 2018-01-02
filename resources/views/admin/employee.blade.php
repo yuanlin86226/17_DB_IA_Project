@@ -29,6 +29,7 @@
                                     <thead>
                                         <th data-field="state" data-width="50" data-checkbox="true"></th>
                                         <th data-field="job" data-sortable="true">職稱</th>
+                                        <th data-field="status" data-visible="true" data-sortable="true" data-formatter="statusFormatter">工作狀態</th>
                                         <th data-field="identity_id" data-sortable="true">身分證字號</th>
                                         <th data-field="name"  data-sortable="true">姓名</th>
                                         <th data-field="sex" data-visible="false" data-sortable="true" data-formatter="sexFormatter">性別</th>
@@ -36,7 +37,7 @@
                                         <th data-field="email" data-sortable="true">Email</th>
                                         <th data-field="cellphone" data-visible="true" data-sortable="true">手機號碼</th>
                                         <th data-field="address" data-visible="false" data-sortable="true">地址</th>
-                                        <th data-field="start_date" data-visible="true" data-sortable="true">到職日</th>
+                                        <th data-field="start_date" data-visible="false" data-sortable="true">到職日</th>
                                         <th data-field="end_date" data-visible="false" data-sortable="true">離職日</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
                                     </thead>
@@ -148,6 +149,16 @@
 
                                     <fieldset>
                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">工作狀態</label>
+                                            <div class="col-sm-10">
+                                                <p v-if="row.status==0" class="form-control-static">離職</p>
+                                                <p v-if="row.status==1" class="form-control-static">在職</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
                                             <label class="col-sm-2 control-label">離職日</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.end_date}}</p>
@@ -209,7 +220,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">姓名</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="password" name="name" placeholder="姓名" data-vv-as="姓名" v-model="row.name" v-validate="'required'">
+                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="姓名" data-vv-as="姓名" v-model="row.name" v-validate="'required'">
                                                 <span v-show="errors.has('name')" class="help-block">@{{ errors.first('name') }}</span>
                                             </div>
                                         </div>
@@ -270,6 +281,15 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">工作狀態</label>
+                                            <div class="col-sm-10">
+                                                <input v-model="row.status" name="status" class="radio-button" type="radio" value="1"> 在職
+                                                <input v-model="row.status" name="status" class="radio-button" type="radio" value="0" v-on:change="check_radio"> 離職
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset v-if="row.status==0">
+                                        <div class="form-group">
                                             <label class="col-sm-2 control-label">離職日</label>
                                             <div class="col-sm-10">
                                                 <input :class="{'form-control': true, 'error': errors.has('end_date') }" type="date" name="end_date" placeholder="離職日" data-vv-as="離職日" v-model="row.end_date" v-validate="'required'">
@@ -319,6 +339,11 @@
         if( value == 1 ) {return "男"; }
     }
 
+    function statusFormatter (value, row, index) {
+        if( value == 0 ){ return "離職"; }
+        if( value == 1 ) {return "在職"; }
+    }
+
     var panelList = new Vue({
         el: '#panel-list',
         data: {
@@ -356,11 +381,20 @@
                     showCancelButton: true
                 }).then( function(isConfirm) {
                     if (isConfirm) {
-                        Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
-                            notifyAfterHttpSuccess(response.body);
-                            $table.bootstrapTable('refresh');
-                        }, function() {
-                            notifyAfterHttpError();
+                        swal({
+                            title:"刪除無法復原，確定要刪除？",
+                            text:"相關資料有可能損毀或一併消失",
+                            type:"warning",
+                            showCancelButton: true
+                        }).then( function (isConfire) {
+                            if (isConfire) {
+                                Vue.http.delete(__REST_API_URL__, {body: ids}).then(function(response) {
+                                    notifyAfterHttpSuccess(response.body);
+                                    $table.bootstrapTable('refresh');
+                                }, function() {
+                                    notifyAfterHttpError();
+                                });
+                            }
                         });
                     }
                 });
@@ -470,6 +504,11 @@
                         _this.row.roles = [];
                     }
                 });
+            },
+            check_radio: function () {
+                var _this = this;
+
+                _this.row = JSON.parse(JSON.stringify(_this.row));
             }
         }
     });
@@ -492,14 +531,23 @@
                 showCancelButton: true
             }).then( function(isConfirm) {
                 if (isConfirm) {
-                    $table.bootstrapTable('remove', {
-                        field: 'id',
-                        values: [row.id]
-                    });
-                    Vue.http.delete(__REST_API_URL__ + row.id).then(function(response) {
-                        notifyAfterHttpSuccess(response.body);
-                    }, function() {
-                        notifyAfterHttpError();
+                    swal({
+                        title:"刪除無法復原，確定要刪除？",
+                        text:"相關資料有可能損毀或一併消失",
+                        type:"warning",
+                        showCancelButton: true
+                    }).then( function (isConfire) {
+                        if (isConfirm) {
+                            $table.bootstrapTable('remove', {
+                                field: 'id',
+                                values: [row.id]
+                            });
+                            Vue.http.delete(__REST_API_URL__ + row.id).then(function(response) {
+                                notifyAfterHttpSuccess(response.body);
+                            }, function() {
+                                notifyAfterHttpError();
+                            });
+                        }
                     });
                 }
             });

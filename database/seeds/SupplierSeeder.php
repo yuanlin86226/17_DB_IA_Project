@@ -37,15 +37,15 @@ class SupplierSeeder extends Seeder
             'website' => 'http://bts.ibighit.com/'
         ]);
 
-        Supplier::create([
-            'name' => '',
-            'tax' => '',
-            'ceo' => '',
-            'telephone' => '',
-            'fax' => '',
-            'email' => '',
-            'address' => '',
-            'website' => ''
-        ]);
+        // Supplier::create([
+        //     'name' => '',
+        //     'tax' => '',
+        //     'ceo' => '',
+        //     'telephone' => '',
+        //     'fax' => '',
+        //     'email' => '',
+        //     'address' => '',
+        //     'website' => ''
+        // ]);
     }
 }

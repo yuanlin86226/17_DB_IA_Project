@@ -25,6 +25,7 @@ class EmployeeSeeder extends Seeder
             'cellphone' => '0931226767',
             'address' => '台中市烏日區九德里中華路182號',
             'start_date' => '2017-12-25',
+            'status' => 1,
             'end_date' => null,
         ]);
 
@@ -38,6 +39,7 @@ class EmployeeSeeder extends Seeder
             'cellphone' => '0988874857',
             'address' => '台中市大里區益民路二段355號7樓',
             'start_date' => '2017-12-25',
+            'status' => 1,
             'end_date' => null,
         ]);
 
@@ -51,6 +53,7 @@ class EmployeeSeeder extends Seeder
             'email' => 's1310634005@gms.nutc.edu.tw',
             'address' => '台中市太平區文林街56號',
             'start_date' => '2017-12-25',
+            'status' => 1,
             'end_date' => null,
         ]);
 
@@ -64,6 +67,7 @@ class EmployeeSeeder extends Seeder
             'email' => 'wangmei@gmail.com',
             'address' => '台中市西區三民路一段50巷8號',
             'start_date' => '2017-12-25',
+            'status' => 1,
             'end_date' => null,
         ]);
 
@@ -77,6 +81,7 @@ class EmployeeSeeder extends Seeder
             'email' => 'wangshy@gmail.com',
             'address' => '台中市西區三民路一段50巷8號',
             'start_date' => '2017-12-25',
+            'status' => 1,
             'end_date' => null,
         ]);
     }

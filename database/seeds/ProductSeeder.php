@@ -32,74 +32,74 @@ class ProductSeeder extends Seeder
             'supplier_id' => '1'
         ]);
 
-        Type::create([
-            'name' => 'GOT7',
-            'folder' => 'GOT7',
-            'discription' => '',
-            'supplier_id' => '2'
-        ]);
+        // Type::create([
+        //     'name' => 'GOT7',
+        //     'folder' => 'GOT7',
+        //     'discription' => '',
+        //     'supplier_id' => '2'
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'BLACKPINK',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'BLACKPINK',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'DAY6',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'DAY6',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'TWICE',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'TWICE',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'BIGBANG',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'BIGBANG',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'Highlight',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'Highlight',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'WannaOne',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'WannaOne',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
-        Type::create([
-            'name' => '',
-            'folder' => 'GirlsGeneration',
-            'discription' => '',
-            'supplier_id' => ''
-        ]);
+        // Type::create([
+        //     'name' => '',
+        //     'folder' => 'GirlsGeneration',
+        //     'discription' => '',
+        //     'supplier_id' => ''
+        // ]);
 
 
 
-        DB::table('products')->delete();
+        // DB::table('products')->delete();
 
-        Product::create([
-            'name' => '',
-            'photo' => '/image/products/BTS/',
-            'price' => '',
-            'total_amount' => '',
-            'inventory' => '',
-            'sales_amount' => '',
-            'type_id' => ''
-        ]);
+        // Product::create([
+        //     'name' => '',
+        //     'photo' => '/image/products/BTS/',
+        //     'price' => '',
+        //     'total_amount' => '',
+        //     'inventory' => '',
+        //     'sales_amount' => '',
+        //     'type_id' => ''
+        // ]);
     }
 }

@@ -65,6 +65,7 @@ class EmployeeController extends Controller
                 'cellphone' => $request["cellphone"],
                 'address' => $request["address"],
                 'start_date' => $request["start_date"],
+                'status' => $request["status"],
                 'end_date' => $request["end_date"]
             ];
 
@@ -109,6 +110,7 @@ class EmployeeController extends Controller
                 'cellphone' => $request["cellphone"],
                 'address' => $request["address"],
                 'start_date' => $request["start_date"],
+                'status' => $request["status"],
                 'end_date' => $request["end_date"]
             ];
 
@@ -139,6 +141,7 @@ class EmployeeController extends Controller
                 $updateEmployee -> cellphone = $employee["cellphone"];
                 $updateEmployee -> address = $employee["address"];
                 $updateEmployee -> start_date = $employee["start_date"];
+                $updateEmployee -> status = $employee["status"];
                 $updateEmployee -> end_date = $employee["end_date"];
                 $updateEmployee -> save();
 

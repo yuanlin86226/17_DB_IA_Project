@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $fillable = [
-        'job','name','identity_id','sex','birthday','email','cellphone','address','start_date','end_date'
+        'job','name','identity_id','sex','birthday','email','cellphone','address','start_date','status','end_date'
     ];
 
     public $timestamps = true;
@@ -24,6 +24,7 @@ class Employee extends Model
             'cellphone' => 'required',
             'address' => 'required',
             'start_date' => 'required',
+            'status' => 'required',
         ], 
         $merge);
     }

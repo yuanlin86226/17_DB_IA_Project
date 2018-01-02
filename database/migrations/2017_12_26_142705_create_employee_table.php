@@ -24,6 +24,7 @@ class CreateEmployeeTable extends Migration
             $table->string('cellphone');
             $table->string('address');
             $table->date('start_date');
+            $table->integer('status');
             $table->date('end_date')->nullable();
             $table->timestamps();
         });
