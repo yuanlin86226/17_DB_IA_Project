@@ -7,8 +7,8 @@ use Illuminate\Http\Request as data_request;
 
 use App\User;
 
-use App\Supplier;
 use App\Type;
+use App\Supplier;
 
 use Exception;
 use Validator;
@@ -18,14 +18,14 @@ use Redirect;
 use Request;
 use DB;
 
-class SupplierController extends Controller
+class ProductTypeController extends Controller
 {
     public function index()
     {
         if (Auth::check()) {
 
             // menu_id要確認
-            $menu_id = 9;
+            $menu_id = 10;
             $user_id = Auth::user()->id;
 
             $role_menus = User::able_page($user_id, $menu_id);
@@ -33,7 +33,7 @@ class SupplierController extends Controller
             if (count($role_menus)==0) {
                 return Redirect::action('AuthController@login');
             } else {
-                return View::make('admin/supplier',['menu_id' => $menu_id]);
+                return View::make('admin/productType',['menu_id' => $menu_id]);
             }
             
         } else {
@@ -43,32 +43,30 @@ class SupplierController extends Controller
 
     public function findAll()
     {
-        $suppliers = Supplier::all();
-        return response()->json($suppliers);
+        $types = Type::all();
+        return response()->json($types);
     }
 
     public function findOne($id)
     {
-        $supplier = Supplier::find($id);
-        return response()->json($supplier);
+        $type = Type::find($id);
+        $supplier = Supplier::find($type['supplier_id']);
+        $type['supplier'] = $supplier['name'];
+
+        return response()->json($type);
     }
 
     public function save(data_request $request)
     {
         try {
-
-            $supplier = [
+            $type = [
                 'name' => $request["name"],
-                'tax' => $request["tax"],
-                'website' => $request["website"],
-                'email' => $request["email"],
-                'fax' => $request["fax"],
-                'telephone' => $request["telephone"],
-                'address' => $request["address"],
-                'ceo' => $request["ceo"]
+                'folder' => $request["folder"],
+                'discription' => $request["discription"],
+                'supplier_id' => $request["supplier_id"]
             ];
 
-            $validator = Validator::make($supplier, Supplier::validate());
+            $validator = Validator::make($type, Type::validate());
             
             if ($validator->fails())
             {
@@ -82,10 +80,10 @@ class SupplierController extends Controller
                 $data['message'] = $error_msg;
                 
             } else {
-                $createdSupplier = Supplier::create($supplier);
+                $createdType = Type::create($type);
 
                 $data["result"] = true;
-                $data["message"] = "廠商建立成功";
+                $data["message"] = "分類建立成功";
             }
             
             return response()->json($data);
@@ -98,20 +96,16 @@ class SupplierController extends Controller
     public function update($id, data_request $request)
     {
         try {
-            $supplier = [
+            $type = [
                 'id' => $id,
                 'name' => $request["name"],
-                'tax' => $request["tax"],
-                'website' => $request["website"],
-                'email' => $request["email"],
-                'fax' => $request["fax"],
-                'telephone' => $request["telephone"],
-                'address' => $request["address"],
-                'ceo' => $request["ceo"]
+                'folder' => $request["folder"],
+                'discription' => $request["discription"],
+                'supplier_id' => $request["supplier_id"]
             ];
 
             // 資料驗證
-            $validator = Validator::make($supplier, Supplier::validate($supplier["id"]));
+            $validator = Validator::make($type, Type::validate($type["id"]));
 
             if ($validator->fails())
             {
@@ -126,20 +120,16 @@ class SupplierController extends Controller
                 
             } else {
                 // 修改資料
-                $updateSupplier =  Supplier::find($supplier["id"]);
+                $updateType =  Type::find($type["id"]);
   
-                $updateSupplier -> name = $supplier["name"];
-                $updateSupplier -> tax = $supplier["tax"];
-                $updateSupplier -> website = $supplier["website"];
-                $updateSupplier -> email = $supplier["email"];
-                $updateSupplier -> fax = $supplier["fax"];
-                $updateSupplier -> telephone = $supplier["telephone"];
-                $updateSupplier -> address = $supplier["address"];
-                $updateSupplier -> ceo = $supplier["ceo"];
-                $updateSupplier -> save();
+                $updateType -> name = $type["name"];
+                $updateType -> folder = $type["folder"];
+                $updateType -> discription = $type["discription"];
+                $updateType -> supplier_id = $type["supplier_id"];
+                $updateType -> save();
 
                 $data["result"] = true;
-                $data["message"] = "廠商修改成功";
+                $data["message"] = "分類修改成功";
             }
         
             return response()->json($data);
@@ -152,11 +142,11 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         try {
-            Type::where('supplier_id',$id)->delete();
-            Supplier::destroy($id);
+
+            Type::destroy($id);
 
             $data["result"] = true;
-            $data["message"] = "廠商刪除成功";
+            $data["message"] = "分類刪除成功";
 
             return response()->json($data);
 
@@ -171,8 +161,7 @@ class SupplierController extends Controller
             $ids = $request->json()->all();
 
             foreach ($ids as $id) {
-                Type::where('supplier_id',$id)->delete();
-                Supplier::destroy($id);
+                Type::destroy($id);
             }
 
             $data["result"] = true;

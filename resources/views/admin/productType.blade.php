@@ -4,7 +4,7 @@
 
 @section('content')
 
-@php ($REST_API = '/api/admin/supplier/')
+@php ($REST_API = '/api/admin/productType/')
 
         <div class="content" id="panel-list">
             <div class="container-fluid">
@@ -28,15 +28,10 @@
                                 <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
                                     <thead>
                                         <th data-field="state" data-width="50" data-checkbox="true"></th>
-                                        <th data-field="name"  data-sortable="true">廠商名稱</th>
-                                        <th data-field="tax" data-visible="false" data-sortable="true">統一編號</th>
-                                        <th data-field="telephone" data-sortable="true">電話號碼</th>
-                                        <th data-field="fax" data-visible="false" data-sortable="true">傳真</th>
-                                        <th data-field="email" data-sortable="true">Email</th>
-                                        <th data-field="address" data-visible="false" data-sortable="true">地址</th>
-                                        <th data-field="website" data-visible="false" data-sortable="true">網站</th>
-                                        <th data-field="ceo" data-sortable="true">聯絡人</th>
-                                        <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
+                                        <th data-field="name"  data-sortable="true">類別名稱</th>
+                                        <th data-field="discription" data-visible="false" data-sortable="true">簡介</th>
+                                        <th data-field="folder" data-sortable="true">資料夾</th>
+                                        <th data-field="created_at" data-sortable="true">建立時間</th>
                                         <th data-field="updated_at" data-visible="false" data-sortable="true">更新時間</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
                                     </thead>
@@ -66,7 +61,7 @@
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">廠商名稱</label>
+                                            <label class="col-sm-2 control-label">類別名稱</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.name}}</p>
                                             </div>
@@ -75,63 +70,27 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">統一編號</label>
+                                            <label class="col-sm-2 control-label">簡介</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.tax}}</p>
+                                                <p class="form-control-static">@{{row.discription}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">電話號碼</label>
+                                            <label class="col-sm-2 control-label">資料夾</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.telephone}}</p>
+                                                <p class="form-control-static">@{{row.folder}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">傳真</label>
+                                            <label class="col-sm-2 control-label">主要供應廠商</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.fax}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.email}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">地址</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.address}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">網站</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.website}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">聯絡人</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.ceo}}</p>
+                                                <p class="form-control-static">@{{row.supplier}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -178,8 +137,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <legend v-if="type==='update'">修改 廠商</legend>
-                                <legend v-if="type==='create'">新增 廠商</legend>
+                                <legend v-if="type==='update'">修改 類別</legend>
+                                <legend v-if="type==='create'">新增 類別</legend>
                             </div>
                             <div class="content">
                                 
@@ -188,73 +147,39 @@
                                 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">廠商名稱</label>
+                                            <label class="col-sm-2 control-label">類別名稱</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="公司名稱" data-vv-as="公司名稱" v-model="row.name" v-validate="'required'" required>
+                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="類別名稱" data-vv-as="類別名稱" v-model="row.name" v-validate="'required'" required>
                                                 <span v-show="errors.has('name')" class="help-block">@{{ errors.first('name') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">統一編號</label>
+                                            <label class="col-sm-2 control-label">簡介</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('tax') }" type="text" name="tax" placeholder="統一編號" data-vv-as="統一編號" v-model="row.tax" v-validate="'required|numeric|digits:8'" required>
-                                                <span v-show="errors.has('tax')" class="help-block">@{{ errors.first('tax') }}</span>
+                                                <textarea rows="10" :class="{'form-control': true, 'error': errors.has('discription') }"  name="discription" placeholder="簡介" data-vv-as="簡介" v-model="row.discription" v-validate="'required'" required></textarea>
+                                                <span v-show="errors.has('discription')" class="help-block">@{{ errors.first('discription') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">電話號碼</label>
+                                            <label class="col-sm-2 control-label">資料夾</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('telephone') }" type="text" name="telephone" placeholder="電話號碼" data-vv-as="電話號碼" v-model="row.telephone" v-validate="'required|numeric'">
-                                                <span v-show="errors.has('telephone')" class="help-block">@{{ errors.first('telephone') }}</span>
+                                                <input :class="{'form-control': true, 'error': errors.has('folder') }" type="text" name="folder" placeholder="資料夾" data-vv-as="資料夾" v-model="row.folder" v-validate="'required|min:2|alpha_dash'" required>
+                                                <span v-show="errors.has('folder')" class="help-block">@{{ errors.first('folder') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">傳真</label>
+                                            <label class="col-sm-2 control-label">主要供應廠商</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('fax') }" type="text" name="fax" placeholder="傳真號碼" data-vv-as="傳真號碼" v-model="row.fax" v-validate="'required|numeric'">
-                                                <span v-show="errors.has('fax')" class="help-block">@{{ errors.first('fax') }}</span>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('email') }" type="text" name="email" placeholder="公司信箱" data-vv-as="公司信箱" v-model="row.email" v-validate="'required|email'" required>
-                                                <span v-show="errors.has('email')" class="help-block">@{{ errors.first('email') }}</span>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">地址</label>
-                                            <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('address') }" type="text" name="address" placeholder="公司地址" data-vv-as="公司地址" v-model="row.address" v-validate="'required'">
-                                                <span v-show="errors.has('address')" class="help-block">@{{ errors.first('address') }}</span>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">網站</label>
-                                            <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('website') }" type="text" name="website" placeholder="公司網站" data-vv-as="公司網站" v-model="row.website" v-validate="'required'">
-                                                <span v-show="errors.has('website')" class="help-block">@{{ errors.first('website') }}</span>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">聯絡人</label>
-                                            <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('ceo') }" type="text" name="ceo" placeholder="聯絡人" data-vv-as="聯絡人" v-model="row.ceo" v-validate="'required'">
-                                                <span v-show="errors.has('ceo')" class="help-block">@{{ errors.first('ceo') }}</span>
+                                                <select class="form-control menu-dropdown" v-model="row.supplier_id">
+                                                    <option disabled="disabled" value="0" selected>請選擇供應廠商</option>
+                                                    <option v-for="supplier in suppliers" :value="supplier.id">@{{ supplier.name }}</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -381,7 +306,8 @@
                 _token: csrf_token,
                 all_roles:[],
                 roles:[],
-            }
+            },
+            suppliers:{}
         },
         methods: {
             close: function(e) {
@@ -428,9 +354,15 @@
                 _this.row = {};
                 _this.errors.clear();
 
-                Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
-                    _this.row = response.body;
+                Vue.http.get('/api/admin/supplier').then(function(response) {
+                    _this.suppliers = response.body;
+                    _this.suppliers = JSON.parse(JSON.stringify(_this.suppliers));
+
+                    Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
+                        _this.row = response.body;
+                    });
                 });
+                
             }
         }
     });
