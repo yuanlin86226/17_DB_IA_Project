@@ -47,6 +47,7 @@ class SupplierSeeder extends Seeder
             'address' => '首爾市麻浦區合井洞397-5號',
             'website' => 'http://www.ygfamily.com/'
         ]);
+
         Supplier::create([
             'name' => 'AroundUS Entertainment',
             'tax' => '52010320',
@@ -56,6 +57,17 @@ class SupplierSeeder extends Seeder
             'email' => 'office@aroundusent.com',
             'address' => '江南區狎鷗亭路79街37-1(清潭洞)',
             'website' => 'http://www.aroundusent.com/'
+        ]);
+
+        Supplier::create([
+            'name' => 'JYP Entertainment',
+            'tax' => '52010707',
+            'ceo' => '朴軫永',
+            'telephone' => '82-2-3438-2300',
+            'fax' => '82-2-3438-2301',
+            'email' => 'business@jype.com',
+            'address' => '首爾市江南區狎鷗亭路79街41號JYP中心',
+            'website' => 'http://www.jype.com'
         ]);
     }
 }
