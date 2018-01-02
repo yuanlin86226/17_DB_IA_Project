@@ -80,3 +80,10 @@ Route::middleware('api')->post('/admin/productType', 'Admin\ProductTypeControlle
 Route::middleware('api')->put('/admin/productType/{id}', 'Admin\ProductTypeController@update');
 Route::middleware('api')->delete('/admin/productType/{id}', 'Admin\ProductTypeController@destroy');
 Route::middleware('api')->delete('/admin/productType', 'Admin\ProductTypeController@destroyMany');
+
+Route::middleware('api')->get('/admin/productData', 'Admin\ProductDataController@findAll');
+Route::middleware('api')->get('/admin/productData/{id}', 'Admin\ProductDataController@findOne');
+Route::middleware('api')->post('/admin/productData', 'Admin\ProductDataController@save');
+Route::middleware('api')->put('/admin/productData/{id}', 'Admin\ProductDataController@update');
+Route::middleware('api')->delete('/admin/productData/{id}', 'Admin\ProductDataController@destroy');
+Route::middleware('api')->delete('/admin/productData', 'Admin\ProductDataController@destroyMany');

@@ -16,24 +16,24 @@ class OrderSeeder extends Seeder
     {
         DB::table('orders')->delete();
 
-        // Order::create([
-        //     'payment_method' => '',
-        //     'discount' => '',
-        //     'total' => '',
-        //     'remark' => '',
-        //     'customer_id' => ''
-        // ]);
+        Order::create([
+            'payment_method' => '0',
+            'discount' => '0',
+            'total' => '',
+            'remark' => '',
+            'customer_id' => ''
+        ]);
 
 
 
         // DB::table('order_details')->delete();
 
-        // Order::create([
-        //     'order_id' => '',
-        //     'product_id' => '',
-        //     'name' => '',
-        //     'price' => '',
-        //     'num' => ''
-        // ]);
+        OrderDetail::create([
+            'order_id' => '1',
+            'product_id' => '',
+            'name' => '',
+            'price' => '',
+            'num' => ''
+        ]);
     }
 }
