@@ -94,7 +94,7 @@ class ProductSeeder extends Seeder
 
         Product::create([
             'name' => '',
-            'photo' => '',
+            'photo' => '/image/products/BTS/',
             'price' => '',
             'total_amount' => '',
             'inventory' => '',
