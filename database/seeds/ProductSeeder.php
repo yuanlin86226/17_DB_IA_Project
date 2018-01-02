@@ -40,52 +40,52 @@ class ProductSeeder extends Seeder
         ]);
 
         Type::create([
-            'name' => '',
+            'name' => 'BLACKPINK',
             'folder' => 'BLACKPINK',
             'discription' => '',
-            'supplier_id' => ''
+            'supplier_id' => '3'
         ]);
 
         Type::create([
             'name' => '',
             'folder' => 'DAY6',
             'discription' => '',
-            'supplier_id' => ''
+            'supplier_id' => '4'
         ]);
 
         Type::create([
             'name' => '',
             'folder' => 'TWICE',
             'discription' => '',
-            'supplier_id' => ''
+            'supplier_id' => '5'
         ]);
 
         Type::create([
-            'name' => '',
+            'name' => 'BIGBANG',
             'folder' => 'BIGBANG',
-            'discription' => '',
-            'supplier_id' => ''
+            'discription' => 'YG娛樂於2006年推出的韓國男子音樂組合，由T.O.P、太陽、G-Dragon、大聲及勝利五名成員組成，G-Dragon擔任隊長一職，而他們的團體名稱「BIGBANG」為宇宙大爆炸之意(The Big Bang Theory)，意味著將對於韓國音樂界，甚至在全世界帶來爆炸性的影響，官方的歌迷名稱則是「V.I.P」，其意思為「Very Important People」，是根據第二張單曲《BIGBANG Is V.I.P》命名，有著粉絲是非常重要的人的含意。官方應援物為黃色皇冠造型手燈。',
+            'supplier_id' => '6'
         ]);
 
         Type::create([
-            'name' => '',
-            'folder' => 'Highlight',
-            'discription' => '',
-            'supplier_id' => ''
+            'name' => 'HIGHLIGHT',
+            'folder' => 'HIGHLIGHT',
+            'discription' => '韓國的五人男子團體，前身為BEAST。現任成員有尹斗俊、龍俊亨、梁耀燮、李起光、孫東雲。2017年3月20日以全新的名字「Highlight」展開活動，寓意為最明亮的部分、最顯眼的存在。同年6月2日，公開新粉絲名為Light。',
+            'supplier_id' => '7'
         ]);
 
         Type::create([
             'name' => '',
             'folder' => 'WannaOne',
             'discription' => '',
-            'supplier_id' => ''
+            'supplier_id' => '8'
         ]);
 
         Type::create([
-            'name' => '',
-            'folder' => 'GirlsGeneration',
+            'name' => 'GIRLSGENERATION',
+            'folder' => 'GIRLSGENERATION',
             'discription' => '',
-            'supplier_id' => ''
+            'supplier_id' => '9'
         ]);
 
 
@@ -96,6 +96,78 @@ class ProductSeeder extends Seeder
             'name' => '',
             'photo' => '/image/products/BTS/',
             'price' => '',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [M]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesM',
+            'price' => '418',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [A]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesA',
+            'price' => '418',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [D]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesD',
+            'price' => '418',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [E]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesE',
+            'price' => '418',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE THE FULL ALBUM',
+            'photo' => '/image/products/BIGBANG/MadeFullAlbum',
+            'price' => '988',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'CAN YOU FEEL IT?',
+            'photo' => '/image/products/HIGHLIGHT/CanYouFeelIt',
+            'price' => '468',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'CALLING YOU',
+            'photo' => '/image/products/HIGHLIGHT/CallingYou',
+            'price' => '498',
+            'total_amount' => '',
+            'inventory' => '',
+            'sales_amount' => '',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'CELEBRATE',
+            'photo' => '/image/products/HIGHLIGHT/Celebrate',
+            'price' => '498',
             'total_amount' => '',
             'inventory' => '',
             'sales_amount' => '',
