@@ -66,3 +66,10 @@ Route::middleware('api')->post('/admin/customer', 'Admin\CustomerController@save
 Route::middleware('api')->put('/admin/customer/{id}', 'Admin\CustomerController@update');
 Route::middleware('api')->delete('/admin/customer/{id}', 'Admin\CustomerController@destroy');
 Route::middleware('api')->delete('/admin/customer', 'Admin\CustomerController@destroyMany');
+
+Route::middleware('api')->get('/admin/supplier', 'Admin\SupplierController@findAll');
+Route::middleware('api')->get('/admin/supplier/{id}', 'Admin\SupplierController@findOne');
+Route::middleware('api')->post('/admin/supplier', 'Admin\SupplierController@save');
+Route::middleware('api')->put('/admin/supplier/{id}', 'Admin\SupplierController@update');
+Route::middleware('api')->delete('/admin/supplier/{id}', 'Admin\SupplierController@destroy');
+Route::middleware('api')->delete('/admin/supplier', 'Admin\SupplierController@destroyMany');

@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title','客戶資料')
+@section('title','廠商資料')
 
 @section('content')
 
-@php ($REST_API = '/api/admin/customer/')
+@php ($REST_API = '/api/admin/supplier/')
 
         <div class="content" id="panel-list">
             <div class="container-fluid">
@@ -28,13 +28,15 @@
                                 <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
                                     <thead>
                                         <th data-field="state" data-width="50" data-checkbox="true"></th>
-                                        <th data-field="name"  data-sortable="true">姓名</th>
-                                        <th data-field="sex" data-visible="false" data-sortable="true" data-formatter="sexFormatter">性別</th>
-                                        <th data-field="birthday" data-visible="false" data-sortable="true">生日</th>
+                                        <th data-field="name"  data-sortable="true">廠商名稱</th>
+                                        <th data-field="tax" data-visible="false" data-sortable="true">統一編號</th>
+                                        <th data-field="telephone" data-sortable="true">電話號碼</th>
+                                        <th data-field="fax" data-visible="false" data-sortable="true">傳真</th>
                                         <th data-field="email" data-sortable="true">Email</th>
-                                        <th data-field="cellphone" data-visible="true" data-sortable="true">手機號碼</th>
                                         <th data-field="address" data-visible="false" data-sortable="true">地址</th>
-                                        <th data-field="created_at" data-visible="true" data-sortable="true">建立時間</th>
+                                        <th data-field="website" data-visible="false" data-sortable="true">網站</th>
+                                        <th data-field="ceo" data-sortable="true">聯絡人</th>
+                                        <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
                                         <th data-field="updated_at" data-visible="false" data-sortable="true">更新時間</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
                                     </thead>
@@ -64,7 +66,7 @@
                                 <form class="form-horizontal">
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">姓名</label>
+                                            <label class="col-sm-2 control-label">廠商名稱</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.name}}</p>
                                             </div>
@@ -73,19 +75,27 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">性別</label>
+                                            <label class="col-sm-2 control-label">統一編號</label>
                                             <div class="col-sm-10">
-                                                <p v-if="row.sex==0" class="form-control-static">女</p>
-                                                <p v-if="row.sex==1" class="form-control-static">男</p>
+                                                <p class="form-control-static">@{{row.tax}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">生日</label>
+                                            <label class="col-sm-2 control-label">電話號碼</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.birthday}}</p>
+                                                <p class="form-control-static">@{{row.telephone}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">傳真</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.fax}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -101,21 +111,48 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">手機號碼</label>
+                                            <label class="col-sm-2 control-label">地址</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.cellphone}}</p>
+                                                <p class="form-control-static">@{{row.address}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">地址</label>
+                                            <label class="col-sm-2 control-label">網站</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.address}}</p>
+                                                <p class="form-control-static">@{{row.website}}</p>
                                             </div>
                                         </div>
-                                    </fieldset> 
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">聯絡人</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.ceo}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">建立時間</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.created_at}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">更新時間</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.updated_at}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
 
                                     <fieldset>
                                         <div class="form-group" style="margin-top: 20px;">
@@ -141,8 +178,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <legend v-if="type==='update'">修改 客戶</legend>
-                                <legend v-if="type==='create'">新增 客戶</legend>
+                                <legend v-if="type==='update'">修改 廠商</legend>
+                                <legend v-if="type==='create'">新增 廠商</legend>
                             </div>
                             <div class="content">
                                 
@@ -151,28 +188,37 @@
                                 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">姓名</label>
+                                            <label class="col-sm-2 control-label">廠商名稱</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="姓名" data-vv-as="姓名" v-model="row.name" v-validate="'required'">
+                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="公司名稱" data-vv-as="公司名稱" v-model="row.name" v-validate="'required'" required>
                                                 <span v-show="errors.has('name')" class="help-block">@{{ errors.first('name') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">性別</label>
+                                            <label class="col-sm-2 control-label">統一編號</label>
                                             <div class="col-sm-10">
-                                                <input v-model="row.sex" name="sex" class="radio-button" type="radio" value="1"> 男
-                                                <input v-model="row.sex" name="sex" class="radio-button" type="radio" value="0"> 女
+                                                <input :class="{'form-control': true, 'error': errors.has('tax') }" type="text" name="tax" placeholder="統一編號" data-vv-as="統一編號" v-model="row.tax" v-validate="'required|numeric|digits:8'" required>
+                                                <span v-show="errors.has('tax')" class="help-block">@{{ errors.first('tax') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">生日</label>
+                                            <label class="col-sm-2 control-label">電話號碼</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('birthday') }" type="date" name="birthday" placeholder="生日" data-vv-as="生日" v-model="row.birthday" v-validate="'required'">
-                                                <span v-show="errors.has('birthday')" class="help-block">@{{ errors.first('birthday') }}</span>
+                                                <input :class="{'form-control': true, 'error': errors.has('telephone') }" type="text" name="telephone" placeholder="電話號碼" data-vv-as="電話號碼" v-model="row.telephone" v-validate="'required|numeric'">
+                                                <span v-show="errors.has('telephone')" class="help-block">@{{ errors.first('telephone') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">傳真</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('fax') }" type="text" name="fax" placeholder="傳真號碼" data-vv-as="傳真號碼" v-model="row.fax" v-validate="'required|numeric'">
+                                                <span v-show="errors.has('fax')" class="help-block">@{{ errors.first('fax') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -180,17 +226,8 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('email') }" type="text" name="email" placeholder="Email" data-vv-as="Email" v-model="row.email" v-validate="'required|email'">
+                                                <input :class="{'form-control': true, 'error': errors.has('email') }" type="text" name="email" placeholder="公司信箱" data-vv-as="公司信箱" v-model="row.email" v-validate="'required|email'" required>
                                                 <span v-show="errors.has('email')" class="help-block">@{{ errors.first('email') }}</span>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">手機號碼</label>
-                                            <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('cellphone') }" type="text" name="cellphone" placeholder="手機號碼" data-vv-as="手機號碼" v-model="row.cellphone" v-validate="'regex:^[0-9\.\-]+$|required'">
-                                                <span v-show="errors.has('cellphone')" class="help-block">@{{ errors.first('cellphone') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -198,20 +235,35 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">地址</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('address') }" type="text" name="address" placeholder="地址" data-vv-as="地址" v-model="row.address" v-validate="'required'">
+                                                <input :class="{'form-control': true, 'error': errors.has('address') }" type="text" name="address" placeholder="公司地址" data-vv-as="公司地址" v-model="row.address" v-validate="'required'">
                                                 <span v-show="errors.has('address')" class="help-block">@{{ errors.first('address') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
-                                    
-
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">網站</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('website') }" type="text" name="website" placeholder="公司網站" data-vv-as="公司網站" v-model="row.website" v-validate="'required'">
+                                                <span v-show="errors.has('website')" class="help-block">@{{ errors.first('website') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">聯絡人</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('ceo') }" type="text" name="ceo" placeholder="聯絡人" data-vv-as="聯絡人" v-model="row.ceo" v-validate="'required'">
+                                                <span v-show="errors.has('ceo')" class="help-block">@{{ errors.first('ceo') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                     <fieldset>
                                         <div class="form-group">
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="save" v-if="type==='update'">更新</button>
-                                                <button type="submit" class="btn btn-fill btn-info" v-on:click="save" v-if="type==='create'">儲存</button>
-                                                <button type="submit" class="btn btn-default" v-on:click="cancel">取消</button>
+                                                <button v-if="roles.edit" type="submit" class="btn btn-fill btn-info" v-on:click="save">更新</button>
+                                                <button v-if="roles.edit" type="submit" class="btn btn-default" v-on:click="cancel">取消</button>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -240,11 +292,6 @@
     var menu_id = '{{ $menu_id }}';
 
     var roles = {};
-
-    function sexFormatter (value, row, index) {
-        if( value == 0 ){ return "女"; }
-        if( value == 1 ) {return "男"; }
-    }
 
     var panelList = new Vue({
         el: '#panel-list',
