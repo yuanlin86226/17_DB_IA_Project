@@ -51,7 +51,7 @@ class SupplierSeeder extends Seeder
         Supplier::create([
             'name' => 'YMC Entertainment',
             'tax' => '52010101',
-            'ceo' => '朴軫永',
+            'ceo' => '太珍兒',
             'telephone' => '82-2-512-2299',
             'fax' => '82-2-512-2230',
             'email' => 'ymcent@hanmail.net',
