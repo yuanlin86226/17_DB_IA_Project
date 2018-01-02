@@ -47,5 +47,16 @@ class SupplierSeeder extends Seeder
             'address' => '首爾市江南區狎鷗亭路79街41號JYP中心',
             'website' => 'http://www.jype.com'
         ]);
+
+        Supplier::create([
+            'name' => 'YMC Entertainment',
+            'tax' => '52010101',
+            'ceo' => '朴軫永',
+            'telephone' => '82-2-512-2299',
+            'fax' => '82-2-512-2230',
+            'email' => 'ymcent@hanmail.net',
+            'address' => '首爾特別市龍山區梨泰院洞36-35號4層',
+            'website' => 'http://www.jype.com'
+        ]);
     }
 }

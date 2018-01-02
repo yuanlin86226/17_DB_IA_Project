@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
             'discription' => '是韓國JYP娛樂於2015年推出的六人男子樂團，原由Jae、晟鎮、晙赫、Young K、元弼及度雲6位成員組成，由晟鎮擔任隊長。2016年時成員晙赫退出DAY6並與JYP娛樂終止合約，自此DAY6成為五人樂團。
             成員們不僅參與專輯所有詞曲創作，全團同時擔任演奏與vocal的型態，是韓語流行樂壇少見的風格。
             團名由朴軫永命名，DAY6六位成員共代表一周裡的6天，第7天則是代表歌迷，由大家組成了一周，並周而復始的不斷循環下去。官方粉絲名為「My Day」，寓意為DAY6與歌迷成為填滿彼此每一天的珍貴存在。',
-            'supplier_id' => '3'
+            'supplier_id' => ''
         ]);
 
         Type::create([
@@ -63,7 +63,7 @@ class ProductSeeder extends Seeder
             'discription' => '韓國JYP娛樂旗下的九人女子組合，成員透過Mnet生存實境節目《SIXTEEN》篩選而出。最終由五名韓國成員娜璉、定延、志效、多賢、彩瑛，三名日本成員Momo、Sana、Mina，以及一名臺灣成員子瑜所組成，並由志效擔任隊長。
             官方粉絲名為「ONCE」，應援色為杏桃黃與霓洋紅，應援物為白底配應援色的棒棒糖幻彩手燈（Candy Bong）。
             團名「TWICE」由公司創辦者朴軫永取名，寓意為「透過舞台令耳朵得到感動之後，再為眼睛帶來多一次感動。」。TWICE除了會繼承JYP娛樂旗下女子組合的風格，還會增加嘻哈元素及野性奔放的感覺。',
-            'supplier_id' => '4'
+            'supplier_id' => ''
         ]);
 
         Type::create([
@@ -86,7 +86,7 @@ class ProductSeeder extends Seeder
             'discription' => '依據Mnet節目《PRODUCE 101 第二季》的出道承諾，於2017年成立的韓國男子演唱團體，該節目是由BoA擔任國民製作人代表，韓國國民擔任製作人，以投票方式決定成員；
             成員包括尹智聖、河成雲、黃旼炫、邕聖祐、金在奐、姜丹尼爾、朴志訓、朴佑鎭、裴珍映、李大輝、賴冠霖。2017年以YMC娛樂旗下藝人身份正式出道，進行為期一年半的限定活動。
             團名包含國民製作人與11位成員成為一體的意義，其取自「Produce 101」的「101」英文「One O One」之諧音。官方粉絲名「Wannable」（韓語：워너블 Wo Neo Beul）是由Wanna One親自選出，意思是「讓我們一起將所有希望的都成真吧」。',
-            'supplier_id' => '7'
+            'supplier_id' => ''
         ]);
 
         Type::create([
