@@ -38,14 +38,14 @@ class SupplierSeeder extends Seeder
         ]);
 
         Supplier::create([
-            'name' => '',
-            'tax' => '',
-            'ceo' => '',
-            'telephone' => '',
-            'fax' => '',
-            'email' => '',
-            'address' => '',
-            'website' => ''
+            'name' => 'JYP Entertainment',
+            'tax' => '52010707',
+            'ceo' => '朴軫永',
+            'telephone' => '82-2-3438-2300',
+            'fax' => '82-2-3438-2301',
+            'email' => 'business@jype.com',
+            'address' => '首爾市江南區狎鷗亭路79街41號JYP中心',
+            'website' => 'http://www.jype.com'
         ]);
     }
 }
