@@ -39,54 +39,54 @@ class ProductSeeder extends Seeder
         //     'supplier_id' => '2'
         // ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'BLACKPINK',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => 'BLACKPINK',
+            'folder' => 'BLACKPINK',
+            'discription' => '',
+            'supplier_id' => ''
+        ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'DAY6',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => '',
+            'folder' => 'DAY6',
+            'discription' => '',
+            'supplier_id' => ''
+        ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'TWICE',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => '',
+            'folder' => 'TWICE',
+            'discription' => '',
+            'supplier_id' => ''
+        ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'BIGBANG',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => 'BIGBANG',
+            'folder' => 'BIGBANG',
+            'discription' => 'YG娛樂於2006年推出的韓國男子音樂組合，由T.O.P、太陽、G-Dragon、大聲及勝利五名成員組成，G-Dragon擔任隊長一職，而他們的團體名稱「BIGBANG」為宇宙大爆炸之意(The Big Bang Theory)，意味著將對於韓國音樂界，甚至在全世界帶來爆炸性的影響，官方的歌迷名稱則是「V.I.P」，其意思為「Very Important People」，是根據第二張單曲《BIGBANG Is V.I.P》命名，有著粉絲是非常重要的人的含意。官方應援物為黃色皇冠造型手燈。',
+            'supplier_id' => ''
+        ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'Highlight',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => 'HIGHLIGHT',
+            'folder' => 'HIGHLIGHT',
+            'discription' => '韓國的五人男子團體，前身為BEAST。現任成員有尹斗俊、龍俊亨、梁耀燮、李起光、孫東雲。2017年3月20日以全新的名字「Highlight」展開活動，寓意為最明亮的部分、最顯眼的存在。同年6月2日，公開新粉絲名為Light。',
+            'supplier_id' => ''
+        ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'WannaOne',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => '',
+            'folder' => 'WannaOne',
+            'discription' => '',
+            'supplier_id' => ''
+        ]);
 
-        // Type::create([
-        //     'name' => '',
-        //     'folder' => 'GirlsGeneration',
-        //     'discription' => '',
-        //     'supplier_id' => ''
-        // ]);
+        Type::create([
+            'name' => 'GIRLSGENERATION',
+            'folder' => 'GIRLSGENERATION',
+            'discription' => '',
+            'supplier_id' => ''
+        ]);
 
 
 
@@ -101,5 +101,77 @@ class ProductSeeder extends Seeder
         //     'sales_amount' => '',
         //     'type_id' => ''
         // ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [M]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesM.jpg',
+            'price' => '418',
+            'total_amount' => '10',
+            'inventory' => '2',
+            'sales_amount' => '8',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [A]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesA.jpg',
+            'price' => '418',
+            'total_amount' => '10',
+            'inventory' => '6',
+            'sales_amount' => '4',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [D]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesD.jpg',
+            'price' => '418',
+            'total_amount' => '10',
+            'inventory' => '8',
+            'sales_amount' => '2',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE SERIES [E]',
+            'photo' => '/image/products/BIGBANG/MadeSeriesE.jpg',
+            'price' => '418',
+            'total_amount' => '10',
+            'inventory' => '5',
+            'sales_amount' => '5',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'BIGBANG MADE THE FULL ALBUM',
+            'photo' => '/image/products/BIGBANG/MadeFullAlbum.jpg',
+            'price' => '988',
+            'total_amount' => '10',
+            'inventory' => '8',
+            'sales_amount' => '2',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'CAN YOU FEEL IT?',
+            'photo' => '/image/products/HIGHLIGHT/CanYouFeelIt.jpg',
+            'price' => '468',
+            'total_amount' => '10',
+            'inventory' => '7',
+            'sales_amount' => '3',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'CALLING YOU',
+            'photo' => '/image/products/HIGHLIGHT/CallingYou.jpg',
+            'price' => '498',
+            'total_amount' => '10',
+            'inventory' => '6',
+            'sales_amount' => '4',
+            'type_id' => ''
+        ]);
+        Product::create([
+            'name' => 'CELEBRATE',
+            'photo' => '/image/products/HIGHLIGHT/Celebrate.jpg',
+            'price' => '498',
+            'total_amount' => '10',
+            'inventory' => '5',
+            'sales_amount' => '5',
+            'type_id' => ''
+        ]);
     }
 }

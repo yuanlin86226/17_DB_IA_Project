@@ -164,8 +164,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <legend v-if="type==='update'">修改 類別</legend>
-                                <legend v-if="type==='create'">新增 類別</legend>
+                                <legend v-if="type==='update'">修改 商品</legend>
+                                <legend v-if="type==='create'">新增 商品</legend>
                             </div>
                             <div class="content">
                                 

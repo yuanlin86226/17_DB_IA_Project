@@ -27,7 +27,7 @@ class SupplierSeeder extends Seeder
         DB::table('suppliers')->delete();
 
         Supplier::create([
-            'name' => 'BigHit',
+            'name' => 'BigHit Entertainment',
             'tax' => '52010202',
             'ceo' => '方時赫',
             'telephone' => '027417732',
@@ -37,15 +37,25 @@ class SupplierSeeder extends Seeder
             'website' => 'http://bts.ibighit.com/'
         ]);
 
-        // Supplier::create([
-        //     'name' => '',
-        //     'tax' => '',
-        //     'ceo' => '',
-        //     'telephone' => '',
-        //     'fax' => '',
-        //     'email' => '',
-        //     'address' => '',
-        //     'website' => ''
-        // ]);
+        Supplier::create([
+            'name' => 'YG Entertainment',
+            'tax' => '52010819',
+            'ceo' => '楊賢碩',
+            'telephone' => '0231421104',
+            'fax' => '0231421103',
+            'email' => 'office@ygfamily.com',
+            'address' => '首爾市麻浦區合井洞397-5號',
+            'website' => 'http://www.ygfamily.com/'
+        ]);
+        Supplier::create([
+            'name' => 'AroundUS Entertainment',
+            'tax' => '52010320',
+            'ceo' => '尹龍梁李孫',
+            'telephone' => '02-546-2964',
+            'fax' => '02-546-3964',
+            'email' => 'office@aroundusent.com',
+            'address' => '江南區狎鷗亭路79街37-1(清潭洞)',
+            'website' => 'http://www.aroundusent.com/'
+        ]);
     }
 }
