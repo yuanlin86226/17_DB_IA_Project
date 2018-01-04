@@ -8,6 +8,8 @@ use Illuminate\Http\Request as data_request;
 use App\User;
 
 use App\Customer;
+use App\Order;
+use App\OrderDetail;
 
 use Exception;
 use Validator;
@@ -49,6 +51,7 @@ class CustomerController extends Controller
     public function findOne($id)
     {
         $customer = Customer::find($id);
+
         return response()->json($customer);
     }
 
@@ -145,7 +148,11 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         try {
-
+            $orders = Order::where('customer_id',$id)->get();
+            foreach ($orders as $order) {
+                OrderDetail::where('order_id',$order['id'])->delete();
+            }
+            Order::where('customer_id',$id)->delete();
             Customer::destroy($id);
 
             $data["result"] = true;
@@ -164,6 +171,11 @@ class CustomerController extends Controller
             $ids = $request->json()->all();
 
             foreach ($ids as $id) {
+                $orders = Order::where('customer_id',$id)->get();
+                foreach ($orders as $order) {
+                    OrderDetail::where('order_id',$order['id'])->delete();
+                }
+                Order::where('customer_id',$id)->delete();
                 Customer::destroy($id);
             }
 
@@ -174,5 +186,15 @@ class CustomerController extends Controller
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function getOrders($id)
+    {
+        $data = array();
+
+        $orders = Order::with('details')->where('customer_id',$id)->get();
+
+
+        return response()->json($orders);
     }
 }

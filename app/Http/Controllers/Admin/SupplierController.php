@@ -9,6 +9,9 @@ use App\User;
 
 use App\Supplier;
 use App\Type;
+use App\Product;
+use App\Order;
+use App\OrderDetail;
 
 use Exception;
 use Validator;
@@ -152,7 +155,10 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         try {
-            Type::where('supplier_id',$id)->delete();
+            DB::select(
+                DB::raw("update types set supplier_id = null where supplier_id = '".$id."'")
+            );
+
             Supplier::destroy($id);
 
             $data["result"] = true;
@@ -171,7 +177,10 @@ class SupplierController extends Controller
             $ids = $request->json()->all();
 
             foreach ($ids as $id) {
-                Type::where('supplier_id',$id)->delete();
+                DB::select(
+                    DB::raw("update types set supplier_id = null where supplier_id = '".$id."'")
+                );
+
                 Supplier::destroy($id);
             }
 

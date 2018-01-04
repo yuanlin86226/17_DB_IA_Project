@@ -20,7 +20,7 @@ class CreateOrderDetailTable extends Migration
             $table->foreign('order_id')
                 ->references('id')->on('orders');
             
-            $table->integer('product_id')->unsigned();
+            $table->integer('product_id')->unsigned()->nullable();
             $table->foreign('product_id')
                 ->references('id')->on('products');
 

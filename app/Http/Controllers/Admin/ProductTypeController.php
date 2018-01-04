@@ -9,6 +9,8 @@ use App\User;
 
 use App\Type;
 use App\Supplier;
+use App\Product;
+use App\OrderDetail;
 
 use Exception;
 use Validator;
@@ -142,7 +144,17 @@ class ProductTypeController extends Controller
     public function destroy($id)
     {
         try {
+            
+            $products = Product::where('type_id',$id)->get();
 
+            foreach ($products as $product) {
+                DB::select(
+                    DB::raw("update order_details set product_id = null where product_id = '".$product['id']."'")
+                );
+            }
+            
+
+            Product::where('type_id',$id)->delete();
             Type::destroy($id);
 
             $data["result"] = true;
@@ -161,6 +173,14 @@ class ProductTypeController extends Controller
             $ids = $request->json()->all();
 
             foreach ($ids as $id) {
+                $products = Product::where('type_id',$id)->get();
+
+                foreach ($products as $product) {
+                    DB::select(
+                        DB::raw("update order_details set product_id = null where product_id = '".$product['id']."'")
+                    );
+                }
+                Product::where('type_id',$id)->delete();
                 Type::destroy($id);
             }
 

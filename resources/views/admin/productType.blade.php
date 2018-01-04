@@ -303,9 +303,7 @@
         data: {
             type: 'create',
             row: {
-                _token: csrf_token,
-                all_roles:[],
-                roles:[],
+                _token: csrf_token
             },
             suppliers:{}
         },
@@ -320,28 +318,37 @@
                 if (e) e.preventDefault();
 
                 _this = this;
-                
-                this.$validator.validateAll().then(function() {
 
-                    var cb_success = function(response) {
-                        notifyAfterHttpSuccess(response.body);
-                        if (response.body.result) {
-                            _this.close();
+                if (_this.row.supplier_id == 0) {
+                    swal({
+                        text:"請選擇主要供應廠商",
+                        type:"info"
+                    });
+                } else {
+                    this.$validator.validateAll().then(function() {
+
+                        var cb_success = function(response) {
+                            notifyAfterHttpSuccess(response.body);
+                            if (response.body.result) {
+                                _this.close();
+                            }
+                        };
+
+                        if (_this.type == 'update') {
+                            Vue.http.put(__REST_API_URL__ + _this.row.id, _this.row).then(cb_success, notifyAfterHttpError);
                         }
-                    };
+                        else {
+                            Vue.http.options.emulateJSON = true;
+                            Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
+                            Vue.http.options.emulateJSON = false;                      
+                        }
 
-                    if (_this.type == 'update') {
-                        Vue.http.put(__REST_API_URL__ + _this.row.id, _this.row).then(cb_success, notifyAfterHttpError);
-                    }
-                    else {
-                        Vue.http.options.emulateJSON = true;
-                        Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
-                        Vue.http.options.emulateJSON = false;                      
-                    }
-
-                }).catch(function() {
-                    $('.form-control.error').first().focus();
-                });
+                    }).catch(function() {
+                        $('.form-control.error').first().focus();
+                    });
+                }
+                
+                
             },
             cancel: function(e) {
                 if (e) e.preventDefault();
@@ -360,6 +367,10 @@
 
                     Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
                         _this.row = response.body;
+
+                        if (!id) {
+                            _this.row['supplier_id'] = 0;
+                        }
                     });
                 });
                 

@@ -31,8 +31,4 @@ Route::get('/admin/employee','Admin\EmployeeController@index');
 Route::get('/admin/customer','Admin\CustomerController@index');
 Route::get('/admin/supplier','Admin\SupplierController@index');
 Route::get('/admin/productType','Admin\ProductTypeController@index');
-
-
-Route::get('/admin/productData', function () {
-    return view('/admin/code');
-});
+Route::get('/admin/productData','Admin\ProductDataController@index');

@@ -16,7 +16,6 @@ class OrderDetail extends Model
         return array_merge(
         [
             'order_id' => 'required',
-            'product_id' => 'required',
             'name' => 'required',
             'price' => 'required',
             'num' => 'required'

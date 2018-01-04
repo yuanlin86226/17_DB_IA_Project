@@ -118,6 +118,25 @@
                                     </fieldset> 
 
                                     <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">消費記錄</label>
+                                            <div class="col-sm-9" style="border: 1px #cccccc solid; margin-left: 6px;">
+                                                <table id="bootstrap-table2" class="table" data-toggle="table">
+                                                    <thead>
+                                                        <th data-field="created_at" data-sortable="true" data-formatter="dateFormatter">日期</th>
+                                                        <th data-field="discount" data-sortable="true" data-formatter="discountFormatter">折扣</th>
+                                                        <th data-field="total" data-sortable="true">總額</th>
+                                                        <th data-field="remark" data-sortable="true">備註</th>
+                                                        <th data-field="payment_method" data-sortable="true" data-formatter="paymentFormatter">結帳方式</th>
+                                                    </thead>
+                                                    <tbody id="table-body"></tbody>
+                                                </table>
+                                            </div>
+                                            <!-- <div class="col-sm-1"></div> -->
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
                                         <div class="form-group" style="margin-top: 20px;">
                                             <div class="col-sm-2">
                                                 <button type="submit" class="btn btn-fill btn-info" v-on:click="done">返回</button>
@@ -246,6 +265,21 @@
         if( value == 1 ) {return "男"; }
     }
 
+    function discountFormatter (value, row, index) {
+        if( value == 0 ){ return "9折"; }
+        if( value == 1 ) {return "8折"; }
+        if( value == 2 ){ return "7折"; }
+    }
+
+    function dateFormatter (value, row, index) {
+        return moment(value).format('YYYY-MM-DD');
+    }
+
+    function paymentFormatter (value, row, index) {
+        if( value == 0 ){ return "現金"; }
+        if( value == 1 ) {return "信用卡"; }
+    }
+
     var panelList = new Vue({
         el: '#panel-list',
         data: {
@@ -321,6 +355,12 @@
                 var _this = this;
                 Vue.http.get(__REST_API_URL__ + id).then(function(response) {
                     _this.row = response.body;
+
+                    Vue.nextTick(function () {
+                        $table2.bootstrapTable('refresh', {
+                            url: __REST_API_URL__ + id + '/orders'
+                        });
+                    });
                 });
             }
         }
@@ -482,6 +522,45 @@
     var $table = $('#bootstrap-table');
     
     initDataTable($table);
+
+
+    var initDataTable2 = function($table) {
+        $table.bootstrapTable({
+            striped: true,
+            sortOrder: 'desc',
+            sortName: 'updatedAt',
+            clickToSelect: false,
+            showRefresh: false,
+            search: false,
+            showToggle: false,
+            showColumns: false,
+            pagination: true,
+            searchAlign: 'right',
+            pageSize: 10,
+            clickToSelect: false,
+            pageList: [10, 20, 40, 60, 80, 100],
+            formatShowingRows: function(pageFrom, pageTo, totalRows){
+                return "共 " + totalRows + " 筆 ";
+            },
+            formatRecordsPerPage: function(pageNumber){
+                return "每頁顯示 " + pageNumber + " 筆資料";
+            },
+            icons: {
+                refresh: 'fa fa-refresh',
+                toggle: 'fa fa-th-list',
+                columns: 'fa fa-columns',
+                detailOpen: 'fa fa-plus-circle',
+                detailClose: 'fa fa-minus-circle'
+            }
+        });
+        $(window).resize(function () {
+            $table.bootstrapTable('resetView');
+        });
+    };
+
+    var $table2 = $('#bootstrap-table2');
+    
+    initDataTable2($table2);
 
     function operateFormatter(value, row, index) {
         

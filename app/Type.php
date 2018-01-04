@@ -22,4 +22,9 @@ class Type extends Model
         ], 
         $merge);
     }
+
+    public function product()
+    {
+        return $this->hasMany('App\Product', 'id', 'type_id');
+    }
 }

@@ -19,7 +19,7 @@ class CreateTypeTable extends Migration
             $table->string('folder');
             $table->text('discription');
             
-            $table->integer('supplier_id')->unsigned();
+            $table->integer('supplier_id')->unsigned()->nullable();
             $table->foreign('supplier_id')
                 ->references('id')->on('suppliers');
 

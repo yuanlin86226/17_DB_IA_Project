@@ -21,4 +21,9 @@ class Order extends Model
         ], 
         $merge);
     }
+
+    public function details() 
+    {
+        return $this->hasMany('App\OrderDetail', 'id' ,'order_id');
+    }
 }

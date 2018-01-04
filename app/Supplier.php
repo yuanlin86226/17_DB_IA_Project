@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     protected $fillable = [
-        'name','tax','ceo','telephone','fax','email','address','website'
+        'name','tax','ceo','telephone','fax','email','address','website','supplier_id'
     ];
 
     public $timestamps = true;
@@ -21,7 +21,8 @@ class Supplier extends Model
             'fax' => 'required',
             'telephone' => 'required',
             'address' => 'required',
-            'ceo' => 'required'
+            'ceo' => 'required',
+            'supplier_id' => 'required'
         ], 
         $merge);
     }

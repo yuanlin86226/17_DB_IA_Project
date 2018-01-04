@@ -66,6 +66,7 @@ Route::middleware('api')->post('/admin/customer', 'Admin\CustomerController@save
 Route::middleware('api')->put('/admin/customer/{id}', 'Admin\CustomerController@update');
 Route::middleware('api')->delete('/admin/customer/{id}', 'Admin\CustomerController@destroy');
 Route::middleware('api')->delete('/admin/customer', 'Admin\CustomerController@destroyMany');
+Route::middleware('api')->get('/admin/customer/{id}/orders', 'Admin\CustomerController@getOrders');
 
 Route::middleware('api')->get('/admin/supplier', 'Admin\SupplierController@findAll');
 Route::middleware('api')->get('/admin/supplier/{id}', 'Admin\SupplierController@findOne');
@@ -87,3 +88,4 @@ Route::middleware('api')->post('/admin/productData', 'Admin\ProductDataControlle
 Route::middleware('api')->put('/admin/productData/{id}', 'Admin\ProductDataController@update');
 Route::middleware('api')->delete('/admin/productData/{id}', 'Admin\ProductDataController@destroy');
 Route::middleware('api')->delete('/admin/productData', 'Admin\ProductDataController@destroyMany');
+Route::middleware('api')->post('/admin/productData/upload', 'FileController@upload');

@@ -28,10 +28,11 @@
                                 <table id="bootstrap-table" class="table" data-toggle="table" data-url="{{$REST_API}}" data-click-to-select="ture">
                                     <thead>
                                         <th data-field="state" data-width="50" data-checkbox="true"></th>
+                                        <th data-field="type_name"  data-sortable="true">類別</th>
                                         <th data-field="name"  data-sortable="true">名稱</th>
                                         <th data-field="price" data-sortable="true">定價</th>
                                         <th data-field="inventory" data-sortable="true">庫存量</th>
-                                        <th data-field="created_at" data-sortable="true">建立時間</th>
+                                        <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
                                         <th data-field="updated_at" data-visible="false" data-sortable="true">更新時間</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
                                     </thead>
@@ -63,7 +64,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">商品類別</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.type}}</p>
+                                                <p class="form-control-static">@{{row.type_name}}</p>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -97,7 +98,7 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">訂貨量</label>
+                                            <label class="col-sm-2 control-label">總訂貨量</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.total_amount}}</p>
                                             </div>
@@ -106,7 +107,7 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">成交量</label>
+                                            <label class="col-sm-2 control-label">總成交量</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.sales_amount}}</p>
                                             </div>
@@ -117,7 +118,10 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">圖片</label>
                                             <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.photo}}</p>
+                                                <p class="form-control-static">
+                                                    @{{row.photo}}<br/>
+                                                    <img v-if="row.photo" :src="row.photo" class="img-responsive img-thumbnail" style="height:300px" />
+                                                </p>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -174,42 +178,80 @@
                                 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">類別名稱</label>
+                                            <label class="col-sm-2 control-label">商品類別</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="類別名稱" data-vv-as="類別名稱" v-model="row.name" v-validate="'required'" required>
+                                                <select class="form-control menu-dropdown" v-model="row.type_id">
+                                                    <option disabled="disabled" value="0" selected>請選擇商品類別</option>
+                                                    <option v-for="type in types" :value="type.id">@{{ type.name }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品名稱</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('name') }" type="text" name="name" placeholder="商品名稱" data-vv-as="商品名稱" v-model="row.name" v-validate="'required'" required>
                                                 <span v-show="errors.has('name')" class="help-block">@{{ errors.first('name') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">簡介</label>
+                                            <label class="col-sm-2 control-label">定價</label>
                                             <div class="col-sm-10">
-                                                <textarea rows="10" :class="{'form-control': true, 'error': errors.has('discription') }"  name="discription" placeholder="簡介" data-vv-as="簡介" v-model="row.discription" v-validate="'required'" required></textarea>
-                                                <span v-show="errors.has('discription')" class="help-block">@{{ errors.first('discription') }}</span>
+                                                <input :class="{'form-control': true, 'error': errors.has('price') }" type="text" name="price" placeholder="定價" data-vv-as="定價" v-model="row.price" v-validate="'required|numeric'" required>
+                                                <span v-show="errors.has('price')" class="help-block">@{{ errors.first('price') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">資料夾</label>
+                                            <label class="col-sm-2 control-label">庫存量</label>
                                             <div class="col-sm-10">
-                                                <input :class="{'form-control': true, 'error': errors.has('folder') }" type="text" name="folder" placeholder="資料夾" data-vv-as="資料夾" v-model="row.folder" v-validate="'required|min:2|alpha_dash'" required>
-                                                <span v-show="errors.has('folder')" class="help-block">@{{ errors.first('folder') }}</span>
+                                                <input :class="{'form-control': true, 'error': errors.has('inventory') }" type="text" name="inventory" placeholder="庫存量" data-vv-as="庫存量" v-model="row.inventory" v-validate="'required|numeric'" required>                                                
+                                                <span v-show="errors.has('inventory')" class="help-block">@{{ errors.first('inventory') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">主要供應廠商</label>
+                                            <label class="col-sm-2 control-label">訂貨量</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control menu-dropdown" v-model="row.supplier_id">
-                                                    <option disabled="disabled" value="0" selected>請選擇供應廠商</option>
-                                                    <option v-for="supplier in suppliers" :value="supplier.id">@{{ supplier.name }}</option>
-                                                </select>
+                                                <input :class="{'form-control': true, 'error': errors.has('total_amount') }" type="text" name="total_amount" placeholder="訂貨量" data-vv-as="訂貨量" v-model="row.total_amount" v-validate="'required|numeric'" required>
+                                                <span v-show="errors.has('total_amount')" class="help-block">@{{ errors.first('total_amount') }}</span>
                                             </div>
                                         </div>
                                     </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">成交量</label>
+                                            <div class="col-sm-10">
+                                                <input :class="{'form-control': true, 'error': errors.has('sales_amount') }" type="text" name="sales_amount" placeholder="成交量" data-vv-as="成交量" v-model="row.sales_amount" v-validate="'required|numeric'" required>                                                                                                
+                                                <span v-show="errors.has('sales_amount')" class="help-block">@{{ errors.first('sales_amount') }}</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">圖片</label>
+                                            <div class="col-sm-10">
+                                                <span class="btn btn-default fileinput-button">
+                                                    <span>
+                                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                                        標準
+                                                    </span>
+                                                    <input class="fileupload" type="file" id="photo" name="photo" accept="image/*"> 
+                                                </span>
+                                                <br/>
+                                                <span>@{{ row.photo }}</span>
+                                                <br/>
+                                                <br/>
+                                                <img v-if="row.photo" :src="row.photo" class="img-responsive img-thumbnail" style="height:300px" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    
                                     <fieldset>
                                         <div class="form-group">
                                             <label class="col-sm-2"></label>
@@ -330,11 +372,9 @@
         data: {
             type: 'create',
             row: {
-                _token: csrf_token,
-                all_roles:[],
-                roles:[],
+                _token: csrf_token
             },
-            suppliers:{}
+            types:{}
         },
         methods: {
             close: function(e) {
@@ -347,28 +387,37 @@
                 if (e) e.preventDefault();
 
                 _this = this;
-                
-                this.$validator.validateAll().then(function() {
 
-                    var cb_success = function(response) {
-                        notifyAfterHttpSuccess(response.body);
-                        if (response.body.result) {
-                            _this.close();
+                if (_this.row.type_id == 0) {
+                    swal({
+                        text:"請選擇商品分類",
+                        type:"info"
+                    });
+                } else {
+                    this.$validator.validateAll().then(function() {
+
+                        var cb_success = function(response) {
+                            notifyAfterHttpSuccess(response.body);
+                            if (response.body.result) {
+                                _this.close();
+                            }
+                        };
+
+                        if (_this.type == 'update') {
+                            Vue.http.put(__REST_API_URL__ + _this.row.id, _this.row).then(cb_success, notifyAfterHttpError);
                         }
-                    };
+                        else {
+                            Vue.http.options.emulateJSON = true;
+                            Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
+                            Vue.http.options.emulateJSON = false;                      
+                        }
 
-                    if (_this.type == 'update') {
-                        Vue.http.put(__REST_API_URL__ + _this.row.id, _this.row).then(cb_success, notifyAfterHttpError);
-                    }
-                    else {
-                        Vue.http.options.emulateJSON = true;
-                        Vue.http.post(__REST_API_URL__, _this.row).then(cb_success, notifyAfterHttpError);
-                        Vue.http.options.emulateJSON = false;                      
-                    }
-
-                }).catch(function() {
-                    $('.form-control.error').first().focus();
-                });
+                    }).catch(function() {
+                        $('.form-control.error').first().focus();
+                    });
+                }
+                
+                
             },
             cancel: function(e) {
                 if (e) e.preventDefault();
@@ -381,15 +430,42 @@
                 _this.row = {};
                 _this.errors.clear();
 
-                Vue.http.get('/api/admin/supplier').then(function(response) {
-                    _this.suppliers = response.body;
-                    _this.suppliers = JSON.parse(JSON.stringify(_this.suppliers));
+                var setupFileupload = function() {
+                    $('#photo').fileupload({
+                        url: __REST_API_URL__ + 'upload',
+                        formData: {
+                            input_file_sign: 'photo',
+                            input_folder: _this.input_folder
+                        },
+                        dataType: 'json',
+                        done: function (e, data) {
+                            _this.afterUpload(data.result.path,'photo');
+                            notifyAfterHttpSuccess(data.result);
+                        }
+                    });
+                };
+
+                Vue.http.get('/api/admin/productType').then(function(response) {
+                    _this.types = response.body;
+                    _this.types = JSON.parse(JSON.stringify(_this.types));
 
                     Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
                         _this.row = response.body;
+
+                        if (!id) {
+                            _this.row['type_id'] = 0;
+                        }
                     });
                 });
+
+                setupFileupload();
                 
+            },
+            afterUpload: function(photo,path) {
+                var _this = this;
+                _this.row[path] = photo;
+
+                _this.row = JSON.parse(JSON.stringify(_this.row));
             }
         }
     });

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'name','photo','price','total_amount','inventory','sales_amount'
+        'name','photo','price','total_amount','inventory','sales_amount','type_id'
     ];
 
     public $timestamps = true;
@@ -20,8 +20,14 @@ class Product extends Model
             'price' => 'required',
             'total_amount' => 'required',
             'inventory' => 'required',
-            'sales_amount' => 'required'
+            'sales_amount' => 'required',
+            'type_id' => 'required'
         ], 
         $merge);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Type', 'type_id' ,'id');
     }
 }
