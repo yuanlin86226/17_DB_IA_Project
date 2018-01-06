@@ -32,3 +32,13 @@ Route::get('/admin/customer','Admin\CustomerController@index');
 Route::get('/admin/supplier','Admin\SupplierController@index');
 Route::get('/admin/productType','Admin\ProductTypeController@index');
 Route::get('/admin/productData','Admin\ProductDataController@index');
+
+Route::get('/admin/purchase','Admin\PurchaseController@index');
+
+
+// Route::get('/admin/purchase', function () {
+//     return view('/admin/code');
+// });
+Route::get('/admin/returnPurchase', function () {
+    return view('/admin/code');
+});

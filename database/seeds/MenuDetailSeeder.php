@@ -209,6 +209,50 @@ class MenuDetailSeeder extends Seeder
             'description' => '刪除'
         ]);
 
+
+
+        MenuDetail::create([
+            'menu_id' => '13',
+            'sign' => 'view',
+            'description' => '檢視'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '13',
+            'sign' => 'insert',
+            'description' => '新增'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '13',
+            'sign' => 'edit',
+            'description' => '修改'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '13',
+            'sign' => 'delete',
+            'description' => '刪除'
+        ]);
+
+        MenuDetail::create([
+            'menu_id' => '14',
+            'sign' => 'view',
+            'description' => '檢視'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '14',
+            'sign' => 'insert',
+            'description' => '新增'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '14',
+            'sign' => 'edit',
+            'description' => '修改'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '14',
+            'sign' => 'delete',
+            'description' => '刪除'
+        ]);
+
         DB::table('menu_role')->delete();
 
         $menu_parents = Menu::where('parent',null)->get();
