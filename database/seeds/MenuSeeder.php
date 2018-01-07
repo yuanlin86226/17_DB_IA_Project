@@ -106,5 +106,32 @@ class MenuSeeder extends Seeder
             'parent' => '12'
         ]);
 
+
+        Menu::create([
+            'icon' => 'pe-7s-cart',
+            'title' => '銷貨管理',
+            'href' => '#',
+            'parent' => null
+        ]);
+
+        Menu::create([
+            'icon' => 'pe-7s-box2',
+            'title' => '訂貨維護',
+            'href' => '/admin/order',
+            'parent' => '15'
+        ]);
+        Menu::create([
+            'icon' => 'pe-7s-box2',
+            'title' => '出貨維護',
+            'href' => '/admin/sales',
+            'parent' => '15'
+        ]);
+        Menu::create([
+            'icon' => 'pe-7s-box2',
+            'title' => '退貨處理',
+            'href' => '/admin/returnOrder',
+            'parent' => '15'
+        ]);
+
     }
 }

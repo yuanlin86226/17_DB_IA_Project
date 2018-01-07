@@ -253,6 +253,70 @@ class MenuDetailSeeder extends Seeder
             'description' => '刪除'
         ]);
 
+
+        MenuDetail::create([
+            'menu_id' => '16',
+            'sign' => 'view',
+            'description' => '檢視'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '16',
+            'sign' => 'insert',
+            'description' => '新增'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '16',
+            'sign' => 'edit',
+            'description' => '修改'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '16',
+            'sign' => 'delete',
+            'description' => '刪除'
+        ]);
+
+        MenuDetail::create([
+            'menu_id' => '17',
+            'sign' => 'view',
+            'description' => '檢視'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '17',
+            'sign' => 'insert',
+            'description' => '新增'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '17',
+            'sign' => 'edit',
+            'description' => '修改'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '17',
+            'sign' => 'delete',
+            'description' => '刪除'
+        ]);
+
+        MenuDetail::create([
+            'menu_id' => '18',
+            'sign' => 'view',
+            'description' => '檢視'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '18',
+            'sign' => 'insert',
+            'description' => '新增'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '18',
+            'sign' => 'edit',
+            'description' => '修改'
+        ]);
+        MenuDetail::create([
+            'menu_id' => '18',
+            'sign' => 'delete',
+            'description' => '刪除'
+        ]);
+
         DB::table('menu_role')->delete();
 
         $menu_parents = Menu::where('parent',null)->get();
