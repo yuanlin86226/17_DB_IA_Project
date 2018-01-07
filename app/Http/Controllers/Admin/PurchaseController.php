@@ -264,21 +264,25 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         try {
-            
-            $products = Product::where('type_id',$id)->get();
 
-            foreach ($products as $product) {
-                DB::select(
-                    DB::raw("update order_details set product_id = null where product_id = '".$product['id']."'")
-                );
+            $details = PurchaseDetail::where('purchase_id',$id)->get();
+
+            foreach ($details as $detail) {
+                $product = Product::find($detail['product_id']);
+
+                $product->total_amount -= $detail['num'];
+                $product->inventory -= $detail['num'];
+
+                $product->save();
+
             }
             
 
-            Product::where('type_id',$id)->delete();
-            Type::destroy($id);
+            PurchaseDetail::where('purchase_id',$id)->delete();
+            Purchase::destroy($id);
 
             $data["result"] = true;
-            $data["message"] = "分類刪除成功";
+            $data["message"] = "進貨資料刪除成功";
 
             return response()->json($data);
 
@@ -293,15 +297,21 @@ class PurchaseController extends Controller
             $ids = $request->json()->all();
 
             foreach ($ids as $id) {
-                $products = Product::where('type_id',$id)->get();
+                $details = PurchaseDetail::where('purchase_id',$id)->get();
+                
+                foreach ($details as $detail) {
+                    $product = Product::find($detail['product_id']);
 
-                foreach ($products as $product) {
-                    DB::select(
-                        DB::raw("update order_details set product_id = null where product_id = '".$product['id']."'")
-                    );
+                    $product->total_amount -= $detail['num'];
+                    $product->inventory -= $detail['num'];
+
+                    $product->save();
+
                 }
-                Product::where('type_id',$id)->delete();
-                Type::destroy($id);
+                
+
+                PurchaseDetail::where('purchase_id',$id)->delete();
+                Purchase::destroy($id);
             }
 
             $data["result"] = true;
