@@ -12,6 +12,7 @@ use App\Type;
 use App\Product;
 use App\Order;
 use App\OrderDetail;
+use App\Purchase;
 
 use Exception;
 use Validator;
@@ -191,5 +192,12 @@ class SupplierController extends Controller
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function getPurchases($id)
+    {
+        $purchases = Purchase::where('supplier_id',$id)->get();
+
+        return response()->json($purchases);
     }
 }

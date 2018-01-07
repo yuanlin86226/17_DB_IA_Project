@@ -114,6 +114,26 @@
                                     </fieldset>
 
                                     <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品</label>
+                                            <div class="col-sm-9" style="border: 1px #cccccc solid; margin-left: 6px;">
+                                                <table id="bootstrap-table2" class="table" data-toggle="table">
+                                                    <thead>
+                                                        <th data-field="name" data-sortable="true">名稱</th>
+                                                        <th data-field="cost" data-sortable="true">成本</th>
+                                                        <th data-field="price" data-sortable="true">定價</th>
+                                                        <th data-field="total_amount" data-sortable="true">總進貨量</th>
+                                                        <th data-field="inventory" data-sortable="true">目前庫存量</th>
+                                                        <th data-field="sales_amount" data-sortable="true">總銷售量</th>
+                                                    </thead>
+                                                    <tbody id="table-body"></tbody>
+                                                </table>
+                                            </div>
+                                            <!-- <div class="col-sm-1"></div> -->
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
                                         <div class="form-group" style="margin-top: 20px;">
                                             <div class="col-sm-2">
                                                 <button type="submit" class="btn btn-fill btn-info" v-on:click="done">返回</button>
@@ -293,6 +313,12 @@
                 var _this = this;
                 Vue.http.get(__REST_API_URL__ + id).then(function(response) {
                     _this.row = response.body;
+
+                    Vue.nextTick(function () {
+                        $table2.bootstrapTable('refresh', {
+                            url: __REST_API_URL__ + id + '/products'
+                        });
+                    });
                 });
             }
         }
@@ -457,6 +483,44 @@
     var $table = $('#bootstrap-table');
     
     initDataTable($table);
+    
+    var initDataTable2 = function($table) {
+        $table.bootstrapTable({
+            striped: true,
+            sortOrder: 'desc',
+            sortName: 'updatedAt',
+            clickToSelect: false,
+            showRefresh: false,
+            search: false,
+            showToggle: false,
+            showColumns: false,
+            pagination: true,
+            searchAlign: 'right',
+            pageSize: 10,
+            clickToSelect: false,
+            pageList: [10, 20, 40, 60, 80, 100],
+            formatShowingRows: function(pageFrom, pageTo, totalRows){
+                return "共 " + totalRows + " 筆 ";
+            },
+            formatRecordsPerPage: function(pageNumber){
+                return "每頁顯示 " + pageNumber + " 筆資料";
+            },
+            icons: {
+                refresh: 'fa fa-refresh',
+                toggle: 'fa fa-th-list',
+                columns: 'fa fa-columns',
+                detailOpen: 'fa fa-plus-circle',
+                detailClose: 'fa fa-minus-circle'
+            }
+        });
+        $(window).resize(function () {
+            $table.bootstrapTable('resetView');
+        });
+    };
+
+    var $table2 = $('#bootstrap-table2');
+    
+    initDataTable2($table2);
 
     function operateFormatter(value, row, index) {
         

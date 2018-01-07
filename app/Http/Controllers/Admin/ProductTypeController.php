@@ -192,4 +192,11 @@ class ProductTypeController extends Controller
             throw $e;
         }
     }
+
+    public function getProducts ($id)
+    {
+        $products = Product::where('type_id',$id)->get();
+
+        return response()->json($products);
+    }
 }

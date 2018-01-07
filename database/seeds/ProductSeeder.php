@@ -96,6 +96,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'BIGBANG MADE SERIES [M]',
             'photo' => '/image/products/BIGBANG/MadeSeriesM.jpg',
+            'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
             'inventory' => '2',
@@ -105,6 +106,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'BIGBANG MADE SERIES [A]',
             'photo' => '/image/products/BIGBANG/MadeSeriesA.jpg',
+            'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
             'inventory' => '6',
@@ -114,6 +116,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'BIGBANG MADE SERIES [D]',
             'photo' => '/image/products/BIGBANG/MadeSeriesD.jpg',
+            'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
             'inventory' => '8',
@@ -123,6 +126,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'BIGBANG MADE SERIES [E]',
             'photo' => '/image/products/BIGBANG/MadeSeriesE.jpg',
+            'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
             'inventory' => '5',
@@ -132,6 +136,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'BIGBANG MADE THE FULL ALBUM',
             'photo' => '/image/products/BIGBANG/MadeFullAlbum.jpg',
+            'cost' => '750',
             'price' => '988',
             'total_amount' => '10',
             'inventory' => '8',
@@ -142,6 +147,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'CAN YOU FEEL IT?',
             'photo' => '/image/products/HIGHLIGHT/CanYouFeelIt.jpg',
+            'cost' => '200',
             'price' => '468',
             'total_amount' => '10',
             'inventory' => '7',
@@ -151,6 +157,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'CALLING YOU',
             'photo' => '/image/products/HIGHLIGHT/CallingYou.jpg',
+            'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '6',
@@ -160,6 +167,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'CELEBRATE',
             'photo' => '/image/products/HIGHLIGHT/Celebrate.jpg',
+            'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '5',
@@ -170,6 +178,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => '2 Cool 4 Skool',
             'photo' => '/image/products/BTS/2Cool4Skool.jpg',
+            'cost' => '150',
             'price' => '358',
             'total_amount' => '10',
             'inventory' => '5',
@@ -179,6 +188,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'O!RUL8,2?',
             'photo' => '/image/products/BTS/O!RUL8,2.jpg',
+            'cost' => '150',
             'price' => '398',
             'total_amount' => '10',
             'inventory' => '5',
@@ -188,6 +198,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Skool Luv Affair',
             'photo' => '/image/products/BTS/SkoolLuvAffair.jpg',
+            'cost' => '150',
             'price' => '398',
             'total_amount' => '10',
             'inventory' => '5',
@@ -197,6 +208,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Dark & Wild',
             'photo' => '/image/products/BTS/Dark&Wild.jpg',
+            'cost' => '220',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '6',
@@ -206,6 +218,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => '花樣年華 pt.1',
             'photo' => '/image/products/BTS/Pt.1.jpg',
+            'cost' => '200',
             'price' => '448',
             'total_amount' => '10',
             'inventory' => '7',
@@ -215,6 +228,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => '花樣年華 pt.2',
             'photo' => '/image/products/BTS/Pt.2.jpg',
+            'cost' => '200',
             'price' => '458',
             'total_amount' => '10',
             'inventory' => '7',
@@ -224,6 +238,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Young Forever',
             'photo' => '/image/products/BTS/YoungForever.jpg',
+            'cost' => '350',
             'price' => '678',
             'total_amount' => '10',
             'inventory' => '7',
@@ -233,6 +248,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'WINGS',
             'photo' => '/image/products/BTS/Wings.jpg',
+            'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '8',
@@ -242,6 +258,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'You Never Walk Alone',
             'photo' => '/image/products/BTS/YouNeverWalkAlone.jpg',
+            'cost' => '250',
             'price' => '588',
             'total_amount' => '10',
             'inventory' => '8',
@@ -251,6 +268,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'LOVE YOURSELF 承 Her',
             'photo' => '/image/products/BTS/LoveYourself.jpg',
+            'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '9',
@@ -261,6 +279,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Got it?',
             'photo' => '/image/products/GOT7/GotIt.jpg',
+            'cost' => '200',
             'price' => '388',
             'total_amount' => '10',
             'inventory' => '5',
@@ -270,6 +289,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'GOT♡',
             'photo' => '/image/products/GOT7/GotIt.jpg',
+            'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
             'inventory' => '5',
@@ -279,6 +299,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Identify',
             'photo' => '/image/products/GOT7/Identify.jpg',
+            'cost' => '300',
             'price' => '488',
             'total_amount' => '10',
             'inventory' => '5',
@@ -288,6 +309,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Just Right',
             'photo' => '/image/products/GOT7/JustRight.jpg',
+            'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
             'inventory' => '7',
@@ -297,6 +319,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'MAD',
             'photo' => '/image/products/GOT7/Mad.jpg',
+            'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
             'inventory' => '7',
@@ -306,6 +329,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'MAD Winter Edition',
             'photo' => '/image/products/GOT7/MadWinterEdition.jpg',
+            'cost' => '850',
             'price' => '968',
             'total_amount' => '10',
             'inventory' => '7',
@@ -315,6 +339,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'FLIGHT LOG:DEPARTURE',
             'photo' => '/image/products/GOT7/Departure.jpg',
+            'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
             'inventory' => '8',
@@ -324,6 +349,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'FLIGHT LOG:TURBULENCE',
             'photo' => '/image/products/GOT7/Turbulence.jpg',
+            'cost' => '200',
             'price' => '518',
             'total_amount' => '10',
             'inventory' => '8',
@@ -333,6 +359,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'FLIGHT LOG:ARRIVAL',
             'photo' => '/image/products/GOT7/Arrival.jpg',
+            'cost' => '300',
             'price' => '468',
             'total_amount' => '10',
             'inventory' => '9',
@@ -342,6 +369,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => '7 FOR 7',
             'photo' => '/image/products/GOT7/7for7.jpg',
+            'cost' => '200',
             'price' => '438',
             'total_amount' => '10',
             'inventory' => '9',
@@ -352,6 +380,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'The Day',
             'photo' => '/image/products/DAY6/TheDay.jpg',
+            'cost' => '200',
             'price' => '448',
             'total_amount' => '10',
             'inventory' => '5',
@@ -361,6 +390,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'DAYDREAM',
             'photo' => '/image/products/DAY6/DayDream.jpg',
+            'cost' => '200',
             'price' => '428',
             'total_amount' => '10',
             'inventory' => '5',
@@ -370,6 +400,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'SUNRISE',
             'photo' => '/image/products/DAY6/Sunrise.jpg',
+            'cost' => '250',
             'price' => '480',
             'total_amount' => '10',
             'inventory' => '5',
@@ -379,6 +410,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'MOONRISE',
             'photo' => '/image/products/DAY6/Moonrise.jpg',
+            'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '5',
@@ -389,6 +421,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'The Story Begins',
             'photo' => '/image/products/TWICE/TheStoryBegins.jpg',
+            'cost' => '200',
             'price' => '428',
             'total_amount' => '10',
             'inventory' => '5',
@@ -398,6 +431,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Page Two',
             'photo' => '/image/products/TWICE/PageTwo.jpg',
+            'cost' => '300',
             'price' => '518',
             'total_amount' => '10',
             'inventory' => '5',
@@ -407,6 +441,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'TWICEcoaster:LANE 1',
             'photo' => '/image/products/TWICE/Lane1.jpg',
+            'cost' => '300',
             'price' => '518',
             'total_amount' => '10',
             'inventory' => '5',
@@ -416,6 +451,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'TWICEcoaster:LANE 2',
             'photo' => '/image/products/TWICE/Lane2.jpg',
+            'cost' => '250',
             'price' => '488',
             'total_amount' => '10',
             'inventory' => '5',
@@ -425,6 +461,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'SIGNAL',
             'photo' => '/image/products/TWICE/Signal.jpg',
+            'cost' => '250',
             'price' => '488',
             'total_amount' => '10',
             'inventory' => '5',
@@ -434,6 +471,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Twicetagram',
             'photo' => '/image/products/TWICE/Twicetagram.jpg',
+            'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '5',
@@ -443,6 +481,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Merry&Happy',
             'photo' => '/image/products/TWICE/Merry&Happy.jpg',
+            'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '5',
@@ -453,6 +492,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => '1-1=0',
             'photo' => '/image/products/WannaOne/1-1=0.jpg',
+            'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '5',
@@ -462,6 +502,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => '1X1=1',
             'photo' => '/image/products/WannaOne/1X1=1.jpg',
+            'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
             'inventory' => '5',
