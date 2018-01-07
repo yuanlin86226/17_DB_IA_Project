@@ -46,3 +46,46 @@ Route::middleware('api')->post('/admin/menu', 'Admin\MenuController@save');
 Route::middleware('api')->put('/admin/menu/{id}', 'Admin\MenuController@update');
 Route::middleware('api')->delete('/admin/menu/{id}', 'Admin\MenuController@destroy');
 Route::middleware('api')->delete('/admin/menu', 'Admin\MenuController@destroyMany');
+
+
+Route::middleware('api')->get('/admin/company', 'Admin\CompanyController@findOne');
+Route::middleware('api')->put('/admin/company', 'Admin\CompanyController@update');
+
+
+Route::middleware('api')->get('/admin/employee', 'Admin\EmployeeController@findAll');
+Route::middleware('api')->get('/admin/employee/{id}', 'Admin\EmployeeController@findOne');
+Route::middleware('api')->post('/admin/employee', 'Admin\EmployeeController@save');
+Route::middleware('api')->put('/admin/employee/{id}', 'Admin\EmployeeController@update');
+Route::middleware('api')->delete('/admin/employee/{id}', 'Admin\EmployeeController@destroy');
+Route::middleware('api')->delete('/admin/employee', 'Admin\EmployeeController@destroyMany');
+
+
+Route::middleware('api')->get('/admin/customer', 'Admin\CustomerController@findAll');
+Route::middleware('api')->get('/admin/customer/{id}', 'Admin\CustomerController@findOne');
+Route::middleware('api')->post('/admin/customer', 'Admin\CustomerController@save');
+Route::middleware('api')->put('/admin/customer/{id}', 'Admin\CustomerController@update');
+Route::middleware('api')->delete('/admin/customer/{id}', 'Admin\CustomerController@destroy');
+Route::middleware('api')->delete('/admin/customer', 'Admin\CustomerController@destroyMany');
+Route::middleware('api')->get('/admin/customer/{id}/orders', 'Admin\CustomerController@getOrders');
+
+Route::middleware('api')->get('/admin/supplier', 'Admin\SupplierController@findAll');
+Route::middleware('api')->get('/admin/supplier/{id}', 'Admin\SupplierController@findOne');
+Route::middleware('api')->post('/admin/supplier', 'Admin\SupplierController@save');
+Route::middleware('api')->put('/admin/supplier/{id}', 'Admin\SupplierController@update');
+Route::middleware('api')->delete('/admin/supplier/{id}', 'Admin\SupplierController@destroy');
+Route::middleware('api')->delete('/admin/supplier', 'Admin\SupplierController@destroyMany');
+
+Route::middleware('api')->get('/admin/productType', 'Admin\ProductTypeController@findAll');
+Route::middleware('api')->get('/admin/productType/{id}', 'Admin\ProductTypeController@findOne');
+Route::middleware('api')->post('/admin/productType', 'Admin\ProductTypeController@save');
+Route::middleware('api')->put('/admin/productType/{id}', 'Admin\ProductTypeController@update');
+Route::middleware('api')->delete('/admin/productType/{id}', 'Admin\ProductTypeController@destroy');
+Route::middleware('api')->delete('/admin/productType', 'Admin\ProductTypeController@destroyMany');
+
+Route::middleware('api')->get('/admin/productData', 'Admin\ProductDataController@findAll');
+Route::middleware('api')->get('/admin/productData/{id}', 'Admin\ProductDataController@findOne');
+Route::middleware('api')->post('/admin/productData', 'Admin\ProductDataController@save');
+Route::middleware('api')->put('/admin/productData/{id}', 'Admin\ProductDataController@update');
+Route::middleware('api')->delete('/admin/productData/{id}', 'Admin\ProductDataController@destroy');
+Route::middleware('api')->delete('/admin/productData', 'Admin\ProductDataController@destroyMany');
+Route::middleware('api')->post('/admin/productData/upload', 'FileController@upload');

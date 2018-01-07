@@ -26,22 +26,9 @@ Route::get('/admin/user','Admin\UserController@index');
 Route::get('/admin/role','Admin\RoleController@index');
 Route::get('/admin/menu','Admin\MenuController@index');
 
-
-Route::get('/admin/company', function () {
-    return view('/admin/code');
-});
-Route::get('/admin/employee', function () {
-    return view('/admin/code');
-});
-Route::get('/admin/customer', function () {
-    return view('/admin/code');
-});
-Route::get('/admin/supplier', function () {
-    return view('/admin/code');
-});
-Route::get('/admin/productType', function () {
-    return view('/admin/code');
-});
-Route::get('/admin/productData', function () {
-    return view('/admin/code');
-});
+Route::get('/admin/company','Admin\CompanyController@index');
+Route::get('/admin/employee','Admin\EmployeeController@index');
+Route::get('/admin/customer','Admin\CustomerController@index');
+Route::get('/admin/supplier','Admin\SupplierController@index');
+Route::get('/admin/productType','Admin\ProductTypeController@index');
+Route::get('/admin/productData','Admin\ProductDataController@index');

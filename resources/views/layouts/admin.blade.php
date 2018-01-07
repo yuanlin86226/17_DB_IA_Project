@@ -181,6 +181,9 @@
     <!--  Notifications Plugin    -->
     <script src="/admin/assets/js/bootstrap-notify.js"></script>
 
+    <!-- jquery.fileupload.js -->
+    <script src="/admin/assets/js/jquery.fileupload.js"></script>
+
     <!-- Sweet Alert 2 plugin -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.0/sweetalert2.min.js"></script> -->
     <!-- <script src="/admin/assets/js/sweetalert2.js"></script> -->
