@@ -125,14 +125,14 @@ WINGS專輯 W版2張、I版2張、N版3張、G版3張',
             'product_id' => '17',
             'name' => 'You Never Walk Alone',
             'price' => '250',
-            'num' => '10'
+            'num' => '15'
         ]);
         PurchaseDetail::create([
             'purchase_id' => '1',
             'product_id' => '18',
             'name' => 'LOVE YOURSELF 承 Her',
             'price' => '200',
-            'num' => '10'
+            'num' => '15'
         ]);
 
         PurchaseDetail::create([
@@ -237,21 +237,21 @@ WINGS專輯 W版2張、I版2張、N版3張、G版3張',
             'product_id' => '25',
             'name' => 'FLIGHT LOG:DEPARTURE',
             'price' => '200',
-            'num' => '10'
+            'num' => '20'
         ]);
         PurchaseDetail::create([
             'purchase_id' => '6',
             'product_id' => '26',
             'name' => 'FLIGHT LOG:TURBULENCE',
             'price' => '200',
-            'num' => '10'
+            'num' => '20'
         ]);
         PurchaseDetail::create([
             'purchase_id' => '6',
             'product_id' => '27',
             'name' => 'FLIGHT LOG:ARRIVAL',
             'price' => '300',
-            'num' => '10'
+            'num' => '20'
         ]);
 
         PurchaseDetail::create([

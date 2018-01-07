@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title','進貨維護')
+@section('title','退貨維護')
 
 @section('content')
 
-@php ($REST_API = '/api/admin/purchase/')
+@php ($REST_API = '/api/admin/returnPurchase/')
 
         <div class="content" id="panel-list">
             <div class="container-fluid">
@@ -30,7 +30,7 @@
                                         <th data-field="state" data-width="50" data-checkbox="true"></th>
                                         <th data-field="created_at"  data-sortable="true" data-formatter="dateFormatter">進貨日期</th>
                                         <th data-field="supplier_name" data-sortable="true">廠商名稱</th>
-                                        <th data-field="discount" data-sortable="true" data-formatter="discountFormatter">折扣數</th>
+                                        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">狀態</th>
                                         <th data-field="total" data-sortable="true">總額</th>
                                         <th data-field="remark" data-visible="false" data-sortable="true">備註</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
@@ -79,16 +79,7 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">折扣數</label>
-                                            <div class="col-sm-10">
-                                                <p class="form-control-static">@{{row.discount}}</p>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">總額</label>
+                                            <label class="col-sm-2 control-label">退貨總額</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.total}}</p>
                                             </div>
@@ -107,12 +98,12 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">進貨內容</label>
+                                            <label class="col-sm-2 control-label">退貨內容</label>
                                             <div class="col-sm-6" style="border: 1px #cccccc solid; margin-left: 6px;">
                                                 <table class="table">
                                                     <thead>
                                                         <th data-sortable="true">商品名稱</th>
-                                                        <th data-sortable="true">成本單價</th>
+                                                        <th data-sortable="true">退貨單價</th>
                                                         <th data-sortable="true">數量</th>
                                                     </thead>
                                                     <tbody id="table-body">
@@ -151,8 +142,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <legend v-if="type==='update'">修改 進貨單</legend>
-                                <legend v-if="type==='create'">新增 進貨單</legend>
+                                <legend v-if="type==='update'">修改 退貨單</legend>
+                                <legend v-if="type==='create'">新增 退貨單</legend>
                             </div>
                             <div class="content">
                                 
@@ -170,24 +161,22 @@
                                             </div>
                                         </div>
                                     </fieldset>
+
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">折扣數</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control menu-dropdown" v-model="row.discount" v-on:change="count_total">
-                                                    <option value="-1" selected>無折扣</option>
-                                                    <option value="0" selected>9折</option>
-                                                    <option value="1" selected>8折</option>
-                                                    <option value="2" selected>7折</option>
-                                                </select>
+                                            <label class="col-sm-2 control-label">狀態</label>
+                                            <div class="col-sm-10">
+                                                <input v-model="row.status" v-on:change="status_change" name="status" class="radio-button" type="radio" value="0" checked> 退貨
+                                                <input v-model="row.status" v-on:change="status_change" name="status" class="radio-button" type="radio" value="1"> 換貨
                                             </div>
                                         </div>
                                     </fieldset>
+
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">總額</label>
+                                            <label class="col-sm-2 control-label">退貨總額</label>
                                             <div class="col-sm-9">
-                                                <input :class="{'form-control': true, 'error': errors.has('total') }" type="text" name="total" placeholder="請先選擇折扣，可自行修改總額" data-vv-as="總額" v-model="row.total" v-validate="'required|numeric'" required>
+                                                <input :class="{'form-control': true, 'error': errors.has('total') }" type="text" name="total" placeholder="可自行修改總額" data-vv-as="總額" v-model="row.total" v-validate="'required|numeric'" required>
                                                 <span v-show="errors.has('total')" class="help-block">@{{ errors.first('total') }}</span>
                                             </div>
                                         </div>
@@ -275,11 +264,9 @@
 
     var roles = {};
 
-    function discountFormatter (value, row, index) {
-        if( value == -1 ) { return "無折扣"; }
-        if( value == 0 ) { return "9折"; }
-        if( value == 1 ) { return "8折"; }
-        if( value == 2 ) { return "7折"; }
+    function statusFormatter (value, row, index) {
+        if( value == 0 ) { return "退貨"; }
+        if( value == 1 ) { return "換貨"; }
     }
 
     function dateFormatter (value, row, index) {
@@ -364,16 +351,6 @@
 
                     _this.row['created_at'] = moment(_this.row['created_at']).format('YYYY-MM-DD');
 
-                    if (_this.row['discount'] == 0) {
-                        _this.row['discount'] = "9折";
-                    } else if (_this.row['discount'] == 1) {
-                        _this.row['discount'] = "8折";
-                    } else if (_this.row['discount'] == 2) {
-                        _this.row['discount'] = "7折";
-                    } else if (_this.row['discount'] == -1) {
-                        _this.row['discount'] = "無折扣";
-                    } 
-                    // _this.row['remark'].replace(/&lt;br \/>/gi, "\n");
                 });
             }
         }
@@ -394,7 +371,9 @@
             value_products: {},
             value_names: {},
             value_prices: {},
-            value_nums: {}
+            value_nums: {},
+            value_inventorys: {},
+            value_costs:{}
         },
         methods: {
             close: function(e) {
@@ -423,7 +402,7 @@
 
                         var num = 0;
                         for (i=0; i<_this.apply_forms.length; i++) {
-                            if ((_this.value_types[i]!="" && _this.value_types[i]!=null) && (_this.value_products[i]!="" && _this.value_products[i]!=null) && (_this.value_names[i]!="" && _this.value_names[i]!=null) && (_this.value_prices[i]!="" && _this.value_prices[i]!=null) && (_this.value_nums[i]!="" && _this.value_nums[i]!=null)) {
+                            if ((_this.value_types[i]!="" && _this.value_types[i]!=null) && (_this.value_products[i]!="" && _this.value_products[i]!=null) && (_this.value_names[i]!="" && _this.value_names[i]!=null) && (_this.value_prices[i]!=null) && (_this.value_nums[i]!="" && _this.value_nums[i]!=null)) {
                                 _this.row.form_datas[num] = {
                                     type_id : _this.value_types[i],
                                     product_id : _this.value_products[i],
@@ -445,7 +424,7 @@
 
                         var num = 0;
                         for (i=0; i<_this.apply_forms.length; i++) {
-                            if ((_this.value_types[i]!="" && _this.value_types[i]!=null) && (_this.value_products[i]!="" && _this.value_products[i]!=null) && (_this.value_names[i]!="" && _this.value_names[i]!=null) && (_this.value_prices[i]!="" && _this.value_prices[i]!=null) && (_this.value_nums[i]!="" && _this.value_nums[i]!=null)) {
+                            if ((_this.value_types[i]!="" && _this.value_types[i]!=null) && (_this.value_products[i]!="" && _this.value_products[i]!=null) && (_this.value_names[i]!="" && _this.value_names[i]!=null) && (_this.value_prices[i]!=null) && (_this.value_nums[i]!="" && _this.value_nums[i]!=null)) {
                                 _this.row.form_datas[num] = {
                                     type_id : _this.value_types[i],
                                     product_id : _this.value_products[i],
@@ -511,7 +490,7 @@
 
                         if (!id) {
                             _this.row['supplier_id'] = 0;
-                            _this.row['discount'] = -1;
+                            _this.row['status'] = 0;
 
                             _this.apply_forms[_this.apply_forms.length] = _this.apply_forms.length;
                             _this.apply_forms = JSON.parse(JSON.stringify(_this.apply_forms));
@@ -556,6 +535,7 @@
 
                                 _this.value_products[i] = response.body['details'][i]['product_id'];
                                 _this.value_products = JSON.parse(JSON.stringify(_this.value_products));
+                                _this.product_select_change(response.body['details'][i]['product_id'],i);
 
                                 _this.value_names[i] = response.body['details'][i]['name'];
                                 _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
@@ -630,10 +610,20 @@
                 
                 Vue.http.get(__REST_API_URL__ + product_id + '/data').then(function(response) {
                     _this.value_names[form_num] = response.body['name'];
-                    _this.value_prices[form_num] = response.body['cost'];
+
+                    if (_this.row.status == 0) {
+                        _this.value_prices[form_num] = response.body['cost'];                        
+                    } else {
+                        _this.value_prices[form_num] = 0;                        
+                    }
+
+                    _this.value_inventorys[form_num] = response.body['inventory'];
+                    _this.value_costs[form_num] = response.body['cost'];
 
                     _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
                     _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
+                    _this.value_inventorys = JSON.parse(JSON.stringify(_this.value_inventorys));
+                    _this.value_costs = JSON.parse(JSON.stringify(_this.value_costs));
                 });
             },
             count_total: function () {
@@ -643,25 +633,48 @@
 
                 for (i=0; i<_this.apply_forms.length; i++) {
                     if ((_this.value_prices[i]!="" || _this.value_prices[i]!=null) && (_this.value_nums[i]!="" || _this.value_nums[i]!=null)){
-                        total += _this.value_prices[i] * _this.value_nums[i];
+                        // 判斷是否超過庫存量
+                        if (_this.value_nums[i] > _this.value_inventorys[i]) {
+                            swal({
+                                title: "數量錯誤",
+                                text: "產品數量不得高於庫存量，庫存為"+_this.value_inventorys[i],
+                                type: "info",
+                            });
+
+                            _this.value_nums[i] = _this.value_inventorys[i];
+                            _this.value_nums = JSON.parse(JSON.stringify(_this.value_nums));
+                        } 
+
+                        total += _this.value_prices[i] * _this.value_nums[i];  
                     } else {
                         total = 0;
                         break;
                     }
                 }
 
-                if (total != 0) {
-                    if (_this.row.discount == 0) {
-                        total *= 0.9;
-                    } else if (_this.row.discount == 1) {
-                        total *= 0.8;
-                    } else if (_this.row.discount == 2) {
-                        total *= 0.7;
+                _this.row.total = total;
+                _this.row = JSON.parse(JSON.stringify(_this.row));
+                
+            },
+            status_change: function () {
+                _this = this;
+
+                if (_this.row.status == 1) {
+                    for (i=0; i<_this.apply_forms.length; i++) {
+                        _this.value_prices[i] = 0;
                     }
 
-                    _this.row.total = Math.ceil(total);
-                    _this.row = JSON.parse(JSON.stringify(_this.row));
+                    _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
+                    _this.count_total();
+                } else if (_this.row.status == 0) {
+                    for (i=0; i<_this.apply_forms.length; i++) {
+                        _this.value_prices[i] = _this.value_costs[i];
+                    }
+
+                    _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
+                    _this.count_total();
                 }
+
                 
             }
         }

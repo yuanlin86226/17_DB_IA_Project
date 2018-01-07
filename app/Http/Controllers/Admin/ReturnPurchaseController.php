@@ -11,6 +11,8 @@ use App\Type;
 use App\Product;
 use App\Purchase;
 use App\PurchaseDetail;
+use App\ReturnPurchase;
+use App\ReturnPurchaseDetail;
 
 use Exception;
 use Validator;
@@ -20,14 +22,14 @@ use Redirect;
 use Request;
 use DB;
 
-class PurchaseController extends Controller
+class ReturnPurchaseController extends Controller
 {
     public function index()
     {
         if (Auth::check()) {
 
             // menu_id要確認
-            $menu_id = 13;
+            $menu_id = 14;
             $user_id = Auth::user()->id;
 
             $role_menus = User::able_page($user_id, $menu_id);
@@ -35,7 +37,7 @@ class PurchaseController extends Controller
             if (count($role_menus)==0) {
                 return Redirect::action('AuthController@login');
             } else {
-                return View::make('admin/purchase',['menu_id' => $menu_id]);
+                return View::make('admin/returnPurchase',['menu_id' => $menu_id]);
             }
             
         } else {
@@ -46,7 +48,7 @@ class PurchaseController extends Controller
     public function findAll()
     {
         // $purchases = Purchase::with('supplier','details')->orderBy('created_at','desc')->get();
-        $purchases = Purchase::with('supplier')->orderBy('created_at','desc')->orderBy('id','desc')->get(); 
+        $purchases = ReturnPurchase::with('supplier')->orderBy('created_at','desc')->orderBy('id','desc')->get(); 
         foreach ($purchases as $purchase) {
             $purchase['supplier_name'] = $purchase['supplier']['name'];
             unset($purchase['supplier']);
@@ -57,7 +59,7 @@ class PurchaseController extends Controller
 
     public function findOne($id)
     {
-        $purchase = Purchase::with('supplier','details')->find($id);
+        $purchase = ReturnPurchase::with('supplier','details')->find($id);
         $purchase['supplier_name'] = $purchase['supplier']['name'];
 
         if(isset($purchase['details'])){
@@ -98,7 +100,7 @@ class PurchaseController extends Controller
     {
         try {
             $purchase = [
-                'discount' => $request["discount"],
+                'status' => $request["status"],
                 'total' => $request["total"],
                 'remark' => $request["remark"],
                 'supplier_id' => $request["supplier_id"]
@@ -114,7 +116,7 @@ class PurchaseController extends Controller
                 ];
             }
 
-            $validator = Validator::make($purchase, Purchase::validate());
+            $validator = Validator::make($purchase, ReturnPurchase::validate());
             
             if ($validator->fails())
             {
@@ -128,12 +130,12 @@ class PurchaseController extends Controller
                 $data['message'] = $error_msg;
                 
             } else {
-                $createdPurchase = Purchase::create($purchase);
+                $createdPurchase = ReturnPurchase::create($purchase);
 
                 foreach ($details as $detail) {
-                    $detail['purchase_id'] = $createdPurchase -> id;
+                    $detail['return_purchase_id'] = $createdPurchase -> id;
 
-                    $validator2 = Validator::make($detail, PurchaseDetail::validate());
+                    $validator2 = Validator::make($detail, ReturnPurchaseDetail::validate());
 
                     if ($validator2->fails()) {
                         $error_msg = "";
@@ -145,19 +147,22 @@ class PurchaseController extends Controller
                         $data['result'] = false;
                         $data['message'] = $error_msg;
                     } else {
-                        PurchaseDetail::create($detail);
+                        ReturnPurchaseDetail::create($detail);
 
-                        $product = Product::find($detail['product_id']);
-                        $product -> total_amount += $detail['num'];
-                        $product -> inventory += $detail['num'];
-                        $product -> save();
+                        if ($purchase['status'] == 0) {
+                            $product = Product::find($detail['product_id']);
+                            $product -> total_amount -= $detail['num'];
+                            $product -> inventory -= $detail['num'];
+                            $product -> save();
+                        }
+                        
                     }
 
                 }
 
 
                 $data["result"] = true;
-                $data["message"] = "進貨資料建立成功";
+                $data["message"] = "退貨資料建立成功";
             }
             
             return response()->json($data);
@@ -172,7 +177,7 @@ class PurchaseController extends Controller
         try {
             $purchase = [
                 'id' => $id,
-                'discount' => $request["discount"],
+                'status' => $request["status"],
                 'total' => $request["total"],
                 'remark' => $request["remark"],
                 'supplier_id' => $request["supplier_id"]
@@ -189,7 +194,7 @@ class PurchaseController extends Controller
             }
 
             // 資料驗證
-            $validator = Validator::make($purchase, Purchase::validate($purchase["id"]));
+            $validator = Validator::make($purchase, ReturnPurchase::validate($purchase["id"]));
 
             if ($validator->fails())
             {
@@ -203,28 +208,32 @@ class PurchaseController extends Controller
                 $data['message'] = $error_msg;
                 
             } else {
-                $updatePurchase = Purchase::find($purchase["id"]);
-                $updatePurchase -> discount = $purchase["discount"];
+                $updatePurchase = ReturnPurchase::find($purchase["id"]);
+
+                if($updatePurchase["status"] == 0) {
+                    $old_details = ReturnPurchaseDetail::where('return_purchase_id',$purchase["id"])->get();
+                    
+                    foreach ($old_details as $old_detail) {
+                        $product = Product::find($old_detail['product_id']);
+                        $product -> total_amount += $old_detail['num'];
+                        $product -> inventory += $old_detail['num'];
+                        $product -> save();
+                    }
+                }
+
+                $updatePurchase -> status = $purchase["status"];
                 $updatePurchase -> total = $purchase["total"];
                 $updatePurchase -> remark = $purchase["remark"];
                 $updatePurchase -> supplier_id = $purchase["supplier_id"];
                 $updatePurchase -> save();
 
-                $old_details = PurchaseDetail::where('purchase_id',$purchase["id"])->get();
 
-                foreach ($old_details as $old_detail) {
-                    $product = Product::find($old_detail['product_id']);
-                    $product -> total_amount -= $old_detail['num'];
-                    $product -> inventory -= $old_detail['num'];
-                    $product -> save();
-                }
-
-                PurchaseDetail::where('purchase_id',$purchase["id"])->delete();
+                ReturnPurchaseDetail::where('return_purchase_id',$purchase["id"])->delete();
 
                 foreach ($details as $detail) {
-                    $detail['purchase_id'] = $updatePurchase -> id;
+                    $detail['return_purchase_id'] = $purchase["id"];
 
-                    $validator2 = Validator::make($detail, PurchaseDetail::validate());
+                    $validator2 = Validator::make($detail, ReturnPurchaseDetail::validate());
 
                     if ($validator2->fails()) {
                         $error_msg = "";
@@ -236,19 +245,22 @@ class PurchaseController extends Controller
                         $data['result'] = false;
                         $data['message'] = $error_msg;
                     } else {
-                        PurchaseDetail::create($detail);
+                        ReturnPurchaseDetail::create($detail);
 
-                        $product = Product::find($detail['product_id']);
-                        $product -> total_amount += $detail['num'];
-                        $product -> inventory += $detail['num'];
-                        $product -> save();
+                        if ($updatePurchase["status"] == 0) {
+                            $product = Product::find($detail['product_id']);
+                            $product -> total_amount -= $detail['num'];
+                            $product -> inventory -= $detail['num'];
+                            $product -> save();
+                        }
+                        
                     }
 
                 }
 
 
                 $data["result"] = true;
-                $data["message"] = "進貨資料修改成功";
+                $data["message"] = "退貨資料修改成功";
 
             }
         
@@ -262,25 +274,26 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         try {
+            $purchase = ReturnPurchase::find($id);
 
-            $details = PurchaseDetail::where('purchase_id',$id)->get();
+            if ($purchase->status == 0) {
+                $details = ReturnPurchaseDetail::where('return_purchase_id',$id)->get();
 
-            foreach ($details as $detail) {
-                $product = Product::find($detail['product_id']);
+                foreach ($details as $detail) {
+                    $product = Product::find($detail['product_id']);
 
-                $product->total_amount -= $detail['num'];
-                $product->inventory -= $detail['num'];
+                    $product->total_amount += $detail['num'];
+                    $product->inventory += $detail['num'];
 
-                $product->save();
+                    $product->save();
+                }
+            }   
 
-            }
-            
-
-            PurchaseDetail::where('purchase_id',$id)->delete();
-            Purchase::destroy($id);
+            ReturnPurchaseDetail::where('return_purchase_id',$id)->delete();
+            ReturnPurchase::destroy($id);
 
             $data["result"] = true;
-            $data["message"] = "進貨資料刪除成功";
+            $data["message"] = "退貨資料刪除成功";
 
             return response()->json($data);
 
@@ -295,21 +308,23 @@ class PurchaseController extends Controller
             $ids = $request->json()->all();
 
             foreach ($ids as $id) {
-                $details = PurchaseDetail::where('purchase_id',$id)->get();
-                
-                foreach ($details as $detail) {
-                    $product = Product::find($detail['product_id']);
+                $purchase = ReturnPurchase::find($id);
 
-                    $product->total_amount -= $detail['num'];
-                    $product->inventory -= $detail['num'];
+                if ($purchase->status == 0) {
+                    $details = ReturnPurchaseDetail::where('return_purchase_id',$id)->get();
 
-                    $product->save();
+                    foreach ($details as $detail) {
+                        $product = Product::find($detail['product_id']);
 
-                }
-                
+                        $product->total_amount += $detail['num'];
+                        $product->inventory += $detail['num'];
 
-                PurchaseDetail::where('purchase_id',$id)->delete();
-                Purchase::destroy($id);
+                        $product->save();
+                    }
+                }   
+
+                ReturnPurchaseDetail::where('return_purchase_id',$id)->delete();
+                ReturnPurchase::destroy($id);
             }
 
             $data["result"] = true;
