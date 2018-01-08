@@ -111,3 +111,12 @@ Route::middleware('api')->delete('/admin/returnPurchase', 'Admin\ReturnPurchaseC
 Route::middleware('api')->get('/admin/returnPurchase/{id}/type', 'Admin\ReturnPurchaseController@findType');
 Route::middleware('api')->get('/admin/returnPurchase/{id}/product', 'Admin\PurchaseController@findProduct');
 Route::middleware('api')->get('/admin/returnPurchase/{id}/data', 'Admin\PurchaseController@findData');
+
+Route::middleware('api')->get('/admin/order', 'Admin\OrderController@findAll');
+Route::middleware('api')->get('/admin/order/{id}', 'Admin\OrderController@findOne');
+Route::middleware('api')->post('/admin/order', 'Admin\OrderController@save');
+Route::middleware('api')->put('/admin/order/{id}', 'Admin\OrderController@update');
+Route::middleware('api')->delete('/admin/order/{id}', 'Admin\OrderController@destroy');
+Route::middleware('api')->delete('/admin/order', 'Admin\OrderController@destroyMany');
+Route::middleware('api')->get('/admin/order/{id}/product', 'Admin\OrderController@findProduct');
+Route::middleware('api')->get('/admin/order/{id}/data', 'Admin\OrderController@findData');

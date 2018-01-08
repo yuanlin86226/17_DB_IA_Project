@@ -22,8 +22,8 @@ class OrderSeeder extends Seeder
             'discount' => '1',
             'total' => '2136',
             'remark' => '承 Her要L版，
-            You Never Walk Alone各1張，
-            WINGS要I、N版',
+You Never Walk Alone各1張，
+WINGS要I、N版',
             'customer_id' => '1'
         ]);
         Order::create([

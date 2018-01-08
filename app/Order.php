@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'payment_method','discount','total','remark','customer_id'
+        'status','payment_method','discount','total','remark','customer_id'
     ];
 
     public $timestamps = true;
@@ -15,7 +15,7 @@ class Order extends Model
     public static function validate($id=0, $merge=[]) {
         return array_merge(
         [
-            'payment_method' => 'required',
+            'status' => 'required',
             'total' => 'required',
             'customer_id' => 'required'
         ], 
@@ -24,6 +24,11 @@ class Order extends Model
 
     public function details() 
     {
-        return $this->hasMany('App\OrderDetail', 'id' ,'order_id');
+        return $this->hasMany('App\OrderDetail', 'order_id' ,'id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer', 'customer_id' ,'id');
     }
 }
