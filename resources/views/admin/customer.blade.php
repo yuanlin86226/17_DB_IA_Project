@@ -127,6 +127,7 @@
                                                         <th data-field="discount" data-sortable="true" data-formatter="discountFormatter">折扣</th>
                                                         <th data-field="total" data-sortable="true">總額</th>
                                                         <th data-field="remark" data-sortable="true">備註</th>
+                                                        <th data-field="status" data-sortable="true" data-formatter="statusFormatter">狀態</th>
                                                         <th data-field="payment_method" data-sortable="true" data-formatter="paymentFormatter">結帳方式</th>
                                                     </thead>
                                                     <tbody id="table-body"></tbody>
@@ -278,6 +279,12 @@
     function paymentFormatter (value, row, index) {
         if( value == 0 ){ return "現金"; }
         if( value == 1 ) {return "信用卡"; }
+    }
+
+    function statusFormatter (value, row, index) {
+        if( value == 0 ){ return "預訂"; }
+        if( value == 1 ) {return "取貨"; }
+        if( value == 2 ) {return "退貨"; }
     }
 
     var panelList = new Vue({
