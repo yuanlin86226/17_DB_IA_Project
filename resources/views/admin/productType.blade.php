@@ -123,8 +123,8 @@
                                                         <th data-field="cost" data-sortable="true">成本</th>
                                                         <th data-field="price" data-sortable="true">定價</th>
                                                         <th data-field="total_amount" data-sortable="true">總進貨量</th>
-                                                        <th data-field="inventory" data-sortable="true">目前庫存量</th>
-                                                        <th data-field="sales_amount" data-sortable="true">總銷售量</th>
+                                                        <th data-field="inventory" data-sortable="true">目前的實際庫存量</th>
+                                                        <th data-field="sales_amount" data-sortable="true">實際銷售量</th>
                                                     </thead>
                                                     <tbody id="table-body"></tbody>
                                                 </table>

@@ -282,7 +282,7 @@ class ProductSeeder extends Seeder
             'price' => '498',
             'total_amount' => '10',
             'order_amount' => '2',
-            'inventory' => '8',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '1'
@@ -294,7 +294,7 @@ class ProductSeeder extends Seeder
             'price' => '588',
             'total_amount' => '10',
             'order_amount' => '2',
-            'inventory' => '8',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '1'
@@ -306,7 +306,7 @@ class ProductSeeder extends Seeder
             'price' => '498',
             'total_amount' => '10',
             'order_amount' => '1',
-            'inventory' => '9',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '1'
@@ -319,7 +319,7 @@ class ProductSeeder extends Seeder
             'price' => '388',
             'total_amount' => '10',
             'order_amount' => '5',
-            'inventory' => '5',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '2'
@@ -331,7 +331,7 @@ class ProductSeeder extends Seeder
             'price' => '398',
             'total_amount' => '10',
             'order_amount' => '5',
-            'inventory' => '5',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '2'
@@ -343,7 +343,7 @@ class ProductSeeder extends Seeder
             'price' => '488',
             'total_amount' => '10',
             'order_amount' => '5',
-            'inventory' => '5',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '2'
@@ -355,7 +355,7 @@ class ProductSeeder extends Seeder
             'price' => '398',
             'total_amount' => '10',
             'order_amount' => '3',
-            'inventory' => '7',
+            'inventory' => '10',
             'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '2'
