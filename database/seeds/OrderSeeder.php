@@ -18,7 +18,7 @@ class OrderSeeder extends Seeder
 
         // BTS
         Order::create([
-            'payment_method' => '0',
+            'status' => '0',
             'discount' => '1',
             'total' => '2136',
             'remark' => '承 Her要L版，
@@ -27,6 +27,7 @@ class OrderSeeder extends Seeder
             'customer_id' => '1'
         ]);
         Order::create([
+            'status' => '1',
             'payment_method' => '0',
             'discount' => '1',
             'total' => '3802',
@@ -34,6 +35,7 @@ class OrderSeeder extends Seeder
             'customer_id' => '1'
         ]);
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => '2',
             'total' => '5434',
@@ -43,13 +45,14 @@ class OrderSeeder extends Seeder
 
         // Got7
         Order::create([
-            'payment_method' => '1',
+            'status' => '0',
             'discount' => '0',
             'total' => '6808',
             'remark' => '附贈小卡',
             'customer_id' => '2'
         ]);
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => '0',
             'total' => '3689',
@@ -57,6 +60,7 @@ class OrderSeeder extends Seeder
             'customer_id' => '2'
         ]);
         Order::create([
+            'status' => '1',
             'payment_method' => '0',
             'discount' => null,
             'total' => '2738',
@@ -66,6 +70,7 @@ class OrderSeeder extends Seeder
 
         // Twice
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => '1',
             'total' => '7808',
@@ -73,6 +78,7 @@ class OrderSeeder extends Seeder
             'customer_id' => '5'
         ]);
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => '0',
             'total' => '6678',
@@ -82,6 +88,7 @@ class OrderSeeder extends Seeder
 
         // Day6
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => '0',
             'total' => '8343',
@@ -91,6 +98,7 @@ class OrderSeeder extends Seeder
 
         // Bigbang
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => '2',
             'total' => '6943',
@@ -100,6 +108,7 @@ class OrderSeeder extends Seeder
 
         // HighLight
         Order::create([
+            'status' => '1',
             'payment_method' => '1',
             'discount' => null,
             'total' => '5886',
@@ -109,6 +118,7 @@ class OrderSeeder extends Seeder
 
         // WannaOne
         Order::create([
+            'status' => '1',
             'payment_method' => '0',
             'discount' => null,
             'total' => '4980',

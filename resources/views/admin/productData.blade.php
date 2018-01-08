@@ -31,7 +31,7 @@
                                         <th data-field="type_name"  data-sortable="true">類別</th>
                                         <th data-field="name"  data-sortable="true">名稱</th>
                                         <th data-field="price" data-sortable="true">定價</th>
-                                        <th data-field="inventory" data-sortable="true">庫存量</th>
+                                        <th data-field="inventory" data-sortable="true">實際庫存量</th>
                                         <th data-field="created_at" data-visible="false" data-sortable="true">建立時間</th>
                                         <th data-field="updated_at" data-visible="false" data-sortable="true">更新時間</th>
                                         <th data-field="actions" data-width="150" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">操作</th>
@@ -89,7 +89,16 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">庫存量</label>
+                                            <label class="col-sm-2 control-label">客戶訂購量</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.order_amount}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">實際庫存量</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.inventory}}</p>
                                             </div>
@@ -98,7 +107,7 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">總訂貨量</label>
+                                            <label class="col-sm-2 control-label">總進貨量</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.total_amount}}</p>
                                             </div>
@@ -107,9 +116,18 @@
 
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">總成交量</label>
+                                            <label class="col-sm-2 control-label">實際成交量</label>
                                             <div class="col-sm-10">
                                                 <p class="form-control-static">@{{row.sales_amount}}</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">庫存遺失量</label>
+                                            <div class="col-sm-10">
+                                                <p class="form-control-static">@{{row.lost_amount}}</p>
                                             </div>
                                         </div>
                                     </fieldset>

@@ -99,8 +99,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '2',
             'sales_amount' => '8',
+            'lost_amount' => '0',
             'type_id' => '5'
         ]);
         Product::create([
@@ -109,8 +111,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '6',
             'sales_amount' => '4',
+            'lost_amount' => '0',
             'type_id' => '5'
         ]);
         Product::create([
@@ -119,8 +123,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '8',
             'sales_amount' => '2',
+            'lost_amount' => '0',
             'type_id' => '5'
         ]);
         Product::create([
@@ -129,8 +135,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '418',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '5'
         ]);
         Product::create([
@@ -139,8 +147,10 @@ class ProductSeeder extends Seeder
             'cost' => '750',
             'price' => '988',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '8',
             'sales_amount' => '2',
+            'lost_amount' => '0',
             'type_id' => '5'
         ]);
 
@@ -150,8 +160,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '468',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '7',
             'sales_amount' => '3',
+            'lost_amount' => '0',
             'type_id' => '6'
         ]);
         Product::create([
@@ -160,8 +172,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '6',
             'sales_amount' => '4',
+            'lost_amount' => '0',
             'type_id' => '6'
         ]);
         Product::create([
@@ -170,8 +184,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '6'
         ]);
 
@@ -181,8 +197,10 @@ class ProductSeeder extends Seeder
             'cost' => '150',
             'price' => '358',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -191,8 +209,10 @@ class ProductSeeder extends Seeder
             'cost' => '150',
             'price' => '398',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -201,8 +221,10 @@ class ProductSeeder extends Seeder
             'cost' => '150',
             'price' => '398',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -211,8 +233,10 @@ class ProductSeeder extends Seeder
             'cost' => '220',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '6',
             'sales_amount' => '4',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -221,8 +245,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '448',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '7',
             'sales_amount' => '3',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -231,8 +257,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '458',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '7',
             'sales_amount' => '3',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -241,8 +269,10 @@ class ProductSeeder extends Seeder
             'cost' => '350',
             'price' => '678',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '7',
             'sales_amount' => '3',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -251,8 +281,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '2',
             'inventory' => '8',
-            'sales_amount' => '2',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -261,8 +293,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '588',
             'total_amount' => '10',
+            'order_amount' => '2',
             'inventory' => '8',
-            'sales_amount' => '2',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
         Product::create([
@@ -271,8 +305,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '1',
             'inventory' => '9',
-            'sales_amount' => '1',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '1'
         ]);
 
@@ -282,8 +318,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '388',
             'total_amount' => '10',
+            'order_amount' => '5',
             'inventory' => '5',
-            'sales_amount' => '5',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -292,8 +330,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
+            'order_amount' => '5',
             'inventory' => '5',
-            'sales_amount' => '5',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -302,8 +342,10 @@ class ProductSeeder extends Seeder
             'cost' => '300',
             'price' => '488',
             'total_amount' => '10',
+            'order_amount' => '5',
             'inventory' => '5',
-            'sales_amount' => '5',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -312,8 +354,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
+            'order_amount' => '3',
             'inventory' => '7',
-            'sales_amount' => '3',
+            'sales_amount' => '0',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -322,8 +366,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '7',
             'sales_amount' => '3',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -332,8 +378,10 @@ class ProductSeeder extends Seeder
             'cost' => '850',
             'price' => '968',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '7',
             'sales_amount' => '3',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -342,8 +390,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '8',
             'sales_amount' => '2',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -352,8 +402,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '518',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '8',
             'sales_amount' => '2',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -362,8 +414,10 @@ class ProductSeeder extends Seeder
             'cost' => '300',
             'price' => '468',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '9',
             'sales_amount' => '1',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
         Product::create([
@@ -372,8 +426,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '438',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '9',
             'sales_amount' => '1',
+            'lost_amount' => '0',
             'type_id' => '2'
         ]);
 
@@ -383,8 +439,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '448',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '3'
         ]);
         Product::create([
@@ -393,8 +451,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '428',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '3'
         ]);
         Product::create([
@@ -403,8 +463,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '480',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '3'
         ]);
         Product::create([
@@ -413,8 +475,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '3'
         ]);
 
@@ -424,8 +488,10 @@ class ProductSeeder extends Seeder
             'cost' => '200',
             'price' => '428',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
         Product::create([
@@ -434,8 +500,10 @@ class ProductSeeder extends Seeder
             'cost' => '300',
             'price' => '518',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
         Product::create([
@@ -444,8 +512,10 @@ class ProductSeeder extends Seeder
             'cost' => '300',
             'price' => '518',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
         Product::create([
@@ -454,8 +524,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '488',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
         Product::create([
@@ -464,8 +536,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '488',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
         Product::create([
@@ -474,8 +548,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
         Product::create([
@@ -484,8 +560,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '4'
         ]);
 
@@ -495,8 +573,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '7'
         ]);
         Product::create([
@@ -505,8 +585,10 @@ class ProductSeeder extends Seeder
             'cost' => '250',
             'price' => '498',
             'total_amount' => '10',
+            'order_amount' => '0',
             'inventory' => '5',
             'sales_amount' => '5',
+            'lost_amount' => '0',
             'type_id' => '7'
         ]);
 

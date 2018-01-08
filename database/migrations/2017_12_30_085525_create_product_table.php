@@ -20,8 +20,10 @@ class CreateProductTable extends Migration
             $table->integer('cost')->nullable();
             $table->integer('price')->nullable();
             $table->integer('total_amount');
+            $table->integer('order_amount');
             $table->integer('inventory');
             $table->integer('sales_amount');
+            $table->integer('lost_amount');
 
             $table->integer('type_id')->unsigned();
             $table->foreign('type_id')
