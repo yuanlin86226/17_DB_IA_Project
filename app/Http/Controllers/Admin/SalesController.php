@@ -20,14 +20,14 @@ use Redirect;
 use Request;
 use DB;
 
-class OrderController extends Controller
+class SalesController extends Controller
 {
     public function index()
     {
         if (Auth::check()) {
 
             // menu_id要確認
-            $menu_id = 16;
+            $menu_id = 17;
             $user_id = Auth::user()->id;
 
             $role_menus = User::able_page($user_id, $menu_id);
@@ -35,7 +35,7 @@ class OrderController extends Controller
             if (count($role_menus)==0) {
                 return Redirect::action('AuthController@login');
             } else {
-                return View::make('admin/order',['menu_id' => $menu_id]);
+                return View::make('admin/sales',['menu_id' => $menu_id]);
             }
             
         } else {
@@ -46,7 +46,7 @@ class OrderController extends Controller
     public function findAll()
     {
         // $purchases = Purchase::with('supplier','details')->orderBy('created_at','desc')->get();
-        $orders = Order::with('customer')->where('status',0)->orderBy('created_at','desc')->orderBy('id','desc')->get(); 
+        $orders = Order::with('customer')->where('status',1)->orderBy('created_at','desc')->orderBy('id','desc')->get(); 
 
         foreach ($orders as $order) {
             $order['customer_name'] = $order['customer']['name'];
@@ -91,7 +91,7 @@ class OrderController extends Controller
     {
         try {
             $order = [
-                'status' => 0,
+                'status' => 1,
                 'discount' => $request["discount"],
                 'total' => $request["total"],
                 'remark' => $request["remark"],
@@ -142,7 +142,8 @@ class OrderController extends Controller
                         OrderDetail::create($detail);
 
                         $product = Product::find($detail['product_id']);
-                        $product -> order_amount += $detail['num'];
+                        $product -> inventory -= $detail['num'];
+                        $product -> sales_amount += $detail['num'];
                         $product -> save();
                     }
 
@@ -211,7 +212,10 @@ class OrderController extends Controller
 
                 foreach ($old_details as $old_detail) {
                     $product = Product::find($old_detail['product_id']);
-                    $product -> order_amount -= $old_detail['num'];
+
+                    $product -> inventory += $detail['num'];
+                    $product -> sales_amount -= $detail['num'];
+
                     $product -> save();
                 }
 
@@ -272,7 +276,8 @@ class OrderController extends Controller
             foreach ($details as $detail) {
                 $product = Product::find($detail['product_id']);
 
-                $product->order_amount -= $detail['num'];
+                $product -> inventory += $detail['num'];
+                $product -> sales_amount -= $detail['num'];
 
                 $product->save();
 
@@ -303,7 +308,8 @@ class OrderController extends Controller
                 foreach ($details as $detail) {
                     $product = Product::find($detail['product_id']);
 
-                    $product->order_amount -= $detail['num'];
+                    $product -> inventory += $detail['num'];
+                    $product -> sales_amount -= $detail['num'];
 
                     $product->save();
 

@@ -62,7 +62,7 @@ WINGS要I、N版',
         Order::create([
             'status' => '1',
             'payment_method' => '0',
-            'discount' => null,
+            'discount' => '-1',
             'total' => '2738',
             'remark' => '附贈限量簽名海報',
             'customer_id' => '2'
@@ -110,7 +110,7 @@ WINGS要I、N版',
         Order::create([
             'status' => '1',
             'payment_method' => '1',
-            'discount' => null,
+            'discount' => '-1',
             'total' => '5886',
             'remark' => '附贈限量海報及小卡',
             'customer_id' => '7'
@@ -120,7 +120,7 @@ WINGS要I、N版',
         Order::create([
             'status' => '1',
             'payment_method' => '0',
-            'discount' => null,
+            'discount' => '-1',
             'total' => '4980',
             'remark' => '附贈簽名海報及特別小卡',
             'customer_id' => '8'
