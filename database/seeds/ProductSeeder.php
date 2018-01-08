@@ -234,8 +234,8 @@ class ProductSeeder extends Seeder
             'price' => '498',
             'total_amount' => '10',
             'order_amount' => '0',
-            'inventory' => '6',
-            'sales_amount' => '4',
+            'inventory' => '7',
+            'sales_amount' => '3',
             'lost_amount' => '0',
             'type_id' => '1'
         ]);
@@ -246,8 +246,8 @@ class ProductSeeder extends Seeder
             'price' => '448',
             'total_amount' => '10',
             'order_amount' => '0',
-            'inventory' => '8',
-            'sales_amount' => '2',
+            'inventory' => '7',
+            'sales_amount' => '3',
             'lost_amount' => '0',
             'type_id' => '1'
         ]);
@@ -427,8 +427,8 @@ class ProductSeeder extends Seeder
             'price' => '438',
             'total_amount' => '10',
             'order_amount' => '0',
-            'inventory' => '9',
-            'sales_amount' => '1',
+            'inventory' => '10',
+            'sales_amount' => '0',
             'lost_amount' => '0',
             'type_id' => '2'
         ]);

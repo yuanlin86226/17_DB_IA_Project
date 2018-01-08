@@ -24,7 +24,8 @@ class OrderSeeder extends Seeder
             'remark' => '承 Her要L版，
 You Never Walk Alone各1張，
 WINGS要I、N版',
-            'customer_id' => '1'
+            'customer_id' => '1',
+            'back_order_id' => null
         ]);
         Order::create([
             'status' => '1',
@@ -32,7 +33,8 @@ WINGS要I、N版',
             'discount' => '1',
             'total' => '3802',
             'remark' => 'Young Forever黑夜版1張',
-            'customer_id' => '1'
+            'customer_id' => '1',
+            'back_order_id' => null
         ]);
         Order::create([
             'status' => '1',
@@ -40,7 +42,8 @@ WINGS要I、N版',
             'discount' => '2',
             'total' => '5434',
             'remark' => '附贈限量立牌組',
-            'customer_id' => '1'
+            'customer_id' => '1',
+            'back_order_id' => null
         ]);
 
         // Got7
@@ -49,7 +52,8 @@ WINGS要I、N版',
             'discount' => '0',
             'total' => '6808',
             'remark' => '附贈小卡',
-            'customer_id' => '2'
+            'customer_id' => '2',
+            'back_order_id' => null
         ]);
         Order::create([
             'status' => '1',
@@ -57,7 +61,8 @@ WINGS要I、N版',
             'discount' => '0',
             'total' => '3689',
             'remark' => '附贈新版人形立牌',
-            'customer_id' => '2'
+            'customer_id' => '2',
+            'back_order_id' => null
         ]);
         Order::create([
             'status' => '1',
@@ -65,7 +70,8 @@ WINGS要I、N版',
             'discount' => '-1',
             'total' => '2738',
             'remark' => '附贈限量簽名海報',
-            'customer_id' => '2'
+            'customer_id' => '2',
+            'back_order_id' => null
         ]);
 
         // Twice
@@ -75,7 +81,8 @@ WINGS要I、N版',
             'discount' => '1',
             'total' => '7808',
             'remark' => '附贈小卡',
-            'customer_id' => '5'
+            'customer_id' => '5',
+            'back_order_id' => null
         ]);
         Order::create([
             'status' => '1',
@@ -83,7 +90,8 @@ WINGS要I、N版',
             'discount' => '0',
             'total' => '6678',
             'remark' => '附贈海報',
-            'customer_id' => '5'
+            'customer_id' => '5',
+            'back_order_id' => null
         ]);
 
         // Day6
@@ -93,7 +101,8 @@ WINGS要I、N版',
             'discount' => '0',
             'total' => '8343',
             'remark' => '附贈海報',
-            'customer_id' => '4'
+            'customer_id' => '4',
+            'back_order_id' => null
         ]);
 
         // Bigbang
@@ -103,7 +112,8 @@ WINGS要I、N版',
             'discount' => '2',
             'total' => '6943',
             'remark' => '附贈海報及小卡',
-            'customer_id' => '6'
+            'customer_id' => '6',
+            'back_order_id' => null
         ]);
 
         // HighLight
@@ -113,7 +123,8 @@ WINGS要I、N版',
             'discount' => '-1',
             'total' => '5886',
             'remark' => '附贈限量海報及小卡',
-            'customer_id' => '7'
+            'customer_id' => '7',
+            'back_order_id' => null
         ]);
 
         // WannaOne
@@ -123,29 +134,34 @@ WINGS要I、N版',
             'discount' => '-1',
             'total' => '4980',
             'remark' => '附贈簽名海報及特別小卡',
-            'customer_id' => '8'
+            'customer_id' => '8',
+            'back_order_id' => null
         ]);
 
+
+        // 退貨單
         Order::create([
             'status' => '2',
-            'total' => '498',
-            'remark' => '',
-            'customer_id' => '1'
+            'payment_method' => '1',
+            'discount' => '2',
+            'total' => '5434',
+            'remark' => '附贈限量立牌組',
+            'customer_id' => '1',
+            'back_order_id' => '3'
         ]);
-
-
+        Order::create([
+            'status' => '2',
+            'payment_method' => '0',
+            'discount' => '-1',
+            'total' => '2738',
+            'remark' => '附贈限量簽名海報',
+            'customer_id' => '2',
+            'back_order_id' => '6'
+        ]);
 
 
 
         DB::table('order_details')->delete();
-
-        OrderDetail::create([
-            'order_id' => '13',
-            'product_id' => '13',
-            'name' => '花樣年華 pt.1',
-            'price' => '498',
-            'num' => '1'
-        ]);
 
         // BTS
         OrderDetail::create([
@@ -451,6 +467,23 @@ WINGS要I、N版',
             'name' => '1X1=1',
             'price' => '498',
             'num' => '5'
+        ]);
+
+
+        // 退貨
+        OrderDetail::create([
+            'order_id' => '13',
+            'product_id' => '12',
+            'name' => 'Dark & Wild',
+            'price' => '498',
+            'num' => '1'
+        ]);
+        OrderDetail::create([
+            'order_id' => '6',
+            'product_id' => '28',
+            'name' => '7 FOR 7',
+            'price' => '438',
+            'num' => '1'
         ]);
     }
 }

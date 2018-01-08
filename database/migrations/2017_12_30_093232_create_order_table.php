@@ -21,6 +21,10 @@ class CreateOrderTable extends Migration
             $table->integer('total');
             $table->string('remark')->nullable();
 
+            $table->integer('back_order_id')->unsigned()->nullable();
+            $table->foreign('back_order_id')
+                ->references('id')->on('orders');
+
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')
                 ->references('id')->on('customers');

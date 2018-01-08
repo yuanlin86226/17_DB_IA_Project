@@ -129,3 +129,12 @@ Route::middleware('api')->delete('/admin/sales/{id}', 'Admin\SalesController@des
 Route::middleware('api')->delete('/admin/sales', 'Admin\SalesController@destroyMany');
 Route::middleware('api')->get('/admin/sales/{id}/product', 'Admin\SalesController@findProduct');
 Route::middleware('api')->get('/admin/sales/{id}/data', 'Admin\SalesController@findData');
+
+Route::middleware('api')->get('/admin/returnOrder', 'Admin\ReturnOrderController@findAll');
+Route::middleware('api')->get('/admin/returnOrder/{id}', 'Admin\ReturnOrderController@findOne');
+Route::middleware('api')->post('/admin/returnOrder', 'Admin\ReturnOrderController@save');
+Route::middleware('api')->put('/admin/returnOrder/{id}', 'Admin\ReturnOrderController@update');
+Route::middleware('api')->delete('/admin/returnOrder/{id}', 'Admin\ReturnOrderController@destroy');
+Route::middleware('api')->delete('/admin/returnOrder', 'Admin\ReturnOrderController@destroyMany');
+Route::middleware('api')->get('/admin/returnOrder/{id}/product', 'Admin\ReturnOrderController@findProduct');
+Route::middleware('api')->get('/admin/returnOrder/{id}/data', 'Admin\ReturnOrderController@findData');

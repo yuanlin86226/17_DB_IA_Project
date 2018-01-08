@@ -38,11 +38,9 @@ Route::get('/admin/returnPurchase','Admin\ReturnPurchaseController@index');
 
 Route::get('/admin/order','Admin\OrderController@index');
 Route::get('/admin/sales','Admin\SalesController@index');
+Route::get('/admin/returnOrder','Admin\ReturnOrderController@index');
 
 
-Route::get('/admin/returnOrder', function () {
-    return view('/admin/code');
-});
 
 // Route::get('/admin/', function () {
 //     return view('/admin/code');
