@@ -126,11 +126,26 @@ WINGS要I、N版',
             'customer_id' => '8'
         ]);
 
+        Order::create([
+            'status' => '2',
+            'total' => '498',
+            'remark' => '',
+            'customer_id' => '1'
+        ]);
+
 
 
 
 
         DB::table('order_details')->delete();
+
+        OrderDetail::create([
+            'order_id' => '13',
+            'product_id' => '13',
+            'name' => '花樣年華 pt.1',
+            'price' => '498',
+            'num' => '1'
+        ]);
 
         // BTS
         OrderDetail::create([

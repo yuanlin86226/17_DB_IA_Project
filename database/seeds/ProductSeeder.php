@@ -246,8 +246,8 @@ class ProductSeeder extends Seeder
             'price' => '448',
             'total_amount' => '10',
             'order_amount' => '0',
-            'inventory' => '7',
-            'sales_amount' => '3',
+            'inventory' => '8',
+            'sales_amount' => '2',
             'lost_amount' => '0',
             'type_id' => '1'
         ]);

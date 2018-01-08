@@ -192,7 +192,7 @@ class CustomerController extends Controller
     {
         $data = array();
 
-        $orders = Order::with('details')->where('customer_id',$id)->get();
+        $orders = Order::with('details')->where('status','<>',2)->where('customer_id',$id)->get();
 
 
         return response()->json($orders);

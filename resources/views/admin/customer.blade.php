@@ -284,7 +284,6 @@
     function statusFormatter (value, row, index) {
         if( value == 0 ){ return "預訂"; }
         if( value == 1 ) {return "取貨"; }
-        if( value == 2 ) {return "退貨"; }
     }
 
     var panelList = new Vue({
