@@ -642,7 +642,7 @@
                 
                 Vue.http.get(__REST_API_URL__ + product_id + '/data').then(function(response) {
                     _this.value_names[form_num] = response.body['name'];
-                    _this.value_prices[form_num] = response.body['cost'];
+                    _this.value_prices[form_num] = response.body['price'];
                     _this.value_inventorys[form_num] = response.body['inventory'] - response.body['order_amount'];
 
                     _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
