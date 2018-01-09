@@ -138,3 +138,5 @@ Route::middleware('api')->delete('/admin/returnOrder/{id}', 'Admin\ReturnOrderCo
 Route::middleware('api')->delete('/admin/returnOrder', 'Admin\ReturnOrderController@destroyMany');
 Route::middleware('api')->get('/admin/returnOrder/{id}/product', 'Admin\ReturnOrderController@findProduct');
 Route::middleware('api')->get('/admin/returnOrder/{id}/data', 'Admin\ReturnOrderController@findData');
+Route::middleware('api')->get('/admin/returnOrder/{id}/orders', 'Admin\ReturnOrderController@getOrders');
+Route::middleware('api')->get('/admin/returnOrder/{id}/products', 'Admin\ReturnOrderController@getProducts');

@@ -144,7 +144,7 @@ WINGS要I、N版',
             'status' => '2',
             'payment_method' => '1',
             'discount' => '2',
-            'total' => '5434',
+            'total' => '498',
             'remark' => '附贈限量立牌組',
             'customer_id' => '1',
             'back_order_id' => '3'
@@ -153,7 +153,7 @@ WINGS要I、N版',
             'status' => '2',
             'payment_method' => '0',
             'discount' => '-1',
-            'total' => '2738',
+            'total' => '438',
             'remark' => '附贈限量簽名海報',
             'customer_id' => '2',
             'back_order_id' => '6'
@@ -213,7 +213,7 @@ WINGS要I、N版',
             'product_id' => '12',
             'name' => 'Dark & Wild',
             'price' => '498',
-            'num' => '4'
+            'num' => '3'
         ]);
         OrderDetail::create([
             'order_id' => '3',
@@ -301,13 +301,6 @@ WINGS要I、N版',
             'product_id' => '27',
             'name' => 'FLIGHT LOG:ARRIVAL',
             'price' => '468',
-            'num' => '1'
-        ]);
-        OrderDetail::create([
-            'order_id' => '6',
-            'product_id' => '28',
-            'name' => '7 FOR 7',
-            'price' => '438',
             'num' => '1'
         ]);
 
@@ -479,7 +472,7 @@ WINGS要I、N版',
             'num' => '1'
         ]);
         OrderDetail::create([
-            'order_id' => '6',
+            'order_id' => '14',
             'product_id' => '28',
             'name' => '7 FOR 7',
             'price' => '438',

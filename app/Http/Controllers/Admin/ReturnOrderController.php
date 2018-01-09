@@ -58,8 +58,9 @@ class ReturnOrderController extends Controller
 
     public function findOne($id)
     {
-        $order = Order::with('customer','details')->find($id);
+        $order = Order::with('customer','details','back')->find($id);
         $order['customer_name'] = $order['customer']['name'];
+        // $order['back_time'] = $order['back']['created_at'];
 
         if(isset($order['details'])){
             foreach ($order['details'] as $detail) {
@@ -69,6 +70,7 @@ class ReturnOrderController extends Controller
         }
 
         unset($order['customer']);
+        // unset($order['back']);
 
         return response()->json($order);
     }
@@ -85,6 +87,38 @@ class ReturnOrderController extends Controller
         $prouduct = Product::find($id);
 
         return response()->json($prouduct);
+    }
+
+    public function getOrders($id)
+    {
+        $orders = Order::where('customer_id',$id)->where('status',1)->get();
+
+        return response()->json($orders);
+    }
+
+    public function getProducts($id)
+    {
+        $order = Order::with('details','back')->find($id);
+
+        // $order['back']['details'] = Order::with('details')->find($order['back']['id']);
+        // // $orders = OrderDetail::with('details','back')->where('order_id',$id)->get();
+        // $type_ids = array();
+        // foreach ($order['back']['details'] as $index => $detail) {
+        //     $product = Product::find($detail['product_id']);
+        //     $type_ids[$index] = $product['type_id'];
+        // }
+
+        // $types = array();
+        // foreach ($type_ids as $key1 => $type_id) {
+        //     foreach ($type_ids as $key2 => $type_id) {
+        //         if ($types[]) {
+
+        //         }
+        //     }
+        // }
+        // // $order['types'] = 
+        
+        return response()->json($order);
     }
 
     public function save(data_request $request)

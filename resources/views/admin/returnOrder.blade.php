@@ -153,7 +153,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">客戶名稱</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control menu-dropdown" v-model="row.customer_id">
+                                                <select class="form-control menu-dropdown" v-model="row.customer_id" v-on:change="customer_select_change">
                                                     <option disabled="disabled" value="0" selected>請選擇客戶</option>
                                                     <option v-for="customer in customers" :value="customer.id">@{{ customer.name }}</option>
                                                 </select>
@@ -161,42 +161,18 @@
                                         </div>
                                     </fieldset>
 
-                                    <fieldset v-if="type==='update'">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">狀態</label>
-                                            <div class="col-sm-9">
-                                                <input v-model="row.status" v-on:change="status_change" name="status" class="radio-button" type="radio" value="0" checked> 預定
-                                                <input v-model="row.status" v-on:change="status_change" name="status" class="radio-button" type="radio" value="1"> 取貨
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset id="payment">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">付款方式</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control menu-dropdown" v-model="row.payment_method">
-                                                    <option disabled="disabled" value="-1" selected>請選擇付款方式</option>
-                                                    <option value="0">現金</option>
-                                                    <option value="1">刷卡</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
                                     <fieldset>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">折扣數</label>
+                                            <label class="col-sm-2 control-label">購買紀錄</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control menu-dropdown" v-model="row.discount" v-on:change="count_total">
-                                                    <option value="-1" selected>無折扣</option>
-                                                    <option value="0" selected>9折</option>
-                                                    <option value="1" selected>8折</option>
-                                                    <option value="2" selected>7折</option>
+                                                <select class="form-control menu-dropdown" v-model="row.back_order_id" v-on:change="order_select_change">
+                                                    <option disabled="disabled" value="0" selected>請選擇改買紀錄</option>
+                                                    <option v-for="order in orders" :value="order.id">@{{ order.created_at }}</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </fieldset>
+
                                     <fieldset>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">總額</label>
@@ -206,6 +182,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
+
                                     <fieldset>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">備註</label>
@@ -378,16 +355,6 @@
 
                     _this.row['created_at'] = moment(_this.row['created_at']).format('YYYY-MM-DD');
 
-                    if (_this.row['discount'] == 0) {
-                        _this.row['discount'] = "9折";
-                    } else if (_this.row['discount'] == 1) {
-                        _this.row['discount'] = "8折";
-                    } else if (_this.row['discount'] == 2) {
-                        _this.row['discount'] = "7折";
-                    } else if (_this.row['discount'] == -1) {
-                        _this.row['discount'] = "無折扣";
-                    } 
-                    // _this.row['remark'].replace(/&lt;br \/>/gi, "\n");
                 });
             }
         }
@@ -401,6 +368,7 @@
                 _token: csrf_token,
             },
             customers:{},
+            orders:{},
             types:{},
             products:[],
             apply_forms: [],
@@ -537,84 +505,76 @@
                     _this.customers = response.body;
                     _this.customers = JSON.parse(JSON.stringify(_this.customers));
                     
-                    Vue.http.get('/api/admin/productType').then(function(response) {
-                        _this.types = response.body;
-                        _this.types = JSON.parse(JSON.stringify(_this.types));
+                    Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
+                        _this.row = response.body;
+                        _this.row = JSON.parse(JSON.stringify(_this.row));
 
-                        Vue.http.get(__REST_API_URL__ + (id || 'new')).then(function(response) {
-                            _this.row = response.body;
+                        total = _this.row['total'];
 
-                            total = _this.row['total'];
+                        if (!id) {
+                            _this.row['customer_id'] = 0;
+                            _this.row['order_id'] = 0;
 
-                            if (!id) {
-                                _this.row['customer_id'] = 0;
-                                _this.row['discount'] = -1;
-                                _this.row['payment_method'] = -1;
+                            _this.apply_forms[_this.apply_forms.length] = _this.apply_forms.length;
+                            _this.apply_forms = JSON.parse(JSON.stringify(_this.apply_forms));
 
-                                _this.apply_forms[_this.apply_forms.length] = _this.apply_forms.length;
-                                _this.apply_forms = JSON.parse(JSON.stringify(_this.apply_forms));
-
-                                _this.value_types[_this.apply_forms.length-1] = '';
-                                _this.value_products[_this.apply_forms.length-1] = '';
-                                _this.value_names[_this.apply_forms.length-1] = '';
-                                _this.value_prices[_this.apply_forms.length-1] = '';
-                                _this.value_nums[_this.apply_forms.length-1] = '';
+                            _this.value_types[_this.apply_forms.length-1] = '';
+                            _this.value_products[_this.apply_forms.length-1] = '';
+                            _this.value_names[_this.apply_forms.length-1] = '';
+                            _this.value_prices[_this.apply_forms.length-1] = '';
+                            _this.value_nums[_this.apply_forms.length-1] = '';
 
                                 
-                                _this.value_types = JSON.parse(JSON.stringify(_this.value_types));
-                                _this.value_products = JSON.parse(JSON.stringify(_this.value_products));
-                                _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
-                                _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
-                                _this.value_nums = JSON.parse(JSON.stringify(_this.value_nums));
+                            _this.value_types = JSON.parse(JSON.stringify(_this.value_types));
+                            _this.value_products = JSON.parse(JSON.stringify(_this.value_products));
+                            _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
+                            _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
+                            _this.value_nums = JSON.parse(JSON.stringify(_this.value_nums));
 
+                            swal({
+                                title:"使用須知",
+                                text:"請先選擇客戶，在選擇購買紀錄",
+                                type:"info"
+                            }).then( function () {
                                 swal({
                                     title:"使用須知",
-                                    text:"填寫產品欄時，若增加過多產品欄可留白",
+                                    text:"購物紀錄的資料會顯示於下方，自行修改即可",
                                     type:"info"
-                                }).then( function () {
-                                    swal({
-                                        title:"使用須知",
-                                        text:"若產品欄的數量或定價留白，將不列入訂購單內",
-                                        type:"info"
-                                    }).then( function () {
-                                        swal({
-                                            title:"使用須知",
-                                            text:"總額會自動計算，可手動修改，更新前請確認",
-                                            type:"info"
-                                        });
-                                    });
                                 });
+                            });
             
-                            } else {
-                                // 帶入資料
-                                for (i=0; i<response.body['details'].length; i++) {
-                                    _this.apply_forms[i] = i;
-                                    _this.apply_forms = JSON.parse(JSON.stringify(_this.apply_forms));
+                        } else {
+                            
+                            _this.customer_select_change();
+
+                            // _this.orders = response.body['back'];
+                            // 帶入資料
+                            for (i=0; i<response.body['details'].length; i++) {
+                                _this.apply_forms[i] = i;
+                                _this.apply_forms = JSON.parse(JSON.stringify(_this.apply_forms));
 
 
-                                    _this.value_types[i] = response.body['details'][i]['type_id'];
-                                    _this.value_types = JSON.parse(JSON.stringify(_this.value_types));
-                                    _this.type_select_change(i);
+                                _this.value_types[i] = response.body['details'][i]['type_id'];
+                                _this.value_types = JSON.parse(JSON.stringify(_this.value_types));
+                                // _this.type_select_change(i);
 
-                                    _this.value_products[i] = response.body['details'][i]['product_id'];
-                                    _this.value_products = JSON.parse(JSON.stringify(_this.value_products));
+                                _this.value_products[i] = response.body['details'][i]['product_id'];
+                                _this.value_products = JSON.parse(JSON.stringify(_this.value_products));
 
-                                    _this.value_names[i] = response.body['details'][i]['name'];
-                                    _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
+                                _this.value_names[i] = response.body['details'][i]['name'];
+                                _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
 
-                                    _this.value_prices[i] = response.body['details'][i]['price'];
-                                    _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
+                                _this.value_prices[i] = response.body['details'][i]['price'];
+                                _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
                                     
-                                    _this.value_nums[i] = response.body['details'][i]['num'];
-                                    _this.value_nums = JSON.parse(JSON.stringify(_this.value_nums));
-
-                                }
+                                _this.value_nums[i] = response.body['details'][i]['num'];
+                                _this.value_nums = JSON.parse(JSON.stringify(_this.value_nums));
 
                             }
+                        }
 
-                            Vue.nextTick(function () {
-                                _this.row.total = total;
-                            });
+                        Vue.nextTick(function () {
+                            _this.row.total = total;
                         });
                     });
                 });
@@ -639,6 +599,29 @@
                 _this.value_names = JSON.parse(JSON.stringify(_this.value_names));
                 _this.value_prices = JSON.parse(JSON.stringify(_this.value_prices));
                 _this.value_nums = JSON.parse(JSON.stringify(_this.value_nums));
+            },
+            customer_select_change: function () {
+                _this = this;
+
+                back_order_id = _this.row.back_order_id;
+
+                Vue.http.get(__REST_API_URL__ + _this.row.customer_id + '/orders').then(function(response) {
+                    _this.orders = response.body;
+                    _this.orders = JSON.parse(JSON.stringify(_this.orders));
+
+                    Vue.nextTick(function () {
+                        _this.row.back_order_id = back_order_id;
+                        _this.row = JSON.parse(JSON.stringify(_this.row));                        
+                    });                    
+                });
+            },
+            order_select_change: function () {
+                _this = this;
+
+
+                Vue.http.get(__REST_API_URL__+_this.row.order_id+'/products').then(function(response) {
+                    // _this.orders = response.body;
+                });
             },
             type_select_change: function(form_num) {
                 _this = this;

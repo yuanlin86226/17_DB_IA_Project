@@ -31,4 +31,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\Customer', 'customer_id' ,'id');
     }
+
+    public function back()
+    {
+        return $this->belongsTo('App\Order', 'back_order_id' ,'id');
+    }
 }
