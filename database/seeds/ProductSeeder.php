@@ -326,7 +326,7 @@ class ProductSeeder extends Seeder
         ]);
         Product::create([
             'name' => 'GOT♡',
-            'photo' => '/image/products/GOT7/GotIt.jpg',
+            'photo' => '/image/products/GOT7/GotLove.jpg',
             'cost' => '200',
             'price' => '398',
             'total_amount' => '10',
